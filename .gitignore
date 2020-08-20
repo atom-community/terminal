@@ -1,13 +1,4 @@
-# OS metadata
 .DS_Store
-Thumbs.db
-
-# Node
+npm-debug.log
 node_modules
-package-lock.json
-
-# TypeScript
-*.tsbuildinfo
-
-# Build directories
-dist
+docs

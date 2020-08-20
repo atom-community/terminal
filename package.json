@@ -1,57 +1,88 @@
 {
-  "name": "atom-ide-template",
-  "main": "dist/main.js",
-  "version": "0.1.0",
-  "author": "<Your Name>",
-  "description": "  ",
-  "keywords": [],
-  "repository": "https://github.com/atom-ide-community/atom-ide-template",
-  "license": "MIT",
-  "scripts": {
-    "format": "prettier --write .",
-    "lint": "eslint . --fix",
-    "test": "atom --test spec",
-    "clean": "shx rm -rf dist",
-    "tsc": "tsc -p src/tsconfig.json || echo done",
-    "dev": "npm run clean && cross-env NODE_ENV=development cross-env BABEL_KEEP_MODULES=true rollup -c -w",
-    "build": "npm run clean && cross-env NODE_ENV=production cross-env BABEL_KEEP_MODULES=true rollup -c ",
-    "build-commit": "build-commit -o dist",
-    "bump": "ncu -u -x coffeescript",
-    "prepare": "npm run build"
+  "name": "x-terminal",
+  "title": "X-Terminal",
+  "main": "./src/x-terminal",
+  "module": "./src/x-terminal",
+  "bugs": {
+    "url": "https://github.com/bus-stop/x-terminal/issues/new/choose"
   },
-  "atomTestRunner": "./spec/runner",
+  "version": "9.1.0",
+  "description": "An xterm based Atom plugin for providing terminals inside your Atom workspace. A fork of atom-xterm",
+  "keywords": [
+    "terminal",
+    "xterm",
+    "term",
+    "console",
+    "shell",
+    "emulator",
+    "pty",
+    "tty",
+    "comspec",
+    "command-line",
+    "bash",
+    "sh",
+    "powershell",
+    "cmd"
+  ],
   "activationHooks": [
     "core:loaded-shell-environment"
   ],
+  "atomTestRunner": "./spec/custom-runner",
+  "repository": "https://github.com/bus-stop/x-terminal",
+  "license": "MIT",
   "engines": {
-    "atom": ">=0.174.0 <2.0.0"
+    "atom": ">=1.41.0 <2.0.0"
+  },
+  "providedServices": {
+    "atom-xterm": {
+      "description": "An x-terminal service for providing terminals inside your Atom workspace.",
+      "versions": {
+        "2.0.0": "provideAtomXtermService"
+      }
+    },
+    "platformioIDETerminal": {
+      "description": "Run commands and open terminals.",
+      "versions": {
+        "1.1.0": "providePlatformIOIDEService"
+      }
+    }
   },
   "dependencies": {
-    "etch": "^0.14.0",
-    "atom-package-deps": "^6.0.0"
+    "deep-object-diff": "^1.1.0",
+    "fs-extra": "^9.0.1",
+    "marked": "^1.1.1",
+    "node-pty-prebuilt-multiarch": "^0.9.0",
+    "uuid": "^8.3.0",
+    "whatwg-url": "^8.1.0",
+    "xterm": "4.8.1",
+    "xterm-addon-fit": "0.4.0",
+    "xterm-addon-web-links": "0.4.0",
+    "xterm-addon-webgl": "0.8.0"
   },
   "devDependencies": {
-    "@types/atom": "1.40.4",
-    "@types/node": "^14.0.27",
-    "typescript": "^3.9.7",
-    "tslib": "^2.0.1",
-    "coffeescript": "^1.12.7",
-    "jasmine": "^3.6.1",
-    "@types/jasmine": "^3.5.12",
+    "@semantic-release/apm-config": "^8.0.0",
     "atom-jasmine3-test-runner": "^5.0.5",
-    "prettier": "^2.0.5",
-    "eslint": "7.6.0",
-    "eslint-config-atomic": "^1.3.0",
-    "tslint": "6.1.3",
-    "tslint-config-prettier": "1.18.0",
-    "rollup": "2.23.1",
-    "rollup-plugin-atomic": "^1.2.0",
-    "shx": "0.3.2",
-    "cross-env": "7.0.2",
-    "npm-check-updates": "7.1.0",
-    "build-commit": "0.1.1"
+    "eslint": "^7.7.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-json": "^2.1.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "semantic-release": "^17.1.1",
+    "stylelint": "^13.6.1",
+    "stylelint-config-standard": "^20.0.0",
+    "temp": "^0.9.1"
   },
-  "providedServices": {},
-  "consumedServices": {},
-  "package-deps": []
+  "scripts": {
+    "eslint": "eslint . --ext .json,.js",
+    "stylelint": "stylelint styles/*.less",
+    "lint": "npm run eslint && npm run stylelint",
+    "lintfix": "npm run eslint -- --fix && npm run stylelint -- --fix",
+    "atom-test": "atom --test spec",
+    "test": "npm run atom-test && npm run lint"
+  },
+  "deserializers": {
+    "XTerminalModel": "deserializeXTerminalModel"
+  }
 }
