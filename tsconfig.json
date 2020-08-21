@@ -1,0 +1,6 @@
+{
+  "compilerOptions": {
+    "downlevelIteration": true,
+    "target": "ES2018"
+  }
+}
