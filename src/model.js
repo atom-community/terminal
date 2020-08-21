@@ -1,28 +1,6 @@
 /** @babel */
-/*
- * Copyright 2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- * Copyright 2017-2018 Andres Mejia <amejia004@gmail.com>. All Rights Reserved.
- * Copyright (c) 2020 UziTech All Rights Reserved.
- * Copyright (c) 2020 bus-stop All Rights Reserved.
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this
- * software and associated documentation files (the "Software"), to deal in the Software
- * without restriction, including without limitation the rights to use, copy, modify,
- * merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
- * permit persons to whom the Software is furnished to do so.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
- * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
- * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
- * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
 
 import { Emitter } from 'atom'
-
-import { recalculateActive } from './utils'
-import { XTerminalProfilesSingleton } from './profiles'
 
 import fs from 'fs-extra'
 import path from 'path'
@@ -30,35 +8,27 @@ import os from 'os'
 
 import { URL } from 'whatwg-url'
 
-const DEFAULT_TITLE = 'X Terminal'
+const DEFAULT_TITLE = 'Terminal'
 
 /**
  * The main terminal model, or rather item, displayed in the Atom workspace.
  *
  * @class
  */
-class XTerminalModel {
-	// NOTE: Though the class is publically accessible, all methods except for the
-	// ones defined at the very bottom of the class should be considered private
-	// and subject to change at any time.
-	constructor (options) {
-		this.options = options
-		this.uri = this.options.uri
+export class TerminalModel {
+	constructor ({ uri, terminalsSet }) {
+		this.uri = uri
 		const url = new URL(this.uri)
 		this.sessionId = url.host
-		this.profilesSingleton = XTerminalProfilesSingleton.instance
-		this.profile = this.profilesSingleton.createProfileDataFromUri(this.uri)
-		this.terminals_set = this.options.terminals_set
-		this.activeIndex = this.terminals_set.size
+		this.terminalsSet = terminalsSet
+		this.activeIndex = this.terminalsSet.size
 		this.element = null
 		this.pane = null
 		this.title = DEFAULT_TITLE
-		if (this.profile.title !== null) {
-			this.title = this.profile.title
-		}
+		this.fontSize = atom.config.get('terminal.fontSize')
 		this.modified = false
 		this.emitter = new Emitter()
-		this.terminals_set.add(this)
+		this.terminalsSet.add(this)
 
 		// Determine appropriate initial working directory based on previous
 		// active item. Since this involves async operations on the file
@@ -71,51 +41,50 @@ class XTerminalModel {
 	}
 
 	async initialize () {
-		const baseProfile = this.profilesSingleton.getBaseProfile()
+		this.cwd = await this.getInitialCwd()
+	}
+
+	async getInitialCwd () {
+		let cwd
 		const previousActiveItem = atom.workspace.getActivePaneItem()
-		let cwd = this.profile.projectCwd ? atom.project.getPaths()[0] : this.profile.cwd
 		if (typeof previousActiveItem !== 'undefined' && typeof previousActiveItem.getPath === 'function') {
 			cwd = previousActiveItem.getPath()
 		}
 		const dir = atom.project.relativizePath(cwd)[0]
 		if (dir) {
 			// Use project paths whenever they are available by default.
-			this.profile.cwd = dir
-			return
-		}
-		if (!cwd) {
-			this.profile.cwd = baseProfile.cwd
-			return
-		}
-		const exists = await fs.exists(cwd)
-		if (!exists) {
-			this.profile.cwd = baseProfile.cwd
-			return
+			return dir
 		}
 
-		// Otherwise, if the path exists on the local file system, use the
-		// path or parent directory as appropriate.
-		const stats = await fs.stat(cwd)
-		if (stats.isDirectory()) {
-			this.profile.cwd = cwd
-			return
+		try {
+			// Otherwise, if the path exists on the local file system, use the
+			// path or parent directory as appropriate.
+			const stats = await fs.stat(cwd)
+			if (stats.isDirectory()) {
+				return cwd
+			}
+
+			cwd = path.dirname(cwd)
+			const dirStats = await fs.stat(cwd)
+			if (dirStats.isDirectory()) {
+				return cwd
+			}
+		} catch (ex) {}
+
+		cwd = atom.project.getPaths()[0]
+		// no project paths
+		if (cwd) {
+			return cwd
 		}
 
-		cwd = path.dirname(cwd)
-		const dirStats = await fs.stat(cwd)
-		if (dirStats.isDirectory) {
-			this.profile.cwd = cwd
-			return
-		}
-
-		this.profile.cwd = baseProfile.cwd
+		return null
 	}
 
 	serialize () {
 		return {
-			deserializer: 'XTerminalModel',
-			version: '2017-09-17',
-			uri: this.profilesSingleton.generateNewUrlFromProfileData(this.profile).href,
+			deserializer: 'TerminalModel',
+			version: '1.0.0',
+			uri: this.uri,
 		}
 	}
 
@@ -123,12 +92,11 @@ class XTerminalModel {
 		if (this.element) {
 			this.element.destroy()
 		}
-		this.terminals_set.delete(this)
+		this.terminalsSet.delete(this)
 	}
 
 	getTitle () {
 		return (this.isActiveTerminal() ? '* ' : '') + this.title
-		// return this.activeIndex + '|' + this.title
 	}
 
 	getElement () {
@@ -155,7 +123,7 @@ class XTerminalModel {
 	}
 
 	getPath () {
-		return this.profile.cwd
+		return this.cwd
 	}
 
 	isModified () {
@@ -187,12 +155,6 @@ class XTerminalModel {
 
 	getSessionId () {
 		return this.sessionId
-	}
-
-	getSessionParameters () {
-		const url = this.profilesSingleton.generateNewUrlFromProfileData(this.profile)
-		url.searchParams.sort()
-		return url.searchParams.toString()
 	}
 
 	refitTerminal () {
@@ -234,7 +196,7 @@ class XTerminalModel {
 	}
 
 	setActive () {
-		recalculateActive(this.terminals_set, this)
+		TerminalModel.recalculateActive(this.terminalsSet, this)
 	}
 
 	isVisible () {
@@ -242,7 +204,7 @@ class XTerminalModel {
 	}
 
 	isActiveTerminal () {
-		return this.activeIndex === 0 && (atom.config.get('x-terminal.terminalSettings.allowHiddenToStayActive') || this.isVisible())
+		return this.activeIndex === 0 && (atom.config.get('terminal.allowHiddenToStayActive') || this.isVisible())
 	}
 
 	setNewPane (pane) {
@@ -263,48 +225,36 @@ class XTerminalModel {
 		}
 	}
 
-	toggleProfileMenu () {
-		this.element.toggleProfileMenu()
-	}
-
-	/* Public methods are defined below this line. */
-
-	/**
-   * Retrieve profile for this {@link XTerminalModel} instance.
-   *
-   * @function
-   * @return {Object} Profile for {@link XTerminalModel} instance.
-   */
-	getProfile () {
-		return this.profile
-	}
-
-	/**
-   * Apply profile changes to {@link XTerminalModel} instance.
-   *
-   * @function
-   * @param {Object} profileChanges Profile changes to apply.
-   */
-	applyProfileChanges (profileChanges) {
-		profileChanges = this.profilesSingleton.sanitizeData(profileChanges)
-		this.profile = this.profilesSingleton.deepClone({
-			...this.profile,
-			...profileChanges,
+	static recalculateActive (terminalsSet, active) {
+		const allowHidden = atom.config.get('terminal.allowHiddenToStayActive')
+		const terminals = [...terminalsSet]
+		terminals.sort((a, b) => {
+			// active before other
+			if (active && a === active) {
+				return -1
+			}
+			if (active && b === active) {
+				return 1
+			}
+			if (!allowHidden) {
+				// visible before hidden
+				if (a.isVisible() && !b.isVisible()) {
+					return -1
+				}
+				if (!a.isVisible() && b.isVisible()) {
+					return 1
+				}
+			}
+			// lower activeIndex before higher activeIndex
+			return a.activeIndex - b.activeIndex
 		})
-		this.element.queueNewProfileChanges(profileChanges)
+		terminals.forEach((t, i) => {
+			t.activeIndex = i
+			t.emitter.emit('did-change-title', t.title)
+		})
 	}
-}
 
-function isXTerminalModel (item) {
-	return (item instanceof XTerminalModel)
-}
-
-function currentItemIsXTerminalModel () {
-	return isXTerminalModel(atom.workspace.getActivePaneItem())
-}
-
-export {
-	XTerminalModel,
-	isXTerminalModel,
-	currentItemIsXTerminalModel,
+	static isTerminalModel (item) {
+		return (item instanceof TerminalModel)
+	}
 }

@@ -1,0 +1,64 @@
+{
+  ".platform-linux atom-workspace": {
+    "ctrl-`": "terminal:open",
+    "ctrl-~": "terminal:open",
+    "ctrl-shift-t": "terminal:open",
+    "ctrl-alt-shift-t": "terminal:open",
+    "ctrl-alt-shift-up": "terminal:open-up",
+    "ctrl-alt-shift-down": "terminal:open-down",
+    "ctrl-alt-shift-left": "terminal:open-left",
+    "ctrl-alt-shift-right": "terminal:open-right",
+    "ctrl-alt-shift-i": "terminal:open-bottom-dock",
+    "ctrl-alt-shift-u": "terminal:open-left-dock",
+    "ctrl-alt-shift-o": "terminal:open-right-dock"
+  },
+  ".platform-win32 atom-workspace": {
+    "ctrl-`": "terminal:open",
+    "ctrl-~": "terminal:open",
+    "ctrl-shift-t": "terminal:open",
+    "ctrl-alt-shift-t": "terminal:open",
+    "ctrl-alt-shift-up": "terminal:open-up",
+    "ctrl-alt-shift-down": "terminal:open-down",
+    "ctrl-alt-shift-left": "terminal:open-left",
+    "ctrl-alt-shift-right": "terminal:open-right",
+    "ctrl-alt-shift-i": "terminal:open-bottom-dock",
+    "ctrl-alt-shift-u": "terminal:open-left-dock",
+    "ctrl-alt-shift-o": "terminal:open-right-dock"
+  },
+  ".platform-darwin atom-workspace": {
+    "cmd-`": "terminal:open",
+    "cmd-~": "terminal:open",
+    "cmd-t": "terminal:open",
+    "cmd-alt-shift-t": "terminal:open",
+    "cmd-alt-shift-up": "terminal:open-up",
+    "cmd-alt-shift-down": "terminal:open-down",
+    "cmd-alt-shift-left": "terminal:open-left",
+    "cmd-alt-shift-right": "terminal:open-right",
+    "cmd-alt-shift-i": "terminal:open-bottom-dock",
+    "cmd-alt-shift-u": "terminal:open-left-dock",
+    "cmd-alt-shift-o": "terminal:open-right-dock"
+  },
+  ".platform-linux atom-terminal": {
+    "ctrl-insert": "terminal:copy",
+    "ctrl-shift-c": "terminal:copy",
+    "shift-insert": "terminal:paste",
+    "ctrl-shift-v": "terminal:paste",
+    "ctrl-shift-u": "terminal:unfocus"
+  },
+  ".platform-win32 atom-terminal": {
+    "ctrl-insert": "terminal:copy",
+    "ctrl-shift-c": "terminal:copy",
+    "shift-insert": "terminal:paste",
+    "ctrl-shift-v": "terminal:paste",
+    "ctrl-shift-u": "terminal:unfocus"
+  },
+  ".platform-darwin atom-terminal": {
+    "ctrl-shift-c": "terminal:copy",
+    "ctrl-insert": "terminal:copy",
+    "ctrl-shift-v": "terminal:paste",
+    "shift-insert": "terminal:paste",
+    "cmd-c": "terminal:copy",
+    "cmd-v": "terminal:paste",
+    "ctrl-shift-u": "terminal:unfocus"
+  }
+}

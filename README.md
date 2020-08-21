@@ -6,16 +6,16 @@
                   ╚═╝  ╚═╝     ╚═╝   ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚══════╝
 <br>
 <p align="center">
-  <a href="https://github.com/bus-stop/x-terminal/actions?query=workflow%3ACI">
+  <a href="https://github.com/atom-ide-community/terminal/actions?query=workflow%3ACI">
     <img src="https://img.shields.io/github/workflow/status/bus-stop/x-terminal/CI?style=flat-square&logo=github&label=CI%20status" alt="actions status">
   </a>
-  <a href="https://github.com/bus-stop/x-terminal/tags">
+  <a href="https://github.com/atom-ide-community/terminal/tags">
     <img src="https://img.shields.io/github/tag/bus-stop/x-terminal.svg?label=current%20version&style=flat-square" alt="version">
   </a>
-  <a href="https://github.com/bus-stop/x-terminal/stargazers">
+  <a href="https://github.com/atom-ide-community/terminal/stargazers">
     <img src="https://img.shields.io/github/stars/bus-stop/x-terminal.svg?style=flat-square" alt="stars">
   </a>
-  <a href="https://github.com/bus-stop/x-terminal/network">
+  <a href="https://github.com/atom-ide-community/terminal/network">
     <img src="https://img.shields.io/github/forks/bus-stop/x-terminal.svg?style=flat-square" alt="forks">
   </a>
   <a href="https://david-dm.org/bus-stop/x-terminal">
@@ -73,7 +73,7 @@ To open terminals, you can open them through the menu or through the available k
 
 ![X-Terminal menu](https://cdn.statically.io/gh/bus-stop/x-terminal/master/resources/x-terminal-packages-menu.png)
 
-See [the available key bindings](https://github.com/bus-stop/x-terminal/blob/master/keymaps/x-terminal.json) for the x-terminal package.
+See [the available key bindings](https://github.com/atom-ide-community/terminal/blob/master/keymaps/x-terminal.json) for the x-terminal package.
 
 There's also menu items available for opening terminals via right clicking on a
 text editor or on a terminal.
@@ -144,11 +144,11 @@ rather a JavaScript object that provides methods to open terminals and run comma
 ### 'atom-xterm' service v2.0.0
 
 The `atom-xterm` service provides the
-[openTerminal()](https://github.com/bus-stop/x-terminal/blob/42ddb71523a393178cacabca17b38d681b87f292/src/x-terminal.js#L262) method. The `openTerminal()` method behaves just like Atom's
+[openTerminal()](https://github.com/atom-ide-community/terminal/blob/42ddb71523a393178cacabca17b38d681b87f292/src/x-terminal.js#L262) method. The `openTerminal()` method behaves just like Atom's
 [open()](https://github.com/atom/atom/blob/917a00e195b93c8c2a9adc349fd8fa1844f61dbc/src/workspace.js#L1076)
 method except that the first argument must be a JSON object describing the
 terminal profile that should be opened. Docs about this JSON object can be
-found [here](https://github.com/bus-stop/x-terminal/blob/42ddb71523a393178cacabca17b38d681b87f292/src/config.js#L25).
+found [here](https://github.com/atom-ide-community/terminal/blob/42ddb71523a393178cacabca17b38d681b87f292/src/config.js#L25).
 
 As an example on how to use the provided `openTerminal()` method, your
 `package.json` should have the following.
@@ -202,7 +202,7 @@ this.atomXtermService.openTerminal({
 
 ### 'platformioIDETerminal' service v1.1.0
 
-The `platformioIDETerminal` service provides an [object](https://github.com/bus-stop/x-terminal/blob/42ddb71523a393178cacabca17b38d681b87f292/src/x-terminal.js#L365) with `updateProcessEnv`, `run`, `getTerminalViews`, and `open` methods.
+The `platformioIDETerminal` service provides an [object](https://github.com/atom-ide-community/terminal/blob/42ddb71523a393178cacabca17b38d681b87f292/src/x-terminal.js#L365) with `updateProcessEnv`, `run`, `getTerminalViews`, and `open` methods.
 
 As an example on how to use the provided `run()` method, your
 `package.json` should have the following.
@@ -254,7 +254,7 @@ this.platformioIDETerminalService.run([
 Want to help develop x-terminal? Here's how to quickly get setup.
 
 First use the [apm](https://github.com/atom/apm) command to clone the
-[x-terminal repo](https://github.com/bus-stop/x-terminal).
+[x-terminal repo](https://github.com/atom-ide-community/terminal).
 
 ```sh
 apm develop x-terminal
@@ -294,7 +294,7 @@ the lint tools, simply run `npm run lint`.
 ## Pull Requests
 
 Whenever you're ready to submit a pull request, be sure to submit it
-against a fork of the main [x-terminal repo](https://github.com/bus-stop/x-terminal)
+against a fork of the main [x-terminal repo](https://github.com/atom-ide-community/terminal)
 master branch that you'll own. Fork the repo using Github and make note of the
 new `git` URL. Set this new git URL as the URL for the `origin` remote in your
 already cloned git repo is follows.
@@ -383,6 +383,6 @@ Click for copyright and license info about this package.
 
 Need to submit a bug report? Have a new feature you want to see implemented in
 *x-terminal*? Please feel free to submit them through the appropriate
-[issue template](https://github.com/bus-stop/x-terminal/issues/new/choose).
+[issue template](https://github.com/atom-ide-community/terminal/issues/new/choose).
 
 For bug reports, please provide images or demos showing your issues if you can.

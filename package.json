@@ -1,13 +1,13 @@
 {
-  "name": "x-terminal",
-  "title": "X-Terminal",
-  "main": "./src/x-terminal",
-  "module": "./src/x-terminal",
+  "name": "terminal",
+  "title": "Atom Integrated Terminal",
+  "main": "./src/terminal",
+  "repository": "https://github.com/atom-ide-community/terminal",
   "bugs": {
-    "url": "https://github.com/bus-stop/x-terminal/issues/new/choose"
+    "url": "https://github.com/atom-ide-community/terminal/issues/new/choose"
   },
-  "version": "9.1.0",
-  "description": "An xterm based Atom plugin for providing terminals inside your Atom workspace. A fork of atom-xterm",
+  "version": "0.0.0",
+  "description": "The xterm based terminal integrated into Atom",
   "keywords": [
     "terminal",
     "xterm",
@@ -28,29 +28,26 @@
     "core:loaded-shell-environment"
   ],
   "atomTestRunner": "./spec/custom-runner",
-  "repository": "https://github.com/bus-stop/x-terminal",
   "license": "MIT",
   "engines": {
-    "atom": ">=1.41.0 <2.0.0"
+    "atom": ">=1.50.0 <2.0.0"
   },
   "providedServices": {
-    "atom-xterm": {
-      "description": "An x-terminal service for providing terminals inside your Atom workspace.",
-      "versions": {
-        "2.0.0": "provideAtomXtermService"
-      }
-    },
     "platformioIDETerminal": {
       "description": "Run commands and open terminals.",
       "versions": {
         "1.1.0": "providePlatformIOIDEService"
       }
+    },
+    "terminal": {
+      "description": "Change the terminal.",
+      "versions": {
+        "1.0.0": "provideTerminalService"
+      }
     }
   },
   "dependencies": {
-    "deep-object-diff": "^1.1.0",
     "fs-extra": "^9.0.1",
-    "marked": "^1.1.1",
     "node-pty-prebuilt-multiarch": "^0.9.0",
     "uuid": "^8.3.0",
     "whatwg-url": "^8.1.0",
@@ -70,19 +67,13 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
     "semantic-release": "^17.1.1",
-    "stylelint": "^13.6.1",
-    "stylelint-config-standard": "^20.0.0",
     "temp": "^0.9.1"
   },
   "scripts": {
-    "eslint": "eslint . --ext .json,.js",
-    "stylelint": "stylelint styles/*.less",
-    "lint": "npm run eslint && npm run stylelint",
-    "lintfix": "npm run eslint -- --fix && npm run stylelint -- --fix",
-    "atom-test": "atom --test spec",
-    "test": "npm run atom-test && npm run lint"
+    "lint": "eslint . --ext .json,.js",
+    "test": "atom --test spec"
   },
   "deserializers": {
-    "XTerminalModel": "deserializeXTerminalModel"
+    "TerminalModel": "deserializeTerminalModel"
   }
 }
