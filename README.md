@@ -1,7 +1,5 @@
 # Terminal
 
-
-
 ## Demo
 
 ![Terminal demo](https://cdn.statically.io/gh/bus-stop/x-terminal/master/resources/x-terminal-demo.gif)

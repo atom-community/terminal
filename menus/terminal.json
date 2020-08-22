@@ -75,55 +75,58 @@
         "command": "terminal:close-all"
       }
     ],
-    "atom-text-editor": [{
-      "label": "Terminal",
-      "submenu": [
-        {
-          "label": "Open New Terminal",
-          "command": "terminal:open"
-        },
-        {
-          "label": "Open New Terminal (Split Up)",
-          "command": "terminal:open-up"
-        },
-        {
-          "label": "Open New Terminal (Split Down)",
-          "command": "terminal:open-down"
-        },
-        {
-          "label": "Open New Terminal (Split Left)",
-          "command": "terminal:open-left"
-        },
-        {
-          "label": "Open New Terminal (Split Right)",
-          "command": "terminal:open-right"
-        },
-        {
-          "label": "Open New Terminal (Bottom Dock)",
-          "command": "terminal:open-bottom-dock"
-        },
-        {
-          "label": "Open New Terminal (Left Dock)",
-          "command": "terminal:open-left-dock"
-        },
-        {
-          "label": "Open New Terminal (Right Dock)",
-          "command": "terminal:open-right-dock"
-        },
-        {
-          "label": "Close All Terminals",
-          "command": "terminal:close-all"
-        }
-      ]
-      }]
-    },
-    "menu": [
+    "atom-text-editor": [
       {
-        "label": "Packages",
+        "label": "Terminal",
         "submenu": [
           {
-            "label": "Terminal",
-            "submenu": [{
+            "label": "Open New Terminal",
+            "command": "terminal:open"
+          },
+          {
+            "label": "Open New Terminal (Split Up)",
+            "command": "terminal:open-up"
+          },
+          {
+            "label": "Open New Terminal (Split Down)",
+            "command": "terminal:open-down"
+          },
+          {
+            "label": "Open New Terminal (Split Left)",
+            "command": "terminal:open-left"
+          },
+          {
+            "label": "Open New Terminal (Split Right)",
+            "command": "terminal:open-right"
+          },
+          {
+            "label": "Open New Terminal (Bottom Dock)",
+            "command": "terminal:open-bottom-dock"
+          },
+          {
+            "label": "Open New Terminal (Left Dock)",
+            "command": "terminal:open-left-dock"
+          },
+          {
+            "label": "Open New Terminal (Right Dock)",
+            "command": "terminal:open-right-dock"
+          },
+          {
+            "label": "Close All Terminals",
+            "command": "terminal:close-all"
+          }
+        ]
+      }
+    ]
+  },
+  "menu": [
+    {
+      "label": "Packages",
+      "submenu": [
+        {
+          "label": "Terminal",
+          "submenu": [
+            {
               "label": "Open New Terminal",
               "command": "terminal:open"
             },

@@ -1,13 +1,13 @@
 {
   "name": "terminal",
-  "title": "Atom Integrated Terminal",
-  "main": "./src/terminal",
+  "title": "Atom Terminal",
+  "main": "./dist/terminal",
   "repository": "https://github.com/atom-ide-community/terminal",
   "bugs": {
     "url": "https://github.com/atom-ide-community/terminal/issues/new/choose"
   },
   "version": "0.0.0",
-  "description": "The xterm based terminal integrated into Atom",
+  "description": "The xterm based terminal for Atom",
   "keywords": [
     "terminal",
     "xterm",
@@ -57,21 +57,36 @@
     "xterm-addon-webgl": "0.8.0"
   },
   "devDependencies": {
-    "@semantic-release/apm-config": "^8.0.0",
+    "@types/atom": "1.40.4",
+    "@types/fs-extra": "^9.0.1",
+    "@types/jasmine": "^3.5.12",
+    "@types/node": "^14.6.0",
+    "@types/uuid": "^8.3.0",
+    "@types/whatwg-url": "^8.0.0",
     "atom-jasmine3-test-runner": "^5.0.5",
+    "build-commit": "0.1.1",
+    "cross-env": "7.0.2",
     "eslint": "^7.7.0",
-    "eslint-config-standard": "^14.1.1",
-    "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-json": "^2.1.2",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1",
-    "semantic-release": "^17.1.1",
-    "temp": "^0.9.1"
+    "eslint-config-atomic": "^1.4.0",
+    "npm-check-updates": "7.1.1",
+    "prettier": "^2.0.5",
+    "rollup": "2.26.4",
+    "rollup-plugin-atomic": "^1.2.0",
+    "shx": "0.3.2",
+    "temp": "^0.9.1",
+    "typescript": "^4.0.2"
   },
   "scripts": {
-    "lint": "eslint . --ext .json,.js",
-    "test": "atom --test spec"
+    "format": "prettier --write .",
+    "lint": "eslint .",
+    "test": "npm run tsc && atom --test spec",
+    "clean": "shx rm -rf dist",
+    "tsc": "tsc -p src/tsconfig.json --sourceMap",
+    "dev": "npm run clean && cross-env NODE_ENV=development cross-env BABEL_KEEP_MODULES=true rollup -c -w",
+    "build": "npm run clean && cross-env NODE_ENV=production cross-env BABEL_KEEP_MODULES=true rollup -c",
+    "build-commit": "build-commit -o dist",
+    "bump": "ncu -u -x coffeescript",
+    "prepare": "npm run build"
   },
   "deserializers": {
     "TerminalModel": "deserializeTerminalModel"
