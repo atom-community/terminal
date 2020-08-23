@@ -8,6 +8,8 @@
     "noImplicitAny": true,
     "noImplicitThis": true,
     "noFallthroughCasesInSwitch": true,
+
+    "downlevelIteration": true,
     "declaration": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,

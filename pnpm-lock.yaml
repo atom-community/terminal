@@ -18,7 +18,7 @@ devDependencies:
   build-commit: 0.1.1
   cross-env: 7.0.2
   eslint: 7.7.0
-  eslint-config-atomic: 1.4.0_eslint@7.7.0
+  eslint-config-atomic: 1.5.0_eslint@7.7.0
   npm-check-updates: 7.1.1
   prettier: 2.0.5
   rollup: 2.26.4
@@ -1812,7 +1812,7 @@ packages:
       eslint-plugin-react-hooks: ^4 || ^3 || ^2.3.0 || ^1.7.0
     resolution:
       integrity: sha512-Fz4JIUKkrhO0du2cg5opdyPKQXOI2MvF8KUvN2710nJMT6jaRUpRE2swrJftAjVGL7T1otLM5ieo5RqS1v9Udg==
-  /eslint-config-atomic/1.4.0_eslint@7.7.0:
+  /eslint-config-atomic/1.5.0_eslint@7.7.0:
     dependencies:
       '@babel/core': 7.11.4
       '@typescript-eslint/eslint-plugin': 3.9.1_a0db6c89db8b59fdf2bdef1d2ddbcbc4
@@ -1824,7 +1824,6 @@ packages:
       eslint-plugin-coffee: 0.1.12_eslint@7.7.0
       eslint-plugin-json: 2.1.2
       eslint-plugin-only-warn: 1.0.2
-      eslint-plugin-prettier: 3.1.4_eslint@7.7.0+prettier@2.0.5
       eslint-plugin-react: 7.20.6_eslint@7.7.0
       eslint-plugin-yaml: 0.3.0
       prettier: 2.0.5
@@ -1833,7 +1832,7 @@ packages:
     peerDependencies:
       eslint: '>=7'
     resolution:
-      integrity: sha512-Ic/hEQlKQIE4eyJWvAcnbSJrXtzV6dkb2QzY04IL7BBdfO1FYjRQfMjsywR5Bd4K6RhpwDJlrzZRno7DPfGUlA==
+      integrity: sha512-jCvGOurb9vDZX0GsG+qr88nLByRwWXZw1Gu/KRU81EbXhkVTcz6cwW3vxoqlSbT0BatXmpdLo+RRnyu2eck2nA==
   /eslint-config-prettier/6.11.0_eslint@7.7.0:
     dependencies:
       eslint: 7.7.0
@@ -1943,19 +1942,6 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-DCG8vuUynDnyfkm0POT50JoE9VJfbtKf+COHn3q79+ExW4dg9ZWM/hsMWX1mjZqxMjQledL/9TmGipon/vwWmw==
-  /eslint-plugin-prettier/3.1.4_eslint@7.7.0+prettier@2.0.5:
-    dependencies:
-      eslint: 7.7.0
-      prettier: 2.0.5
-      prettier-linter-helpers: 1.0.0
-    dev: true
-    engines:
-      node: '>=6.0.0'
-    peerDependencies:
-      eslint: '>=5.0.0'
-      prettier: '>=1.13.0'
-    resolution:
-      integrity: sha512-jZDa8z76klRqo+TdGDTFJSavwbnWK2ZpqGKNZ+VvweMW516pDUMmQ2koXvxEE4JhzNvTv+radye/bWGBmA6jmg==
   /eslint-plugin-react-native-globals/0.1.2:
     dev: true
     resolution:
@@ -2221,10 +2207,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==
-  /fast-diff/1.2.0:
-    dev: true
-    resolution:
-      integrity: sha512-xJuoT5+L99XlZ8twedaRf6Ax2TgQVxvgZOYoPKqZufmJib0tL2tegPBOZb1pVNgIhlqDlA0eO0c3wBvQcmzx4w==
   /fast-glob/2.2.7:
     dependencies:
       '@mrmlnc/readdir-enhanced': 2.2.1
@@ -4272,14 +4254,6 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha1-6SQ0v6XqjBn0HN/UAddBo8gZ2Jc=
-  /prettier-linter-helpers/1.0.0:
-    dependencies:
-      fast-diff: 1.2.0
-    dev: true
-    engines:
-      node: '>=6.0.0'
-    resolution:
-      integrity: sha512-GbK2cP9nraSSUF9N2XwUwqfzlAFlMNYYl+ShE/V+H8a9uNl/oUqB1w2EL54Jh0OlyRSd8RfWYJ3coVS4TROP2w==
   /prettier/2.0.5:
     dev: true
     engines:
@@ -5704,7 +5678,7 @@ specifiers:
   build-commit: 0.1.1
   cross-env: 7.0.2
   eslint: ^7.7.0
-  eslint-config-atomic: ^1.4.0
+  eslint-config-atomic: ^1.5.0
   fs-extra: ^9.0.1
   node-pty-prebuilt-multiarch: ^0.9.0
   npm-check-updates: 7.1.1
