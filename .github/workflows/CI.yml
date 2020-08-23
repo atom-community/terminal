@@ -65,10 +65,10 @@ jobs:
         uses: dcodeIO/setup-node-nvm@master
         with:
           node-version: 12.4.0 # use the same Node as Atom
-      - name: Build and Commit
-        run: npm run build-commit
       - name: Install Dependencies
         run: npm install
+      - name: Build and Commit
+        run: npm run build-commit
       # - name: Release 🎉
       #   uses: cycjimmy/semantic-release-action@v2
       #   with:
