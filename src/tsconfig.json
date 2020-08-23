@@ -20,7 +20,6 @@
     "lib": ["ES2018", "dom"],
     "target": "ES2018",
 
-    "allowJs": true,
     "esModuleInterop": true,
     "module": "commonjs",
     "moduleResolution": "node",

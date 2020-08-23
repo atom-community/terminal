@@ -25,6 +25,7 @@ devDependencies:
   rollup-plugin-atomic: 1.2.0_rollup@2.26.4+typescript@4.0.2
   shx: 0.3.2
   temp: 0.9.1
+  tslib: 2.0.1
   typescript: 4.0.2
 lockfileVersion: 5.1
 packages:
@@ -5712,6 +5713,7 @@ specifiers:
   rollup-plugin-atomic: ^1.2.0
   shx: 0.3.2
   temp: ^0.9.1
+  tslib: ^2.0.1
   typescript: ^4.0.2
   uuid: ^8.3.0
   whatwg-url: ^8.1.0

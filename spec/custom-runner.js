@@ -1,5 +1,6 @@
 /** @babel */
 
+import { execSync } from "child_process"
 import { createRunner } from "atom-jasmine3-test-runner"
 
 function setDefaultSettings(namespace, settings) {
@@ -12,6 +13,8 @@ function setDefaultSettings(namespace, settings) {
     }
   }
 }
+
+execSync("npm run tsc", { cwd: __dirname })
 
 module.exports = createRunner(
   {
