@@ -189,7 +189,10 @@ describe("TerminalElement", () => {
     await element.restartPtyProcess()
     expect(element.ptyProcess).toBe(undefined)
     expect(element.ptyProcessRunning).toBe(false)
-    expect(atom.notifications.addError).toHaveBeenCalledWith("Could not find command 'somecommand'.")
+    expect(atom.notifications.addError).toHaveBeenCalledWith(
+      'Terminal Error',
+      { detail: "Could not open shell 'somecommand'." }
+    )
   })
 
   it("restartPtyProcess() some other error thrown", async () => {
@@ -203,7 +206,8 @@ describe("TerminalElement", () => {
     expect(element.ptyProcess).toBe(undefined)
     expect(element.ptyProcessRunning).toBe(false)
     expect(atom.notifications.addError).toHaveBeenCalledWith(
-      "Launching 'somecommand' raised the following error: Something went wrong"
+      'Terminal Error',
+      { detail: "Launching 'somecommand' raised the following error: Something went wrong" }
     )
   })
 
