@@ -31,7 +31,7 @@ export function getDefaultShell(): string {
 export const config = configOrder({
   shell: {
     title: "Shell",
-    description: "Path to the shell",
+    description: "Path to the shell command.",
     type: "string",
     default: getDefaultShell(),
   },
@@ -43,13 +43,13 @@ export const config = configOrder({
   },
   webgl: {
     title: "WebGL Renderer",
-    description: "Enable the WebGL-based renderer.",
+    description: "Enable the WebGL-based renderer. Faster but experimental. ⚠️",
     type: "boolean",
     default: false,
   },
   webLinks: {
     title: "Web Links",
-    description: "Enable clickable web links",
+    description: "Enable clickable web links.",
     type: "boolean",
     default: true,
   },
