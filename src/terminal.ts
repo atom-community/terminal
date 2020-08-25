@@ -106,6 +106,7 @@ class Terminal {
         "terminal:open-left-dock": () => this.openInCenterOrDock(atom.workspace.getLeftDock()),
         "terminal:open-right-dock": () => this.openInCenterOrDock(atom.workspace.getRightDock()),
         "terminal:close-all": () => this.exitAllTerminals(),
+        "terminal:focus": () => this.focus(),
       }),
       atom.commands.add("atom-terminal", {
         "terminal:close": () => this.close(),
@@ -293,8 +294,8 @@ class Terminal {
       run: (commands: string[]): Promise<TerminalModel> => {
         return this.runCommands(commands)
       },
-      getTerminalViews: (): Set<TerminalModel> => {
-        return this.terminalsSet
+      getTerminalViews: (): TerminalModel[] => {
+        return [...this.terminalsSet]
       },
       open: (): Promise<TerminalModel> => {
         return this.openTerminal()
@@ -330,6 +331,16 @@ class Terminal {
     const terminal = this.getActiveTerminal()
     if (terminal) {
       terminal.pasteToTerminal(atom.clipboard.read())
+    }
+  }
+
+  async focus() {
+    const terminal = [...this.terminalsSet].find((t) => t.activeIndex === 0)
+    if (terminal) {
+      terminal.focusOnTerminal()
+    } else {
+      const options = this.addDefaultPosition()
+      await this.open(this.generateNewUri(), options)
     }
   }
 

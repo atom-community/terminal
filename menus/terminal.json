@@ -32,49 +32,6 @@
         "command": "terminal:close-all"
       }
     ],
-    "terminal .terminal-term-container-has-link": [
-      {
-        "label": "Open Link",
-        "command": "terminal:open-link"
-      },
-      {
-        "label": "Copy Link Address",
-        "command": "terminal:copy-link"
-      },
-      {
-        "type": "separator"
-      },
-      {
-        "label": "Open New Terminal",
-        "command": "terminal:open"
-      },
-      {
-        "label": "Close",
-        "command": "terminal:close"
-      },
-      {
-        "label": "Restart",
-        "command": "terminal:restart"
-      },
-      {
-        "type": "separator"
-      },
-      {
-        "label": "Copy",
-        "command": "terminal:copy"
-      },
-      {
-        "label": "Paste",
-        "command": "terminal:paste"
-      },
-      {
-        "type": "separator"
-      },
-      {
-        "label": "Close All Terminals",
-        "command": "terminal:close-all"
-      }
-    ],
     "atom-text-editor": [
       {
         "label": "Terminal",
@@ -114,6 +71,10 @@
           {
             "label": "Close All Terminals",
             "command": "terminal:close-all"
+          },
+          {
+            "label": "Focus Last Terminal",
+            "command": "terminal:focus"
           }
         ]
       }
@@ -161,6 +122,10 @@
             {
               "label": "Close All Terminals",
               "command": "terminal:close-all"
+            },
+            {
+              "label": "Focus Last Terminal",
+              "command": "terminal:focus"
             }
           ]
         }
