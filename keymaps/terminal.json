@@ -10,7 +10,8 @@
     "ctrl-alt-shift-right": "terminal:open-right",
     "ctrl-alt-shift-i": "terminal:open-bottom-dock",
     "ctrl-alt-shift-u": "terminal:open-left-dock",
-    "ctrl-alt-shift-o": "terminal:open-right-dock"
+    "ctrl-alt-shift-o": "terminal:open-right-dock",
+    "ctrl-alt-shift-f": "terminal:focus"
   },
   ".platform-win32 atom-workspace": {
     "ctrl-`": "terminal:open",
@@ -23,7 +24,8 @@
     "ctrl-alt-shift-right": "terminal:open-right",
     "ctrl-alt-shift-i": "terminal:open-bottom-dock",
     "ctrl-alt-shift-u": "terminal:open-left-dock",
-    "ctrl-alt-shift-o": "terminal:open-right-dock"
+    "ctrl-alt-shift-o": "terminal:open-right-dock",
+    "ctrl-alt-shift-f": "terminal:focus"
   },
   ".platform-darwin atom-workspace": {
     "cmd-`": "terminal:open",
@@ -36,7 +38,8 @@
     "cmd-alt-shift-right": "terminal:open-right",
     "cmd-alt-shift-i": "terminal:open-bottom-dock",
     "cmd-alt-shift-u": "terminal:open-left-dock",
-    "cmd-alt-shift-o": "terminal:open-right-dock"
+    "cmd-alt-shift-o": "terminal:open-right-dock",
+    "cmd-alt-shift-f": "terminal:focus"
   },
   ".platform-linux atom-terminal": {
     "ctrl-insert": "terminal:copy",
