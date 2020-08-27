@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: dcodeIO/setup-node-nvm@v4
+      - uses: dcodeIO/setup-node-nvm@master
         with:
           node-version: 'lts/*'
       - run: |
