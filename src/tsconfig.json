@@ -14,7 +14,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "incremental": true,
-    "inlineSourceMap": false,
+    "inlineSourceMap": true,
     "inlineSources": true,
     "preserveSymlinks": true,
     "removeComments": true,
