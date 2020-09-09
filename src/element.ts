@@ -64,7 +64,7 @@ export class AtomTerminal extends HTMLElement {
       const intersectionObserver = new IntersectionObserver(
         async (entries) => {
           const lastEntry = entries.pop()
-          if (lastEntry && lastEntry.intersectionRatio === 1.0) {
+          if (lastEntry && lastEntry.intersectionRatio > 0.0) {
             this.initiallyVisible = true
             try {
               await this.createTerminal()
