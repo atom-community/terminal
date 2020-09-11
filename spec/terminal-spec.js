@@ -70,4 +70,13 @@ describe("terminal", () => {
       expect(newTerminal.runCommand).toHaveBeenCalledWith("command 2")
     })
   })
+
+  describe("Commands", () => {
+    it("opens a terminal by calling terminal:open", async () => {
+      let workspace = atom.views.getView(atom.workspace)
+      await atom.commands.dispatch(workspace, "terminal:open")
+      spyOn(terminal, "open")
+      expect(terminal.open).toHaveBeenCalled()
+    })
+  })
 })
