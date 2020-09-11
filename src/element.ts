@@ -310,7 +310,7 @@ export class AtomTerminal extends HTMLElement {
       if (err.message.startsWith("File not found:")) {
         message = "Could not open shell '" + this.ptyProcessCommand + "'."
       }
-      atom.notifications.addError('Terminal Error', { detail: message })
+      atom.notifications.addError("Terminal Error", { detail: message })
       if (this.model) {
         this.model.exit()
       }
