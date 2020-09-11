@@ -64,7 +64,7 @@ export class AtomTerminal extends HTMLElement {
       const intersectionObserver = new IntersectionObserver(
         async (entries) => {
           const lastEntry = entries.pop()
-          if (lastEntry && lastEntry.intersectionRatio === 1.0) {
+          if (lastEntry && lastEntry.intersectionRatio > 0.0) {
             this.initiallyVisible = true
             try {
               await this.createTerminal()
@@ -310,7 +310,7 @@ export class AtomTerminal extends HTMLElement {
       if (err.message.startsWith("File not found:")) {
         message = "Could not open shell '" + this.ptyProcessCommand + "'."
       }
-      atom.notifications.addError('Terminal Error', { detail: message })
+      atom.notifications.addError("Terminal Error", { detail: message })
       if (this.model) {
         this.model.exit()
       }
