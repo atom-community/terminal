@@ -3,6 +3,7 @@ import { spawn as spawnPty, IPty, IPtyForkOptions } from "node-pty-prebuilt-mult
 import { Terminal } from "xterm"
 import { FitAddon } from "xterm-addon-fit"
 import { WebLinksAddon } from "xterm-addon-web-links"
+import { LigaturesAddon } from "xterm-addon-ligatures"
 import { WebglAddon } from "xterm-addon-webgl"
 // @ts-ignore
 import { shell } from "electron"
@@ -208,6 +209,7 @@ export class AtomTerminal extends HTMLElement {
     if (atom.config.get("terminal.webgl")) {
       this.terminal.loadAddon(new WebglAddon())
     }
+    this.terminal.loadAddon(new LigaturesAddon())
   }
 
   async createTerminal() {
