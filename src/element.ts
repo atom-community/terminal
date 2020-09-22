@@ -3,8 +3,6 @@ import { spawn as spawnPty, IPty, IPtyForkOptions } from "node-pty-prebuilt-mult
 import { Terminal } from "xterm"
 import { FitAddon } from "xterm-addon-fit"
 import { WebLinksAddon } from "xterm-addon-web-links"
-import { LigaturesAddon } from "xterm-addon-ligatures"
-import { WebglAddon } from "xterm-addon-webgl"
 // @ts-ignore
 import { shell } from "electron"
 
@@ -192,7 +190,7 @@ export class AtomTerminal extends HTMLElement {
     }
   }
 
-  loadAddons() {
+  async loadAddons() {
     if (!this.terminal) {
       return
     }
@@ -207,9 +205,13 @@ export class AtomTerminal extends HTMLElement {
     }
     this.terminal.open(this)
     if (atom.config.get("terminal.webgl")) {
+      const { WebglAddon } = await import("xterm-addon-webgl")
       this.terminal.loadAddon(new WebglAddon())
+    } else {
+      // ligatures only work if WebGL is disabled
+      const { LigaturesAddon } = await import("xterm-addon-ligatures")
+      this.terminal.loadAddon(new LigaturesAddon())
     }
-    this.terminal.loadAddon(new LigaturesAddon())
   }
 
   async createTerminal() {
@@ -219,7 +221,7 @@ export class AtomTerminal extends HTMLElement {
     // Attach terminal emulator to this element and refit.
     this.setMainBackgroundColor()
     this.terminal = new Terminal(this.getXtermOptions())
-    this.loadAddons()
+    await this.loadAddons()
     this.terminal.focus()
     this.ptyProcessCols = 80
     this.ptyProcessRows = 25
