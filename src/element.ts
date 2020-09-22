@@ -2,7 +2,6 @@ import { CompositeDisposable, Disposable } from "atom"
 import { spawn as spawnPty, IPty, IPtyForkOptions } from "node-pty-prebuilt-multiarch"
 import { Terminal } from "xterm"
 import { FitAddon } from "xterm-addon-fit"
-import { WebLinksAddon } from "xterm-addon-web-links"
 // @ts-ignore
 import { shell } from "electron"
 
@@ -197,6 +196,7 @@ export class AtomTerminal extends HTMLElement {
     this.fitAddon = new FitAddon()
     this.terminal.loadAddon(this.fitAddon)
     if (atom.config.get("terminal.webLinks")) {
+      const { WebLinksAddon } = await import("xterm-addon-web-links")
       this.terminal.loadAddon(
         new WebLinksAddon((_e, uri) => {
           shell.openExternal(uri)
