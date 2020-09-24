@@ -2,8 +2,6 @@ import { CompositeDisposable, Disposable } from "atom"
 import { spawn as spawnPty, IPty, IPtyForkOptions } from "node-pty-prebuilt-multiarch"
 import { Terminal } from "xterm"
 import { FitAddon } from "xterm-addon-fit"
-import { WebLinksAddon } from "xterm-addon-web-links"
-import { WebglAddon } from "xterm-addon-webgl"
 // @ts-ignore
 import { shell } from "electron"
 
@@ -195,13 +193,14 @@ export class AtomTerminal extends HTMLElement {
     }
   }
 
-  loadAddons() {
+  async loadAddons() {
     if (!this.terminal) {
       return
     }
     this.fitAddon = new FitAddon()
     this.terminal.loadAddon(this.fitAddon)
     if (atom.config.get("terminal.webLinks")) {
+      const { WebLinksAddon } = await import("xterm-addon-web-links")
       this.terminal.loadAddon(
         new WebLinksAddon((_e, uri) => {
           shell.openExternal(uri)
@@ -210,7 +209,13 @@ export class AtomTerminal extends HTMLElement {
     }
     this.terminal.open(this)
     if (atom.config.get("terminal.webgl")) {
+      const { WebglAddon } = await import("xterm-addon-webgl")
       this.terminal.loadAddon(new WebglAddon())
+    }
+    if (atom.config.get("terminal.ligatures")) {
+      // ligatures only work if WebGL is disabled
+      const { LigaturesAddon } = await import("xterm-addon-ligatures")
+      this.terminal.loadAddon(new LigaturesAddon())
     }
   }
 
@@ -221,7 +226,7 @@ export class AtomTerminal extends HTMLElement {
     // Attach terminal emulator to this element and refit.
     this.setMainBackgroundColor()
     this.terminal = new Terminal(this.getXtermOptions())
-    this.loadAddons()
+    await this.loadAddons()
     this.terminal.focus()
     this.ptyProcessCols = 80
     this.ptyProcessRows = 25
