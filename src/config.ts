@@ -53,6 +53,12 @@ export const config = configOrder({
     type: "boolean",
     default: true,
   },
+  ligatures: {
+    title: "Ligatures",
+    description: "Enables ligatures support (experimental).",
+    type: "boolean",
+    default: true,
+  },
   fontFamily: {
     title: "Font Family",
     description: "Font family used in terminal emulator.",
