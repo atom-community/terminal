@@ -55,7 +55,7 @@ export const config = configOrder({
   },
   ligatures: {
     title: "Ligatures",
-    description: "Enables ligatures support (experimental).",
+    description: "Enables ligatures support (currently works without WebGL).",
     type: "boolean",
     default: true,
   },
