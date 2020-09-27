@@ -67,7 +67,7 @@
     "atom-jasmine3-test-runner": "^5.1.1",
     "build-commit": "0.1.1",
     "cross-env": "7.0.2",
-    "eslint": "^7.9.0",
+    "eslint": "^7.10.0",
     "eslint-config-atomic": "^1.5.0",
     "npm-check-updates": "9.0.2",
     "prettier": "^2.1.2",
