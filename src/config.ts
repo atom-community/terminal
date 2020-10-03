@@ -1,3 +1,4 @@
+import which from "which"
 type configObjects = Record<string, configObject>
 
 type configObject = {
@@ -24,7 +25,29 @@ function configOrder(obj: configObjects): configObjects {
   return obj
 }
 
-export function getDefaultShell(): string {
+// finds the default shell start commmand
+async function getDefaultShell(): Promise<string> {
+  let shellStartCommand
+  if (process.platform === "win32") {
+    // Windows
+    try {
+      shellStartCommand = await which("pwsh.exe")
+      return shellStartCommand
+    } catch (e1) {
+      try {
+        shellStartCommand = await which("powershell.exe")
+        return shellStartCommand
+      } catch (e2) {
+        shellStartCommand = process.env.COMSPEC || "cmd.exe"
+        return shellStartCommand
+      }
+    }
+  } else {
+    // Unix
+    shellStartCommand = process.env.SHELL || "/bin/sh"
+    return shellStartCommand
+  }
+}
   return process.platform === "win32" ? process.env.COMSPEC || "cmd.exe" : process.env.SHELL || "/bin/sh"
 }
 
