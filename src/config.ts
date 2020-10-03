@@ -1,4 +1,5 @@
 import which from "which"
+import { existsSync } from "fs"
 
 type configObjects = Record<string, configObject>
 
@@ -58,8 +59,19 @@ export function getFallbackShell() {
 // set start command asyncronously
 export async function setShellStartCommand() {
   if (localStorage.getItem("terminal.autoShell") === "true") {
+    // first check the cache
+    const defaultSellCache = localStorage.getItem("terminal.defaultSellCache")
+    if (defaultSellCache && existsSync(defaultSellCache)) {
+      atom.config.set("terminal.shell", defaultSellCache)
+      return
+    }
+
+    // find prefered shell
     const shellStartCommand = await getDefaultShell()
     atom.config.set("terminal.shell", shellStartCommand)
+
+    // cache the result for faster restoration in later loads
+    localStorage.setItem("terminal.defaultSellCache", shellStartCommand)
   }
 }
 
