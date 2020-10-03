@@ -2,7 +2,7 @@ import { CompositeDisposable, Workspace, Dock, WorkspaceOpenOptions } from "atom
 
 import { TerminalElement } from "./element"
 import { TerminalModel } from "./model"
-import { setShellStartCommand } from "./config"
+import { setShellStartCommand, getFallbackShell } from "./config"
 
 import { v4 as uuidv4 } from "uuid"
 
@@ -23,11 +23,7 @@ class Terminal {
     // set start command asyncronously
     // TODO does any part of the code rely on this? If so we should await the promise before there
     setShellStartCommand().catch(() => {
-      // run again with autoShell being false
-      localStorage.setItem("terminal.autoShell", "false")
-      setShellStartCommand().catch((e) => {
-        throw e
-      })
+      atom.config.set("terminal.shell", getFallbackShell())
     })
 
     this.disposables.add(
