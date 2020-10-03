@@ -28,7 +28,7 @@ function configOrder(obj: configObjects): configObjects {
 }
 
 // finds the default shell start commmand
-async function getDefaultShell(): Promise<string> {
+export async function getDefaultShell(): Promise<string> {
   let shellStartCommand
   if (process.platform === "win32") {
     // Windows
@@ -52,7 +52,7 @@ async function getDefaultShell(): Promise<string> {
 }
 
 // The shell command used in case getDefaultShell does not find a prefered shell
-function getFallbackShell() {
+export function getFallbackShell() {
   return process.platform === "win32" ? process.env.COMSPEC || "cmd.exe" : process.env.SHELL || "/bin/sh"
 }
 
