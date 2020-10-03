@@ -71,6 +71,13 @@ export async function setShellStartCommand(disposables: CompositeDisposable) {
 }
 
 export const config = configOrder({
+  autoShell: {
+    title: "Automatic shell detection",
+    description:
+      "Automatically detect the prefered shell start command in the next Atom restart. (it will switched off if you edit `shell` option manually.",
+    type: "boolean",
+    default: true,
+  },
   shell: {
     title: "Shell",
     description: "Path to the shell command.",
