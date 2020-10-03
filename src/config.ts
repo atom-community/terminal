@@ -48,6 +48,9 @@ async function getDefaultShell(): Promise<string> {
     return shellStartCommand
   }
 }
+
+// The shell command used in case getDefaultShell does not find a prefered shell
+function getFallbackShell() {
   return process.platform === "win32" ? process.env.COMSPEC || "cmd.exe" : process.env.SHELL || "/bin/sh"
 }
 
