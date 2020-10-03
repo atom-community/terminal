@@ -2,6 +2,7 @@ import { CompositeDisposable, Workspace, Dock, WorkspaceOpenOptions } from "atom
 
 import { TerminalElement } from "./element"
 import { TerminalModel } from "./model"
+import { setShellStartCommand } from "./config"
 
 import { v4 as uuidv4 } from "uuid"
 
@@ -18,6 +19,16 @@ class Terminal {
 
     // Set holding all terminals available at any moment.
     this.terminalsSet = new Set()
+
+    // set start command asyncronously
+    // TODO does any part of the code rely on this? If so we should await the promise before there
+    setShellStartCommand(this.disposables).catch(() => {
+      // run again with autoShell being false
+      atom.config.set("x-terminal.spawnPtySettings.autoShell", false)
+      setShellStartCommand(this.disposables).catch((e) => {
+        throw e
+      })
+    })
 
     this.disposables.add(
       // Register view provider for terminal emulator item.
