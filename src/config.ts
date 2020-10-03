@@ -135,7 +135,7 @@ export const config = configOrder({
     description: "Position to open terminal through service API or terminal:open.",
     type: "string",
     enum: ["Center", "Split Up", "Split Down", "Split Left", "Split Right", "Bottom Dock", "Left Dock", "Right Dock"],
-    default: "Center",
+    default: "Bottom Dock",
   },
   allowHiddenToStayActive: {
     title: "Allow Hidden Terminal To Stay Active",
