@@ -27,15 +27,19 @@ class Terminal {
 
     // set start command asyncronously
     // TODO does any part of the code rely on this? If so we should await the promise before there
-    setShellStartCommand(this.disposables).catch(() => {
+    setShellStartCommand().catch(() => {
       // run again with autoShell being false
       localStorage.setItem("terminal.autoShell", "false")
-      setShellStartCommand(this.disposables).catch((e) => {
+      setShellStartCommand().catch((e) => {
         throw e
       })
     })
 
     this.disposables.add(
+      // an observre that checks if command has been edited manually, if so it will turn autoShell off
+      atom.config.observe("terminal.shell", () => {
+        localStorage.setItem("terminal.autoShell", "false")
+      }),
       // Register view provider for terminal emulator item.
       atom.views.addViewProvider(TerminalModel, (terminalModel) => {
         const terminalElement = new TerminalElement()
