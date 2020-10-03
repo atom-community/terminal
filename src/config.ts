@@ -1,4 +1,6 @@
 import which from "which"
+import { CompositeDisposable } from "atom"
+
 type configObjects = Record<string, configObject>
 
 type configObject = {
@@ -52,6 +54,20 @@ async function getDefaultShell(): Promise<string> {
 // The shell command used in case getDefaultShell does not find a prefered shell
 function getFallbackShell() {
   return process.platform === "win32" ? process.env.COMSPEC || "cmd.exe" : process.env.SHELL || "/bin/sh"
+}
+
+// set start command asyncronously
+export async function setShellStartCommand(disposables: CompositeDisposable) {
+  if (atom.config.get("terminal.autoShell")) {
+    const shellStartCommand = await getDefaultShell()
+    atom.config.set("terminal.shell", shellStartCommand)
+  }
+  return disposables.add(
+    // an observre that checks if command has been edited manually, if so it will turn autoShell off
+    atom.config.observe("terminal.shell", () => {
+      atom.config.set("terminal.autoShell", false)
+    })
+  )
 }
 
 export const config = configOrder({
