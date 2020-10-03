@@ -28,7 +28,7 @@ class Terminal {
 
     this.disposables.add(
       // an observre that checks if command has been edited manually, if so it will turn autoShell off
-      atom.config.observe("terminal.shell", () => {
+      atom.config.onDidChange("terminal.shell", () => {
         localStorage.setItem("terminal.autoShell", "false")
       }),
       // Register view provider for terminal emulator item.
