@@ -58,26 +58,19 @@ export function getFallbackShell() {
 
 // set start command asyncronously
 export async function setShellStartCommand(disposables: CompositeDisposable) {
-  if (atom.config.get("terminal.autoShell")) {
+  if (localStorage.getItem("terminal.autoShell") === "true") {
     const shellStartCommand = await getDefaultShell()
     atom.config.set("terminal.shell", shellStartCommand)
   }
   return disposables.add(
     // an observre that checks if command has been edited manually, if so it will turn autoShell off
     atom.config.observe("terminal.shell", () => {
-      atom.config.set("terminal.autoShell", false)
+      localStorage.setItem("terminal.autoShell", "false")
     })
   )
 }
 
 export const config = configOrder({
-  autoShell: {
-    title: "Automatic shell detection",
-    description:
-      "Automatically detect the prefered shell start command in the next Atom restart. (it will switched off if you edit `shell` option manually.",
-    type: "boolean",
-    default: true,
-  },
   shell: {
     title: "Shell",
     description: "Path to the shell command.",
