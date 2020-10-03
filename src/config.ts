@@ -82,7 +82,7 @@ export const config = configOrder({
     title: "Shell",
     description: "Path to the shell command.",
     type: "string",
-    default: getDefaultShell(),
+    default: getFallbackShell(),
   },
   encoding: {
     title: "Character Encoding",
