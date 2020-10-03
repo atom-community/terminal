@@ -20,11 +20,6 @@ class Terminal {
     // Set holding all terminals available at any moment.
     this.terminalsSet = new Set()
 
-    // set autoShell flag in local storage
-    // If set, automatically detect the prefered shell start command in the next Atom restart.
-    // (it will switched off if you edit `shell` option manually.
-    localStorage.setItem("terminal.autoShell", "true")
-
     // set start command asyncronously
     // TODO does any part of the code rely on this? If so we should await the promise before there
     setShellStartCommand().catch(() => {

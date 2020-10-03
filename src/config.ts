@@ -58,7 +58,17 @@ export function getFallbackShell() {
 
 // set start command asyncronously
 export async function setShellStartCommand() {
-  if (localStorage.getItem("terminal.autoShell") === "true") {
+  // If set, automatically detect the prefered shell start command in the next Atom restart.
+  // (it will switched off if you edit `shell` option manually.
+  let shouldAutoShell = localStorage.getItem("terminal.autoShell")
+
+  // set for the first time
+  if (!shouldAutoShell) {
+    localStorage.setItem("terminal.autoShell", "true")
+    shouldAutoShell = "true"
+  }
+
+  if (shouldAutoShell === "true") {
     // first check the cache
     const defaultSellCache = localStorage.getItem("terminal.defaultSellCache")
     if (defaultSellCache && existsSync(defaultSellCache)) {
