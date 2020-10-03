@@ -1,9 +1,9 @@
 /** @babel */
 
-import { getDefaultShell } from "../dist/config"
+import { getFallbackShell } from "../dist/config"
 
 describe("config", () => {
-  describe("getDefaultShell()", () => {
+  describe("getFallbackShell()", () => {
     const savedPlatform = process.platform
     let savedEnv
 
@@ -25,7 +25,7 @@ describe("config", () => {
       if (process.env.COMSPEC) {
         delete process.env.COMSPEC
       }
-      expect(getDefaultShell()).toBe("cmd.exe")
+      expect(getFallbackShell()).toBe("cmd.exe")
     })
 
     it("on win32 with COMSPEC set", () => {
@@ -34,7 +34,7 @@ describe("config", () => {
       })
       const expected = "somecommand.exe"
       process.env.COMSPEC = expected
-      expect(getDefaultShell()).toBe(expected)
+      expect(getFallbackShell()).toBe(expected)
     })
 
     it("on linux without SHELL set", () => {
@@ -44,7 +44,7 @@ describe("config", () => {
       if (process.env.SHELL) {
         delete process.env.SHELL
       }
-      expect(getDefaultShell()).toBe("/bin/sh")
+      expect(getFallbackShell()).toBe("/bin/sh")
     })
 
     it("on linux with SHELL set", () => {
@@ -53,7 +53,7 @@ describe("config", () => {
       })
       const expected = "somecommand"
       process.env.SHELL = expected
-      expect(getDefaultShell()).toBe(expected)
+      expect(getFallbackShell()).toBe(expected)
     })
   })
 })
