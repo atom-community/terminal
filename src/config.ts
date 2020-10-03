@@ -1,3 +1,6 @@
+import which from "which"
+import { existsSync } from "fs"
+
 type configObjects = Record<string, configObject>
 
 type configObject = {
@@ -24,8 +27,62 @@ function configOrder(obj: configObjects): configObjects {
   return obj
 }
 
-export function getDefaultShell(): string {
+// finds the default shell start commmand
+export async function getDefaultShell(): Promise<string> {
+  let shellStartCommand
+  if (process.platform === "win32") {
+    // Windows
+    try {
+      shellStartCommand = await which("pwsh.exe")
+      return shellStartCommand
+    } catch (e1) {
+      try {
+        shellStartCommand = await which("powershell.exe")
+        return shellStartCommand
+      } catch (e2) {
+        shellStartCommand = process.env.COMSPEC || "cmd.exe"
+        return shellStartCommand
+      }
+    }
+  } else {
+    // Unix
+    shellStartCommand = process.env.SHELL || "/bin/sh"
+    return shellStartCommand
+  }
+}
+
+// The shell command used in case getDefaultShell does not find a prefered shell
+export function getFallbackShell() {
   return process.platform === "win32" ? process.env.COMSPEC || "cmd.exe" : process.env.SHELL || "/bin/sh"
+}
+
+// set start command asyncronously
+export async function setShellStartCommand() {
+  // If set, automatically detect the prefered shell start command in the next Atom restart.
+  // (it will switched off if you edit `shell` option manually.
+  let shouldAutoShell = localStorage.getItem("terminal.autoShell")
+
+  // set for the first time
+  if (!shouldAutoShell) {
+    localStorage.setItem("terminal.autoShell", "true")
+    shouldAutoShell = "true"
+  }
+
+  if (shouldAutoShell === "true") {
+    // first check the cache
+    const defaultSellCache = localStorage.getItem("terminal.defaultSellCache")
+    if (defaultSellCache && existsSync(defaultSellCache)) {
+      atom.config.set("terminal.shell", defaultSellCache)
+      return
+    }
+
+    // find prefered shell
+    const shellStartCommand = await getDefaultShell()
+    atom.config.set("terminal.shell", shellStartCommand)
+
+    // cache the result for faster restoration in later loads
+    localStorage.setItem("terminal.defaultSellCache", shellStartCommand)
+  }
 }
 
 export const config = configOrder({
@@ -33,7 +90,7 @@ export const config = configOrder({
     title: "Shell",
     description: "Path to the shell command.",
     type: "string",
-    default: getDefaultShell(),
+    default: getFallbackShell(),
   },
   encoding: {
     title: "Character Encoding",
