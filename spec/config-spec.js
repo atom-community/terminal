@@ -1,9 +1,10 @@
 /** @babel */
 
-import { getFallbackShell } from "../dist/config"
+import { getDefaultShell, setAutoShell } from "../dist/config"
+import which from "which"
 
 describe("config", () => {
-  describe("getFallbackShell()", () => {
+  describe("getDefaultShell()", () => {
     const savedPlatform = process.platform
     let savedEnv
 
@@ -25,7 +26,7 @@ describe("config", () => {
       if (process.env.COMSPEC) {
         delete process.env.COMSPEC
       }
-      expect(getFallbackShell()).toBe("cmd.exe")
+      expect(getDefaultShell()).toBe("cmd.exe")
     })
 
     it("on win32 with COMSPEC set", () => {
@@ -34,7 +35,7 @@ describe("config", () => {
       })
       const expected = "somecommand.exe"
       process.env.COMSPEC = expected
-      expect(getFallbackShell()).toBe(expected)
+      expect(getDefaultShell()).toBe(expected)
     })
 
     it("on linux without SHELL set", () => {
@@ -44,7 +45,7 @@ describe("config", () => {
       if (process.env.SHELL) {
         delete process.env.SHELL
       }
-      expect(getFallbackShell()).toBe("/bin/sh")
+      expect(getDefaultShell()).toBe("/bin/sh")
     })
 
     it("on linux with SHELL set", () => {
@@ -53,7 +54,57 @@ describe("config", () => {
       })
       const expected = "somecommand"
       process.env.SHELL = expected
-      expect(getFallbackShell()).toBe(expected)
+      expect(getDefaultShell()).toBe(expected)
+    })
+  })
+
+  describe("setAutoShell()", () => {
+    const savedPlatform = process.platform
+
+    beforeEach(() => {
+      Object.defineProperty(process, "platform", {
+        value: "win32",
+      })
+      atom.config.set("terminal.shell", getDefaultShell())
+    })
+
+    afterEach(() => {
+      Object.defineProperty(process, "platform", {
+        value: savedPlatform,
+      })
+    })
+
+    it("should set terminal.shell to pwsh", async () => {
+      const shell = "path/to/pwsh.exe"
+      await setAutoShell(async (file) => {
+        if (file === "pwsh.exe") {
+          return shell
+        }
+        throw new Error("ENOENT")
+      })
+
+      expect(atom.config.get("terminal.shell")).toBe(shell)
+    })
+
+    it("should set terminal.shell to powershell", async () => {
+      const shell = "path/to/powershell.exe"
+      await setAutoShell(async (file) => {
+        if (file === "powershell.exe") {
+          return shell
+        }
+        throw new Error("ENOENT")
+      })
+
+      expect(atom.config.get("terminal.shell")).toBe(shell)
+    })
+
+    it("should set terminal.shell to powershell", async () => {
+      const shell = getDefaultShell()
+      await setAutoShell(async () => {
+        throw new Error("ENOENT")
+      })
+
+      expect(atom.config.get("terminal.shell")).toBe(shell)
     })
   })
 })

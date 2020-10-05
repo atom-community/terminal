@@ -1,7 +1,4 @@
 import which from "which"
-import { access } from "fs"
-import {promisify} from "util"
-const exists = promisify(access)
 
 type configObjects = Record<string, configObject>
 
@@ -29,62 +26,8 @@ function configOrder(obj: configObjects): configObjects {
   return obj
 }
 
-// finds the default shell start commmand
-export async function getDefaultShell(): Promise<string> {
-  let shellStartCommand
-  if (process.platform === "win32") {
-    // Windows
-    try {
-      shellStartCommand = await which("pwsh.exe")
-      return shellStartCommand
-    } catch (e1) {
-      try {
-        shellStartCommand = await which("powershell.exe")
-        return shellStartCommand
-      } catch (e2) {
-        shellStartCommand = process.env.COMSPEC || "cmd.exe"
-        return shellStartCommand
-      }
-    }
-  } else {
-    // Unix
-    shellStartCommand = process.env.SHELL || "/bin/sh"
-    return shellStartCommand
-  }
-}
-
-// The shell command used in case getDefaultShell does not find a prefered shell
-export function getFallbackShell() {
+export function getDefaultShell(): string {
   return process.platform === "win32" ? process.env.COMSPEC || "cmd.exe" : process.env.SHELL || "/bin/sh"
-}
-
-// set start command asyncronously
-export async function setShellStartCommand() {
-  // If set, automatically detect the prefered shell start command in the next Atom restart.
-  // (it will switched off if you edit `shell` option manually.
-  let shouldAutoShell = localStorage.getItem("terminal.autoShell")
-
-  // set for the first time
-  if (!shouldAutoShell) {
-    localStorage.setItem("terminal.autoShell", "true")
-    shouldAutoShell = "true"
-  }
-
-  if (shouldAutoShell === "true") {
-    // first check the cache
-    const defaultShellCache = localStorage.getItem("terminal.defaultSellCache")
-    if (defaultShellCache && await exists(defaultShellCache)) {
-      atom.config.set("terminal.shell", defaultShellCache)
-      return
-    }
-
-    // find prefered shell
-    const shellStartCommand = await getDefaultShell()
-    atom.config.set("terminal.shell", shellStartCommand)
-
-    // cache the result for faster restoration in later loads
-    localStorage.setItem("terminal.defaultSellCache", shellStartCommand)
-  }
 }
 
 export const config = configOrder({
@@ -92,7 +35,7 @@ export const config = configOrder({
     title: "Shell",
     description: "Path to the shell command.",
     type: "string",
-    default: getFallbackShell(),
+    default: getDefaultShell(),
   },
   encoding: {
     title: "Character Encoding",
@@ -333,3 +276,30 @@ export const config = configOrder({
     },
   },
 })
+
+// finds the default shell start commmand
+export async function setAutoShell(which: Function): Promise<void> {
+  let shellStartCommand
+  if (process.platform === "win32") {
+    // Windows
+    try {
+      shellStartCommand = await which("pwsh.exe")
+    } catch (e1) {
+      try {
+        shellStartCommand = await which("powershell.exe")
+      } catch (e2) {
+        // keep default
+      }
+    }
+  }
+
+  if (shellStartCommand && atom.config.get("terminal.shell") === getDefaultShell()) {
+    atom.config.set("terminal.shell", shellStartCommand)
+  }
+}
+
+// set shell command automatically on first install
+if (localStorage.getItem("terminal.autoShellSet") === null) {
+  localStorage.setItem("terminal.autoShellSet", "true")
+  setAutoShell(which)
+}
