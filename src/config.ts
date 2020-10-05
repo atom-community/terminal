@@ -1,5 +1,7 @@
 import which from "which"
-import { existsSync } from "fs"
+import { access } from "fs"
+import {promisify} from "util"
+const exists = promisify(access)
 
 type configObjects = Record<string, configObject>
 
@@ -70,9 +72,9 @@ export async function setShellStartCommand() {
 
   if (shouldAutoShell === "true") {
     // first check the cache
-    const defaultSellCache = localStorage.getItem("terminal.defaultSellCache")
-    if (defaultSellCache && existsSync(defaultSellCache)) {
-      atom.config.set("terminal.shell", defaultSellCache)
+    const defaultShellCache = localStorage.getItem("terminal.defaultSellCache")
+    if (defaultShellCache && await exists(defaultShellCache)) {
+      atom.config.set("terminal.shell", defaultShellCache)
       return
     }
 
