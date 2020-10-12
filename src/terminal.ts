@@ -2,6 +2,7 @@ import { CompositeDisposable, Workspace, Dock, WorkspaceOpenOptions } from "atom
 
 import { TerminalElement } from "./element"
 import { TerminalModel } from "./model"
+export * from "./button"
 
 import { v4 as uuidv4 } from "uuid"
 

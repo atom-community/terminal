@@ -46,6 +46,13 @@
       }
     }
   },
+  "consumedServices": {
+    "tool-bar": {
+      "versions": {
+        "^0 || ^1": "consumeToolBar"
+      }
+    }
+  },
   "dependencies": {
     "fs-extra": "^9.0.1",
     "node-pty-prebuilt-multiarch": "^0.9.0",
