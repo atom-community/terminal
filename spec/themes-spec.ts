@@ -1,6 +1,4 @@
-/** @babel */
-
-import { getTheme } from "../dist/themes"
+import { getTheme } from "../src/themes"
 
 describe("themes", () => {
   describe("getTheme()", () => {
@@ -684,7 +682,7 @@ describe("themes", () => {
 
     it("Standard", () => {
       atom.config.set("terminal.colors.theme", "Standard")
-      const root = getComputedStyle(document.documentElement)
+      const root = getComputedStyle(document.documentElement as HTMLElement)
       expect(getTheme()).toEqual({
         background: root.getPropertyValue("--standard-app-background-color"),
         foreground: root.getPropertyValue("--standard-text-color"),

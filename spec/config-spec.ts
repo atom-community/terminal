@@ -1,12 +1,9 @@
-/** @babel */
-
-import { getDefaultShell, setAutoShell } from "../dist/config"
-import which from "which"
+import { getDefaultShell, setAutoShell } from "../src/config"
 
 describe("config", () => {
   describe("getDefaultShell()", () => {
     const savedPlatform = process.platform
-    let savedEnv
+    let savedEnv: NodeJS.ProcessEnv
 
     beforeEach(() => {
       savedEnv = JSON.parse(JSON.stringify(process.env))
@@ -76,7 +73,7 @@ describe("config", () => {
 
     it("should set terminal.shell to pwsh", async () => {
       const shell = "path/to/pwsh.exe"
-      await setAutoShell(async (file) => {
+      await setAutoShell(async (file: string) => {
         if (file === "pwsh.exe") {
           return shell
         }
@@ -88,7 +85,7 @@ describe("config", () => {
 
     it("should set terminal.shell to powershell", async () => {
       const shell = "path/to/powershell.exe"
-      await setAutoShell(async (file) => {
+      await setAutoShell(async (file: string) => {
         if (file === "powershell.exe") {
           return shell
         }
