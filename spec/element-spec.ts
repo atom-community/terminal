@@ -172,7 +172,8 @@ describe("TerminalElement", () => {
     const oldPtyProcess = element.ptyProcess
     const newPtyProcess = jasmine.createSpyObj("ptyProcess", ["kill", "write", "resize", "on", "removeAllListeners"])
     newPtyProcess.process = jasmine.createSpy("process").and.returnValue("sometestprocess")
-    (nodePty.spawn as jasmine.Spy).and.returnValue(newPtyProcess)
+    const spawn = (nodePty.spawn as jasmine.Spy)
+    spawn.and.returnValue(newPtyProcess)
     await element.restartPtyProcess()
     expect(element.ptyProcess).toBe(newPtyProcess)
     expect(oldPtyProcess).not.toBe(element.ptyProcess)
@@ -181,7 +182,8 @@ describe("TerminalElement", () => {
   it("restartPtyProcess() check ptyProcessRunning set to true", async () => {
     const newPtyProcess = jasmine.createSpyObj("ptyProcess", ["kill", "write", "resize", "on", "removeAllListeners"])
     newPtyProcess.process = jasmine.createSpy("process").and.returnValue("sometestprocess")
-    (nodePty.spawn as jasmine.Spy).and.returnValue(newPtyProcess)
+    const spawn = (nodePty.spawn as jasmine.Spy)
+    spawn.and.returnValue(newPtyProcess)
     await element.restartPtyProcess()
     expect(element.ptyProcessRunning).toBe(true)
   })
@@ -595,12 +597,14 @@ describe("TerminalElement", () => {
     const newPtyProcess = jasmine.createSpyObj("ptyProcess", ["kill", "write", "resize", "on", "removeAllListeners"])
     newPtyProcess.process = "sometestprocess"
     ;(nodePty.spawn as jasmine.Spy).and.returnValue(newPtyProcess)
-    (element.model as TerminalModel).title = "foo"
+    element.model!.title = "foo"
+
     await element.restartPtyProcess()
     const args = ((element.ptyProcess as nodePty.IPty).on as jasmine.Spy).calls.argsFor(0)
     const onDataCallback = args[1]
     onDataCallback("")
-    expect((element.model as TerminalModel).title).toBe("foo")
+
+    expect(element.model!.title).toBe("foo")
   })
 
   it("on 'data' handler custom title on linux platform", async () => {
