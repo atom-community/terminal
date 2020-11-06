@@ -1,10 +1,7 @@
 import { TerminalModel } from "../src/model"
 
 import { Pane } from "atom"
-import { IPty } from "node-pty-prebuilt-multiarch"
 import fs from "fs-extra"
-import { AtomTerminal } from "../src/element"
-import { Terminal } from "xterm"
 import path from "path"
 // @ts-ignore
 import temp from "temp"
@@ -261,13 +258,13 @@ describe("TerminalModel", () => {
   it("refitTerminal() with element set", () => {
     model.element = element
     model.refitTerminal()
-    expect((model.element as AtomTerminal).refitTerminal).toHaveBeenCalled()
+    expect(model.element!.refitTerminal).toHaveBeenCalled()
   })
 
   it("focusOnTerminal()", () => {
     model.element = element
     model.focusOnTerminal()
-    expect((model.element as AtomTerminal).focusOnTerminal).toHaveBeenCalled()
+    expect(model.element!.focusOnTerminal).toHaveBeenCalled()
   })
 
   it("focusOnTerminal() reset modified value old modified value was false", () => {
@@ -312,20 +309,20 @@ describe("TerminalModel", () => {
   it("restartPtyProcess() element set", () => {
     model.element = element
     model.restartPtyProcess()
-    expect((model.element as AtomTerminal).restartPtyProcess).toHaveBeenCalled()
+    expect(model.element!.restartPtyProcess).toHaveBeenCalled()
   })
 
   it("copyFromTerminal()", () => {
     model.element = element
     model.copyFromTerminal()
-    expect(((model.element as AtomTerminal).terminal as Terminal).getSelection).toHaveBeenCalled()
+    expect(model.element!.terminal!.getSelection).toHaveBeenCalled()
   })
 
   it("runCommand(cmd)", () => {
     model.element = element
     const expectedText = "some text"
     model.runCommand(expectedText)
-    expect((((model.element as AtomTerminal).ptyProcess as IPty).write as jasmine.Spy).calls.allArgs()).toEqual([
+    expect((model.element!.ptyProcess!.write as jasmine.Spy).calls.allArgs()).toEqual([
       [expectedText + (process.platform === "win32" ? "\r" : "\n")],
     ])
   })
@@ -334,7 +331,7 @@ describe("TerminalModel", () => {
     model.element = element
     const expectedText = "some text"
     model.pasteToTerminal(expectedText)
-    expect((((model.element as AtomTerminal).ptyProcess as IPty).write as jasmine.Spy).calls.allArgs()).toEqual([[expectedText]])
+    expect((model.element!.ptyProcess!.write as jasmine.Spy).calls.allArgs()).toEqual([[expectedText]])
   })
 
   it("setActive()", async function () {
@@ -468,12 +465,12 @@ describe("TerminalModel", () => {
           title: `title ${i}`,
         })
       }
-      return (terminals as TerminalModel[])
+      return terminals as TerminalModel[]
     }
 
     it("active first", () => {
       const terminals = createTerminals(2)
-      TerminalModel.recalculateActive(new Set(terminals as TerminalModel[]), (terminals as TerminalModel[])[1])
+      TerminalModel.recalculateActive(new Set(terminals), terminals[1])
       expect(terminals[0].activeIndex).toBe(1)
       expect(terminals[1].activeIndex).toBe(0)
     })
@@ -481,7 +478,7 @@ describe("TerminalModel", () => {
     it("visible before hidden", () => {
       const terminals = createTerminals(2)
       spyOn(terminals[1], "isVisible").and.returnValue(true)
-      TerminalModel.recalculateActive(new Set(terminals as TerminalModel[]))
+      TerminalModel.recalculateActive(new Set(terminals))
       expect(terminals[0].activeIndex).toBe(1)
       expect(terminals[1].activeIndex).toBe(0)
     })
@@ -490,7 +487,7 @@ describe("TerminalModel", () => {
       atom.config.set("terminal.allowHiddenToStayActive", true)
       const terminals = createTerminals(2)
       spyOn(terminals[1], "isVisible").and.returnValue(true)
-      TerminalModel.recalculateActive(new Set(terminals as TerminalModel[]))
+      TerminalModel.recalculateActive(new Set(terminals))
       expect(terminals[0].activeIndex).toBe(0)
       expect(terminals[1].activeIndex).toBe(1)
     })
@@ -499,7 +496,7 @@ describe("TerminalModel", () => {
       const terminals = createTerminals(2)
       terminals[0].activeIndex = 1
       terminals[1].activeIndex = 0
-      TerminalModel.recalculateActive(new Set(terminals as TerminalModel[]))
+      TerminalModel.recalculateActive(new Set(terminals))
       expect(terminals[0].activeIndex).toBe(1)
       expect(terminals[1].activeIndex).toBe(0)
     })
@@ -508,7 +505,7 @@ describe("TerminalModel", () => {
       const terminals = createTerminals(2)
       spyOn(terminals[0].emitter, "emit")
       spyOn(terminals[1].emitter, "emit")
-      TerminalModel.recalculateActive(new Set(terminals as TerminalModel[]))
+      TerminalModel.recalculateActive(new Set(terminals))
       // @ts-ignore
       expect(terminals[0].emitter.emit).toHaveBeenCalledWith("did-change-title", "title 0")
       // @ts-ignore
