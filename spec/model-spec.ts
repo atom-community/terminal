@@ -195,14 +195,14 @@ describe("TerminalModel", () => {
   })
 
   it("handleNewDataArrival() current item is active item", () => {
-    (pane.getActiveItem as jasmine.Spy).and.returnValue(model)
+    ;(pane.getActiveItem as jasmine.Spy).and.returnValue(model)
     model.pane = pane
     model.handleNewDataArrival()
     expect(model.modified).toBe(false)
   })
 
   it("handleNewDataArrival() current item is not active item", () => {
-    (pane.getActiveItem as jasmine.Spy).and.returnValue({})
+    ;(pane.getActiveItem as jasmine.Spy).and.returnValue({})
     model.pane = pane
     model.handleNewDataArrival()
     expect(model.modified).toBe(true)
@@ -215,14 +215,14 @@ describe("TerminalModel", () => {
   })
 
   it("handleNewDataArrival() model initially has no pane set", () => {
-    (pane.getActiveItem as jasmine.Spy).and.returnValue({})
+    ;(pane.getActiveItem as jasmine.Spy).and.returnValue({})
     spyOn(atom.workspace, "paneForItem").and.returnValue(pane)
     model.handleNewDataArrival()
     expect(atom.workspace.paneForItem).toHaveBeenCalled()
   })
 
   it("handleNewDataArrival() modified value of false not changed", () => {
-    (pane.getActiveItem as jasmine.Spy).and.returnValue(model)
+    ;(pane.getActiveItem as jasmine.Spy).and.returnValue(model)
     model.pane = pane
     spyOn(model.emitter, "emit")
     model.handleNewDataArrival()
@@ -230,7 +230,7 @@ describe("TerminalModel", () => {
   })
 
   it("handleNewDataArrival() modified value of true not changed", () => {
-    (pane.getActiveItem as jasmine.Spy).and.returnValue({})
+    ;(pane.getActiveItem as jasmine.Spy).and.returnValue({})
     model.pane = pane
     model.modified = true
     spyOn(model.emitter, "emit")
@@ -239,7 +239,7 @@ describe("TerminalModel", () => {
   })
 
   it("handleNewDataArrival() modified value changed", () => {
-    (pane.getActiveItem as jasmine.Spy).and.returnValue({})
+    ;(pane.getActiveItem as jasmine.Spy).and.returnValue({})
     model.pane = pane
     spyOn(model.emitter, "emit")
     model.handleNewDataArrival()
