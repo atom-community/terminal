@@ -104,7 +104,7 @@ export const config = configOrder({
     title: "Copy On Select",
     description: "Copy text to clipboard on selection.",
     type: "boolean",
-    default: false,
+    default: true,
   },
   colors: {
     title: "Colors",
