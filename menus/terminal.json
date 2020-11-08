@@ -1,6 +1,6 @@
 {
   "context-menu": {
-    "terminal": [
+    "atom-terminal": [
       {
         "label": "Open New Terminal",
         "command": "terminal:open"
@@ -77,16 +77,6 @@
             "command": "terminal:focus"
           }
         ]
-      }
-    ],
-    "atom-terminal": [
-      {
-        "label": "Copy",
-        "command": "terminal:copy"
-      },
-      {
-        "label": "Paste",
-        "command": "terminal:paste"
       }
     ]
   },
