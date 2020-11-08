@@ -1,6 +1,6 @@
 {
   "context-menu": {
-    "terminal": [
+    "atom-terminal": [
       {
         "label": "Open New Terminal",
         "command": "terminal:open"
