@@ -350,15 +350,15 @@ class Terminal {
   }
 }
 
-let terminal: Terminal | null = null
+let terminalInstance: Terminal | null = null
 
 export { config } from "./config"
 
 export function getInstance(): Terminal {
-  if (!terminal) {
-    terminal = new Terminal()
+  if (!terminalInstance) {
+    terminalInstance = new Terminal()
   }
-  return terminal
+  return terminalInstance
 }
 
 export function activate(): void {
@@ -366,9 +366,9 @@ export function activate(): void {
 }
 
 export function deactivate(): void {
-  if (terminal) {
-    terminal.destroy()
-    terminal = null
+  if (terminalInstance) {
+    terminalInstance.destroy()
+    terminalInstance = null
   }
 }
 
