@@ -59,13 +59,9 @@ export class TerminalModel {
   }
 
   async getInitialCwd() {
-    let cwd
     const previousActiveItem = atom.workspace.getActivePaneItem()
     // @ts-ignore
-    if (typeof previousActiveItem !== "undefined" && typeof previousActiveItem.getPath === "function") {
-      // @ts-ignore
-      cwd = previousActiveItem.getPath()
-    }
+    let cwd = previousActiveItem?.getPath?.()
     const dir = atom.project.relativizePath(cwd)[0]
     if (dir) {
       // Use project paths whenever they are available by default.
