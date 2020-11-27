@@ -47,7 +47,7 @@ class Terminal {
           pane.observeItems((item) => {
             // In callback, set current pane for terminal items.
             if (TerminalModel.isTerminalModel(item)) {
-              ;(<TerminalModel>item).setNewPane(pane)
+              (<TerminalModel>item).setNewPane(pane)
             }
             TerminalModel.recalculateActive(this.terminalsSet)
           })
@@ -59,7 +59,7 @@ class Terminal {
       atom.workspace.observeActivePaneItem((item) => {
         // In callback, focus specifically on terminal when item is terminal item.
         if (TerminalModel.isTerminalModel(item)) {
-          ;(<TerminalModel>item).focusOnTerminal()
+          (<TerminalModel>item).focusOnTerminal()
         }
         TerminalModel.recalculateActive(this.terminalsSet)
       }),
@@ -68,7 +68,7 @@ class Terminal {
         if (visible) {
           const item = atom.workspace.getRightDock().getActivePaneItem()
           if (TerminalModel.isTerminalModel(item)) {
-            ;(<TerminalModel>item).focusOnTerminal()
+            (<TerminalModel>item).focusOnTerminal()
           }
         }
         TerminalModel.recalculateActive(this.terminalsSet)
@@ -78,7 +78,7 @@ class Terminal {
         if (visible) {
           const item = atom.workspace.getLeftDock().getActivePaneItem()
           if (TerminalModel.isTerminalModel(item)) {
-            ;(<TerminalModel>item).focusOnTerminal()
+            (<TerminalModel>item).focusOnTerminal()
           }
         }
         TerminalModel.recalculateActive(this.terminalsSet)
@@ -88,7 +88,7 @@ class Terminal {
         if (visible) {
           const item = atom.workspace.getBottomDock().getActivePaneItem()
           if (TerminalModel.isTerminalModel(item)) {
-            ;(<TerminalModel>item).focusOnTerminal()
+            (<TerminalModel>item).focusOnTerminal()
           }
         }
         TerminalModel.recalculateActive(this.terminalsSet)
