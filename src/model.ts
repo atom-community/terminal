@@ -81,7 +81,7 @@ export class TerminalModel {
       if (dirStats.isDirectory()) {
         return cwd
       }
-    } catch (ex) {}
+    } catch {}
 
     cwd = atom.project.getPaths()[0]
     // no project paths
