@@ -130,8 +130,7 @@ export class TerminalModel {
     return DEFAULT_TITLE + " (" + this.title + ")"
   }
 
-  onDidChangeTitle(callback: Function) {
-    // @ts-ignore
+  onDidChangeTitle(callback: (value?: any) => void) {
     return this.emitter.on("did-change-title", callback)
   }
 
@@ -147,8 +146,7 @@ export class TerminalModel {
     return this.modified
   }
 
-  onDidChangeModified(callback: Function) {
-    // @ts-ignore
+  onDidChangeModified(callback: (value?: any) => void) {
     return this.emitter.on("did-change-modified", callback)
   }
 
