@@ -33,7 +33,8 @@ export class AtomTerminal extends HTMLElement {
     this.disposables = new CompositeDisposable()
     this.initiallyVisible = false
     this.isInitialized = false
-    let resolveInit: Function, rejectInit: Function
+    let resolveInit: (value?: void | PromiseLike<void | undefined>) => void,
+        rejectInit: (reason?: any) => void
     this.initializedPromise = new Promise((resolve, reject) => {
       resolveInit = resolve
       rejectInit = reject
