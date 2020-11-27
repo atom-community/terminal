@@ -276,7 +276,7 @@ export const config = configOrder({
 })
 
 // finds the default shell start commmand
-export async function setAutoShell(whichFun: Function): Promise<void> {
+export async function setAutoShell(whichFun: typeof which): Promise<void> {
   let shellStartCommand
   if (process.platform === "win32") {
     // Windows
