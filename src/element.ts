@@ -2,7 +2,6 @@ import { CompositeDisposable, Disposable } from "atom"
 import { spawn as spawnPty, IPty, IPtyForkOptions } from "node-pty-prebuilt-multiarch"
 import { Terminal } from "xterm"
 import { FitAddon } from "xterm-addon-fit"
-// @ts-ignore
 import { shell } from "electron"
 
 import { config } from "./config"
@@ -33,7 +32,8 @@ export class AtomTerminal extends HTMLElement {
     this.disposables = new CompositeDisposable()
     this.initiallyVisible = false
     this.isInitialized = false
-    let resolveInit: Function, rejectInit: Function
+    let resolveInit: (value?: void | PromiseLike<void | undefined>) => void,
+        rejectInit: (reason?: any) => void
     this.initializedPromise = new Promise((resolve, reject) => {
       resolveInit = resolve
       rejectInit = reject
@@ -45,9 +45,8 @@ export class AtomTerminal extends HTMLElement {
       // An element resize detector is used to check when this element is
       // resized due to the pane resizing or due to the entire window
       // resizing.
-      // @ts-ignore
       const resizeObserver = new ResizeObserver((entries) => {
-        const lastEntry = entries.pop()
+        const lastEntry = entries[entries.length - 1]
         this.contentRect = lastEntry.contentRect
         this.refitTerminal()
       })
@@ -61,7 +60,7 @@ export class AtomTerminal extends HTMLElement {
       // refit as soon as the terminal is visible.
       const intersectionObserver = new IntersectionObserver(
         async (entries) => {
-          const lastEntry = entries.pop()
+          const lastEntry = entries[entries.length - 1]
           if (lastEntry && lastEntry.intersectionRatio > 0.0) {
             this.initiallyVisible = true
             try {
@@ -356,7 +355,7 @@ export class AtomTerminal extends HTMLElement {
   }
 }
 
-// @ts-ignore
+// @ts-ignore // TODO This should be fixed soon https://developer.mozilla.org/en-US/docs/Web/API/Document/registerElement
 export const TerminalElement = document.registerElement("atom-terminal", {
   prototype: AtomTerminal.prototype,
 })
