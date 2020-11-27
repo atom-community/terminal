@@ -355,7 +355,7 @@ export class AtomTerminal extends HTMLElement {
   }
 }
 
-// @ts-ignore
+// @ts-ignore // TODO This should be fixed soon https://developer.mozilla.org/en-US/docs/Web/API/Document/registerElement
 export const TerminalElement = document.registerElement("atom-terminal", {
   prototype: AtomTerminal.prototype,
 })
