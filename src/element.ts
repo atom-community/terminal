@@ -2,7 +2,6 @@ import { CompositeDisposable, Disposable } from "atom"
 import { spawn as spawnPty, IPty, IPtyForkOptions } from "node-pty-prebuilt-multiarch"
 import { Terminal } from "xterm"
 import { FitAddon } from "xterm-addon-fit"
-// @ts-ignore
 import { shell } from "electron"
 
 import { config } from "./config"
