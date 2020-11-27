@@ -127,8 +127,7 @@ class Terminal {
     this.disposables.dispose()
   }
 
-  //@ts-ignore
-  deserializeTerminalModel(serializedModel) {
+  deserializeTerminalModel(serializedModel: {uri: string}) {
     if (atom.config.get("terminal.allowRelaunchingTerminalsOnStartup")) {
       return new TerminalModel({
         uri: serializedModel.uri,
@@ -372,8 +371,7 @@ export function deactivate(): void {
   }
 }
 
-// @ts-ignore
-export function deserializeTerminalModel(serializedModel) {
+export function deserializeTerminalModel(serializedModel: {uri: string}) {
   return getInstance().deserializeTerminalModel(serializedModel)
 }
 
