@@ -61,7 +61,7 @@ export class AtomTerminal extends HTMLElement {
       // refit as soon as the terminal is visible.
       const intersectionObserver = new IntersectionObserver(
         async (entries) => {
-          const lastEntry = entries.pop()
+          const lastEntry = entries[entries.length - 1]
           if (lastEntry && lastEntry.intersectionRatio > 0.0) {
             this.initiallyVisible = true
             try {
