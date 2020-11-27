@@ -1,5 +1,3 @@
-import which from "which"
-
 type configObjects = Record<string, configObject>
 
 type configObject = {
@@ -278,15 +276,15 @@ export const config = configOrder({
 })
 
 // finds the default shell start commmand
-export async function setAutoShell(which: Function): Promise<void> {
+export async function setAutoShell(whichFun: typeof which): Promise<void> {
   let shellStartCommand
   if (process.platform === "win32") {
     // Windows
     try {
-      shellStartCommand = await which("pwsh.exe")
+      shellStartCommand = await whichFun("pwsh.exe")
     } catch (e1) {
       try {
-        shellStartCommand = await which("powershell.exe")
+        shellStartCommand = await whichFun("powershell.exe")
       } catch (e2) {
         // keep default
       }
@@ -297,6 +295,8 @@ export async function setAutoShell(which: Function): Promise<void> {
     atom.config.set("terminal.shell", shellStartCommand)
   }
 }
+
+import which from "which"
 
 // set shell command automatically on first install
 if (localStorage.getItem("terminal.autoShellSet") === null) {

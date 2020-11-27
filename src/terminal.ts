@@ -47,7 +47,7 @@ class Terminal {
           pane.observeItems((item) => {
             // In callback, set current pane for terminal items.
             if (TerminalModel.isTerminalModel(item)) {
-              ;(<TerminalModel>item).setNewPane(pane)
+              (<TerminalModel>item).setNewPane(pane)
             }
             TerminalModel.recalculateActive(this.terminalsSet)
           })
@@ -59,7 +59,7 @@ class Terminal {
       atom.workspace.observeActivePaneItem((item) => {
         // In callback, focus specifically on terminal when item is terminal item.
         if (TerminalModel.isTerminalModel(item)) {
-          ;(<TerminalModel>item).focusOnTerminal()
+          (<TerminalModel>item).focusOnTerminal()
         }
         TerminalModel.recalculateActive(this.terminalsSet)
       }),
@@ -68,7 +68,7 @@ class Terminal {
         if (visible) {
           const item = atom.workspace.getRightDock().getActivePaneItem()
           if (TerminalModel.isTerminalModel(item)) {
-            ;(<TerminalModel>item).focusOnTerminal()
+            (<TerminalModel>item).focusOnTerminal()
           }
         }
         TerminalModel.recalculateActive(this.terminalsSet)
@@ -78,7 +78,7 @@ class Terminal {
         if (visible) {
           const item = atom.workspace.getLeftDock().getActivePaneItem()
           if (TerminalModel.isTerminalModel(item)) {
-            ;(<TerminalModel>item).focusOnTerminal()
+            (<TerminalModel>item).focusOnTerminal()
           }
         }
         TerminalModel.recalculateActive(this.terminalsSet)
@@ -88,7 +88,7 @@ class Terminal {
         if (visible) {
           const item = atom.workspace.getBottomDock().getActivePaneItem()
           if (TerminalModel.isTerminalModel(item)) {
-            ;(<TerminalModel>item).focusOnTerminal()
+            (<TerminalModel>item).focusOnTerminal()
           }
         }
         TerminalModel.recalculateActive(this.terminalsSet)
@@ -127,8 +127,7 @@ class Terminal {
     this.disposables.dispose()
   }
 
-  //@ts-ignore
-  deserializeTerminalModel(serializedModel) {
+  deserializeTerminalModel(serializedModel: {uri: string}) {
     if (atom.config.get("terminal.allowRelaunchingTerminalsOnStartup")) {
       return new TerminalModel({
         uri: serializedModel.uri,
@@ -350,15 +349,15 @@ class Terminal {
   }
 }
 
-let terminal: Terminal | null = null
+let terminalInstance: Terminal | null = null
 
 export { config } from "./config"
 
 export function getInstance(): Terminal {
-  if (!terminal) {
-    terminal = new Terminal()
+  if (!terminalInstance) {
+    terminalInstance = new Terminal()
   }
-  return terminal
+  return terminalInstance
 }
 
 export function activate(): void {
@@ -366,14 +365,13 @@ export function activate(): void {
 }
 
 export function deactivate(): void {
-  if (terminal) {
-    terminal.destroy()
-    terminal = null
+  if (terminalInstance) {
+    terminalInstance.destroy()
+    terminalInstance = null
   }
 }
 
-// @ts-ignore
-export function deserializeTerminalModel(serializedModel) {
+export function deserializeTerminalModel(serializedModel: {uri: string}) {
   return getInstance().deserializeTerminalModel(serializedModel)
 }
 

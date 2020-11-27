@@ -1,7 +1,6 @@
 /** @babel */
 
 import { getDefaultShell, setAutoShell } from "../dist/config"
-import which from "which"
 
 describe("config", () => {
   describe("getDefaultShell()", () => {

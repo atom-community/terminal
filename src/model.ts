@@ -59,13 +59,9 @@ export class TerminalModel {
   }
 
   async getInitialCwd() {
-    let cwd
     const previousActiveItem = atom.workspace.getActivePaneItem()
     // @ts-ignore
-    if (typeof previousActiveItem !== "undefined" && typeof previousActiveItem.getPath === "function") {
-      // @ts-ignore
-      cwd = previousActiveItem.getPath()
-    }
+    let cwd = previousActiveItem?.getPath?.()
     const dir = atom.project.relativizePath(cwd)[0]
     if (dir) {
       // Use project paths whenever they are available by default.
@@ -85,7 +81,7 @@ export class TerminalModel {
       if (dirStats.isDirectory()) {
         return cwd
       }
-    } catch (ex) {}
+    } catch {}
 
     cwd = atom.project.getPaths()[0]
     // no project paths
@@ -130,8 +126,7 @@ export class TerminalModel {
     return DEFAULT_TITLE + " (" + this.title + ")"
   }
 
-  onDidChangeTitle(callback: Function) {
-    // @ts-ignore
+  onDidChangeTitle(callback: (value?: any) => void) {
     return this.emitter.on("did-change-title", callback)
   }
 
@@ -147,8 +142,7 @@ export class TerminalModel {
     return this.modified
   }
 
-  onDidChangeModified(callback: Function) {
-    // @ts-ignore
+  onDidChangeModified(callback: (value?: any) => void) {
     return this.emitter.on("did-change-modified", callback)
   }
 
