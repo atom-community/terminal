@@ -14,6 +14,10 @@
         "command": "terminal:restart"
       },
       {
+        "label": "Clear",
+        "command": "terminal:clear"
+      },
+      {
         "type": "separator"
       },
       {

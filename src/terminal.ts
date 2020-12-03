@@ -115,6 +115,7 @@ class Terminal {
         "terminal:copy": () => this.copy(),
         "terminal:paste": () => this.paste(),
         "terminal:unfocus": () => this.unfocus(),
+				'terminal:clear': () => this.clear(),
       })
     )
   }
@@ -346,6 +347,13 @@ class Terminal {
 
   unfocus() {
     atom.views.getView(atom.workspace).focus()
+  }
+
+  clear() {
+    const terminal = this.getActiveTerminal()
+    if (terminal) {
+      terminal.clear()
+    }
   }
 }
 

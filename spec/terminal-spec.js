@@ -70,4 +70,63 @@ describe("terminal", () => {
       expect(newTerminal.runCommand).toHaveBeenCalledWith("command 2")
     })
   })
+
+  describe("performOnTerminal", () => {
+    let activeTerminal
+    beforeEach(() => {
+      activeTerminal = {
+        element: {
+          initializedPromise: Promise.resolve(),
+        },
+        exit: jasmine.createSpy('activeTerminal.exit'),
+        restartPtyProcess: jasmine.createSpy('activeTerminal.restartPtyProcess'),
+        copyFromTerminal: jasmine.createSpy('activeTerminal.copy').and.returnValue('copied'),
+        pasteToTerminal: jasmine.createSpy('activeTerminal.paste'),
+        clear: jasmine.createSpy('activeTerminal.clear'),
+      }
+      spyOn(terminal, 'getActiveTerminal').and.returnValue(activeTerminal)
+    })
+
+    describe('close()', () => {
+      it('closes terminal', async () => {
+        await terminal.close()
+
+        expect(activeTerminal.exit).toHaveBeenCalled()
+      })
+    })
+
+    describe('restart()', () => {
+      it('restarts terminal', async () => {
+        await terminal.restart()
+
+        expect(activeTerminal.restartPtyProcess).toHaveBeenCalled()
+      })
+    })
+
+    describe('copy()', () => {
+      it('copys terminal', async () => {
+        spyOn(atom.clipboard, 'write')
+        await terminal.copy()
+
+        expect(atom.clipboard.write).toHaveBeenCalledWith('copied')
+      })
+    })
+
+    describe('paste()', () => {
+      it('pastes terminal', async () => {
+        spyOn(atom.clipboard, 'read').and.returnValue('copied')
+        await terminal.paste()
+
+        expect(activeTerminal.pasteToTerminal).toHaveBeenCalledWith('copied')
+      })
+    })
+
+    describe('clear()', () => {
+      it('clears terminal', async () => {
+        await terminal.clear()
+
+        expect(activeTerminal.clear).toHaveBeenCalled()
+      })
+    })
+  });
 })
