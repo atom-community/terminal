@@ -1,7 +1,7 @@
 const { CompositeDisposable } = require('atom')
 const { $, View } = require('atom-space-pen-views-plus')
 
-const TerminusView = require('./view')
+const TerminalView = require('./view')
 const StatusIcon = require('./status-icon')
 
 const path = require('path')
@@ -9,7 +9,7 @@ const _ = require('underscore')
 
 class StatusBar extends View {
   static content () {
-    this.div({ class: 'terminus status-bar', tabindex: -1 }, () => {
+    this.div({ class: 'terminal status-bar', tabindex: -1 }, () => {
       this.i({ class: 'icon icon-plus', click: 'newTerminalView', outlet: 'plusBtn' })
       this.ul({ class: 'list-inline status-container', tabindex: '-1', outlet: 'statusContainer', is: 'space-pen-ul' })
       this.i({ class: 'icon icon-x', click: 'closeAll', outlet: 'closeBtn' })
@@ -28,48 +28,48 @@ class StatusBar extends View {
     this.onDrop = this.onDrop.bind(this)
 
     this.subscriptions.add(atom.commands.add('atom-workspace', {
-      'terminus:focus': () => this.focusTerminal(),
-      'terminus:new': () => this.newTerminalView(),
-      'terminus:toggle': () => this.toggle(),
-      'terminus:next': () => {
+      'terminal:focus': () => this.focusTerminal(),
+      'terminal:new': () => this.newTerminalView(),
+      'terminal:toggle': () => this.toggle(),
+      'terminal:next': () => {
         if (!this.activeTerminal) { return }
         if (this.activeTerminal.isAnimating()) { return }
         if (this.activeNextTerminalView()) { return this.activeTerminal.open() }
       },
-      'terminus:prev': () => {
+      'terminal:prev': () => {
         if (!this.activeTerminal) { return }
         if (this.activeTerminal.isAnimating()) { return }
         if (this.activePrevTerminalView()) { return this.activeTerminal.open() }
       },
-      'terminus:clear': () => this.clear(),
-      'terminus:close': () => this.destroyActiveTerm(),
-      'terminus:close-all': () => this.closeAll(),
-      'terminus:rename': () => this.runInActiveView(i => i.rename()),
-      'terminus:insert-selected-text': () => this.runInActiveView(i => i.insertSelection('$S')),
-      'terminus:insert-text': () => this.runInActiveView(i => i.inputDialog()),
-      'terminus:insert-custom-text-1': () => this.runInActiveView(i => i.insertSelection(atom.config.get('terminus.customTexts.customText1'))),
-      'terminus:insert-custom-text-2': () => this.runInActiveView(i => i.insertSelection(atom.config.get('terminus.customTexts.customText2'))),
-      'terminus:insert-custom-text-3': () => this.runInActiveView(i => i.insertSelection(atom.config.get('terminus.customTexts.customText3'))),
-      'terminus:insert-custom-text-4': () => this.runInActiveView(i => i.insertSelection(atom.config.get('terminus.customTexts.customText4'))),
-      'terminus:insert-custom-text-5': () => this.runInActiveView(i => i.insertSelection(atom.config.get('terminus.customTexts.customText5'))),
-      'terminus:insert-custom-text-6': () => this.runInActiveView(i => i.insertSelection(atom.config.get('terminus.customTexts.customText6'))),
-      'terminus:insert-custom-text-7': () => this.runInActiveView(i => i.insertSelection(atom.config.get('terminus.customTexts.customText7'))),
-      'terminus:insert-custom-text-8': () => this.runInActiveView(i => i.insertSelection(atom.config.get('terminus.customTexts.customText8'))),
-      'terminus:fullscreen': () => this.activeTerminal.maximize()
+      'terminal:clear': () => this.clear(),
+      'terminal:close': () => this.destroyActiveTerm(),
+      'terminal:close-all': () => this.closeAll(),
+      'terminal:rename': () => this.runInActiveView(i => i.rename()),
+      'terminal:insert-selected-text': () => this.runInActiveView(i => i.insertSelection('$S')),
+      'terminal:insert-text': () => this.runInActiveView(i => i.inputDialog()),
+      'terminal:insert-custom-text-1': () => this.runInActiveView(i => i.insertSelection(atom.config.get('terminal.customTexts.customText1'))),
+      'terminal:insert-custom-text-2': () => this.runInActiveView(i => i.insertSelection(atom.config.get('terminal.customTexts.customText2'))),
+      'terminal:insert-custom-text-3': () => this.runInActiveView(i => i.insertSelection(atom.config.get('terminal.customTexts.customText3'))),
+      'terminal:insert-custom-text-4': () => this.runInActiveView(i => i.insertSelection(atom.config.get('terminal.customTexts.customText4'))),
+      'terminal:insert-custom-text-5': () => this.runInActiveView(i => i.insertSelection(atom.config.get('terminal.customTexts.customText5'))),
+      'terminal:insert-custom-text-6': () => this.runInActiveView(i => i.insertSelection(atom.config.get('terminal.customTexts.customText6'))),
+      'terminal:insert-custom-text-7': () => this.runInActiveView(i => i.insertSelection(atom.config.get('terminal.customTexts.customText7'))),
+      'terminal:insert-custom-text-8': () => this.runInActiveView(i => i.insertSelection(atom.config.get('terminal.customTexts.customText8'))),
+      'terminal:fullscreen': () => this.activeTerminal.maximize()
     }))
 
     this.subscriptions.add(atom.commands.add('.xterm', {
-      'terminus:paste': () => this.runInActiveView(i => i.paste()),
-      'terminus:copy': () => this.runInActiveView(i => i.copy())
+      'terminal:paste': () => this.runInActiveView(i => i.paste()),
+      'terminal:copy': () => this.runInActiveView(i => i.copy())
     }))
 
     this.subscriptions.add(atom.workspace.onDidChangeActivePaneItem(item => {
       if (!item) { return }
 
-      if (item.constructor.name === 'TerminusView') {
+      if (item.constructor.name === 'TerminalView') {
         setTimeout(item.focus, 100)
       } else if (item.constructor.name === 'TextEditor') {
-        const mapping = atom.config.get('terminus.core.mapTerminalsTo')
+        const mapping = atom.config.get('terminal.core.mapTerminalsTo')
         if (mapping === 'None') { return }
         if (!item.getPath()) { return }
 
@@ -86,7 +86,7 @@ class StatusBar extends View {
         const prevTerminal = this.getActiveTerminalView()
         if (prevTerminal !== nextTerminal) {
           if (!nextTerminal) {
-            if (atom.config.get('terminus.core.mapTerminalsToAutoOpen')) {
+            if (atom.config.get('terminal.core.mapTerminalsToAutoOpen')) {
               nextTerminal = this.createTerminalView()
             }
           } else {
@@ -108,14 +108,14 @@ class StatusBar extends View {
       if (event.target === event.delegateTarget) { this.newTerminalView() }
     })
 
-    this.statusContainer.on('dragstart', '.terminus-status-icon', this.onDragStart)
-    this.statusContainer.on('dragend', '.terminus-status-icon', this.onDragEnd)
+    this.statusContainer.on('dragstart', '.terminal-status-icon', this.onDragStart)
+    this.statusContainer.on('dragend', '.terminal-status-icon', this.onDragEnd)
     this.statusContainer.on('dragleave', this.onDragLeave)
     this.statusContainer.on('dragover', this.onDragOver)
     this.statusContainer.on('drop', this.onDrop)
 
     const handleBlur = () => {
-      const terminal = TerminusView.getFocusedTerminal()
+      const terminal = TerminalView.getFocusedTerminal()
       if (terminal) {
         this.returnFocus = this.terminalViewForTerminal(terminal)
         terminal.blur()
@@ -151,26 +151,26 @@ class StatusBar extends View {
   }
 
   registerContextMenu () {
-    this.subscriptions.add(atom.commands.add('.terminus.status-bar', {
-      'terminus:status-red': this.setStatusColor,
-      'terminus:status-orange': this.setStatusColor,
-      'terminus:status-yellow': this.setStatusColor,
-      'terminus:status-green': this.setStatusColor,
-      'terminus:status-blue': this.setStatusColor,
-      'terminus:status-purple': this.setStatusColor,
-      'terminus:status-pink': this.setStatusColor,
-      'terminus:status-cyan': this.setStatusColor,
-      'terminus:status-magenta': this.setStatusColor,
-      'terminus:status-default': this.clearStatusColor,
-      'terminus:context-close' (event) {
-        $(event.target).closest('.terminus-status-icon')[0].terminalView.destroy()
+    this.subscriptions.add(atom.commands.add('.terminal.status-bar', {
+      'terminal:status-red': this.setStatusColor,
+      'terminal:status-orange': this.setStatusColor,
+      'terminal:status-yellow': this.setStatusColor,
+      'terminal:status-green': this.setStatusColor,
+      'terminal:status-blue': this.setStatusColor,
+      'terminal:status-purple': this.setStatusColor,
+      'terminal:status-pink': this.setStatusColor,
+      'terminal:status-cyan': this.setStatusColor,
+      'terminal:status-magenta': this.setStatusColor,
+      'terminal:status-default': this.clearStatusColor,
+      'terminal:context-close' (event) {
+        $(event.target).closest('.terminal-status-icon')[0].terminalView.destroy()
       },
-      'terminus:context-hide' (event) {
-        const statusIcon = $(event.target).closest('.terminus-status-icon')[0]
+      'terminal:context-hide' (event) {
+        const statusIcon = $(event.target).closest('.terminal-status-icon')[0]
         if (statusIcon.isActive()) { statusIcon.terminalView.hide() }
       },
-      'terminus:context-rename' (event) {
-        $(event.target).closest('.terminus-status-icon')[0].rename()
+      'terminal:context-rename' (event) {
+        $(event.target).closest('.terminal-status-icon')[0].rename()
       }
     }))
   }
@@ -182,18 +182,18 @@ class StatusBar extends View {
 
       tabBar.on('drop', event => this.onDropTabBar(event, pane))
       tabBar.on('dragstart', event => {
-        if ((event.target.item ? event.target.item.constructor.name : undefined) !== 'TerminusView') { return }
-        event.originalEvent.dataTransfer.setData('terminus-tab', 'true')
+        if ((event.target.item ? event.target.item.constructor.name : undefined) !== 'TerminalView') { return }
+        event.originalEvent.dataTransfer.setData('terminal-tab', 'true')
       })
       pane.onDidDestroy(() => tabBar.off('drop', this.onDropTabBar))
     }))
   }
 
   createTerminalView (autoRun) {
-    const shell = atom.config.get('terminus.core.shell')
-    const shellArguments = atom.config.get('terminus.core.shellArguments')
+    const shell = atom.config.get('terminal.core.shell')
+    const shellArguments = atom.config.get('terminal.core.shellArguments')
     const args = shellArguments.split(/\s+/g).filter(arg => arg)
-    const shellEnv = atom.config.get('terminus.core.shellEnv')
+    const shellEnv = atom.config.get('terminal.core.shellEnv')
     let env = {}
     shellEnv.split(' ').forEach(element => {
       const configVar = element.split('=')
@@ -226,7 +226,7 @@ class StatusBar extends View {
     const home = process.platform === 'win32' ? process.env.HOMEPATH : process.env.HOME
 
     let pwd
-    switch (atom.config.get('terminus.core.workingDirectory')) {
+    switch (atom.config.get('terminal.core.workingDirectory')) {
       case 'Project': pwd = (projectFolder || editorFolder || home); break
       case 'Active File': pwd = (editorFolder || projectFolder || home); break
       default: pwd = home
@@ -236,14 +236,14 @@ class StatusBar extends View {
     id = { filePath: id, folderPath: path.dirname(id) }
 
     const statusIcon = new StatusIcon()
-    const terminusView = new TerminusView(id, pwd, statusIcon, this, shell, args, env, autoRun)
-    statusIcon.initialize(terminusView)
+    const terminalView = new TerminalView(id, pwd, statusIcon, this, shell, args, env, autoRun)
+    statusIcon.initialize(terminalView)
 
-    terminusView.attach()
+    terminalView.attach()
 
-    this.terminalViews.push(terminusView)
+    this.terminalViews.push(terminalView)
     this.statusContainer.append(statusIcon)
-    return terminusView
+    return terminalView
   }
 
   activeNextTerminalView () {
@@ -283,7 +283,7 @@ class StatusBar extends View {
   focusTerminal () {
     if (!this.activeTerminal) { return }
 
-    if (TerminusView.getFocusedTerminal()) {
+    if (TerminalView.getFocusedTerminal()) {
       this.activeTerminal.blur()
     } else {
       this.activeTerminal.focusTerminal()
@@ -420,18 +420,18 @@ class StatusBar extends View {
 
   setStatusColor (event) {
     let color = event.type.match(/\w+$/)[0]
-    color = atom.config.get(`terminus.iconColors.${color}`).toRGBAString()
-    $(event.target).closest('.terminus-status-icon').css('color', color)
+    color = atom.config.get(`terminal.iconColors.${color}`).toRGBAString()
+    $(event.target).closest('.terminal-status-icon').css('color', color)
   }
 
   clearStatusColor (event) {
-    $(event.target).closest('.terminus-status-icon').css('color', '')
+    $(event.target).closest('.terminal-status-icon').css('color', '')
   }
 
   onDragStart (event) {
-    event.originalEvent.dataTransfer.setData('terminus-panel', 'true')
+    event.originalEvent.dataTransfer.setData('terminal-panel', 'true')
 
-    const element = $(event.target).closest('.terminus-status-icon')
+    const element = $(event.target).closest('.terminal-status-icon')
     element.addClass('is-dragging')
     event.originalEvent.dataTransfer.setData('from-index', element.index())
   }
@@ -447,14 +447,14 @@ class StatusBar extends View {
   onDragOver (event) {
     event.preventDefault()
     event.stopPropagation()
-    if (event.originalEvent.dataTransfer.getData('terminus') !== 'true') {
+    if (event.originalEvent.dataTransfer.getData('terminal') !== 'true') {
       return
     }
 
     const newDropTargetIndex = this.getDropTargetIndex(event)
     if (!newDropTargetIndex) { return }
     this.removeDropTargetClasses()
-    const statusIcons = this.statusContainer.children('.terminus-status-icon')
+    const statusIcons = this.statusContainer.children('.terminal-status-icon')
 
     if (newDropTargetIndex < statusIcons.length) {
       const element = statusIcons.eq(newDropTargetIndex).addClass('is-drop-target')
@@ -467,8 +467,8 @@ class StatusBar extends View {
 
   onDrop (event) {
     const { dataTransfer } = event.originalEvent
-    const panelEvent = dataTransfer.getData('terminus-panel') === 'true'
-    const tabEvent = dataTransfer.getData('terminus-tab') === 'true'
+    const panelEvent = dataTransfer.getData('terminal-panel') === 'true'
+    const tabEvent = dataTransfer.getData('terminal-tab') === 'true'
     if (!panelEvent && !tabEvent) { return }
 
     event.preventDefault()
@@ -499,7 +499,7 @@ class StatusBar extends View {
 
   onDropTabBar (event, pane) {
     const { dataTransfer } = event.originalEvent
-    if (dataTransfer.getData('terminus-panel') !== 'true') { return }
+    if (dataTransfer.getData('terminal-panel') !== 'true') { return }
 
     event.preventDefault()
     event.stopPropagation()
@@ -508,7 +508,7 @@ class StatusBar extends View {
     const fromIndex = parseInt(dataTransfer.getData('from-index'))
     const view = this.terminalViews[fromIndex]
     view.css('height', '')
-    view.terminal.element.style.height = atom.config.get('terminus.style.defaultPanelHeight')
+    view.terminal.element.style.height = atom.config.get('terminal.style.defaultPanelHeight')
     // const tabBar = $(event.target).closest('.tab-bar');
 
     view.toggleTabView()
@@ -538,8 +538,8 @@ class StatusBar extends View {
     const target = $(event.target)
     if (this.isPlaceholder(target)) { return }
 
-    const statusIcons = this.statusContainer.children('.terminus-status-icon')
-    let element = target.closest('.terminus-status-icon')
+    const statusIcons = this.statusContainer.children('.terminal-status-icon')
+    let element = target.closest('.terminal-status-icon')
     if (element.length === 0) { element = statusIcons.last() }
 
     if (!element.length) { return 0 }
@@ -548,8 +548,8 @@ class StatusBar extends View {
 
     if (event.originalEvent.pageX < elementCenter) {
       return statusIcons.index(element)
-    } else if (element.next('.terminus-status-icon').length > 0) {
-      return statusIcons.index(element.next('.terminus-status-icon'))
+    } else if (element.next('.terminal-status-icon').length > 0) {
+      return statusIcons.index(element.next('.terminal-status-icon'))
     } else {
       return statusIcons.index(element) + 1
     }
@@ -575,7 +575,7 @@ class StatusBar extends View {
   }
 
   getStatusIcons () {
-    return this.statusContainer.children('.terminus-status-icon')
+    return this.statusContainer.children('.terminal-status-icon')
   }
 
   moveIconToIndex (icon, toIndex) {

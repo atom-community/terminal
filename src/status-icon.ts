@@ -3,12 +3,12 @@ let RenameDialog = null
 class StatusIcon extends HTMLLIElement {
   constructor (...args) {
     super(...args)
-    this.setAttribute('is', 'terminus-status-icon')
+    this.setAttribute('is', 'terminal-status-icon')
   }
 
   initialize (terminalView) {
     this.terminalView = terminalView
-    this.classList.add('terminus-status-icon')
+    this.classList.add('terminal-status-icon')
 
     this.icon = document.createElement('i')
     this.icon.classList.add('icon', 'icon-terminal')
@@ -35,7 +35,7 @@ class StatusIcon extends HTMLLIElement {
 
   setupTooltip () {
     const onMouseEnter = event => {
-      if (event.detail !== 'terminus') {
+      if (event.detail !== 'terminal') {
         this.updateTooltip()
       }
     }
@@ -65,7 +65,7 @@ class StatusIcon extends HTMLLIElement {
       })
     }
 
-    this.dispatchEvent(new CustomEvent('mouseenter', { bubbles: true, detail: 'terminus' }))
+    this.dispatchEvent(new CustomEvent('mouseenter', { bubbles: true, detail: 'terminal' }))
   }
 
   removeTooltip () {
@@ -123,6 +123,6 @@ class StatusIcon extends HTMLLIElement {
 
 StatusIcon.prototype.active = false
 
-customElements.define('terminus-status-icon', StatusIcon, { extends: 'li' })
+customElements.define('terminal-status-icon', StatusIcon, { extends: 'li' })
 
 module.exports = StatusIcon
