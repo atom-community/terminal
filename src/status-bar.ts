@@ -1,7 +1,6 @@
 const { CompositeDisposable } = require('atom')
 const { $, View } = require('atom-space-pen-views-plus')
 
-const TerminalView = require('./view')
 const StatusIcon = require('./status-icon')
 
 const path = require('path')
