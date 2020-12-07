@@ -27,42 +27,6 @@ class StatusBar extends View {
     this.onDragOver = this.onDragOver.bind(this)
     this.onDrop = this.onDrop.bind(this)
 
-    this.subscriptions.add(atom.commands.add('atom-workspace', {
-      'terminal:focus': () => this.focusTerminal(),
-      'terminal:new': () => this.newTerminalView(),
-      'terminal:toggle': () => this.toggle(),
-      'terminal:next': () => {
-        if (!this.activeTerminal) { return }
-        if (this.activeTerminal.isAnimating()) { return }
-        if (this.activeNextTerminalView()) { return this.activeTerminal.open() }
-      },
-      'terminal:prev': () => {
-        if (!this.activeTerminal) { return }
-        if (this.activeTerminal.isAnimating()) { return }
-        if (this.activePrevTerminalView()) { return this.activeTerminal.open() }
-      },
-      'terminal:clear': () => this.clear(),
-      'terminal:close': () => this.destroyActiveTerm(),
-      'terminal:close-all': () => this.closeAll(),
-      'terminal:rename': () => this.runInActiveView(i => i.rename()),
-      'terminal:insert-selected-text': () => this.runInActiveView(i => i.insertSelection('$S')),
-      'terminal:insert-text': () => this.runInActiveView(i => i.inputDialog()),
-      'terminal:insert-custom-text-1': () => this.runInActiveView(i => i.insertSelection(atom.config.get('terminal.customTexts.customText1'))),
-      'terminal:insert-custom-text-2': () => this.runInActiveView(i => i.insertSelection(atom.config.get('terminal.customTexts.customText2'))),
-      'terminal:insert-custom-text-3': () => this.runInActiveView(i => i.insertSelection(atom.config.get('terminal.customTexts.customText3'))),
-      'terminal:insert-custom-text-4': () => this.runInActiveView(i => i.insertSelection(atom.config.get('terminal.customTexts.customText4'))),
-      'terminal:insert-custom-text-5': () => this.runInActiveView(i => i.insertSelection(atom.config.get('terminal.customTexts.customText5'))),
-      'terminal:insert-custom-text-6': () => this.runInActiveView(i => i.insertSelection(atom.config.get('terminal.customTexts.customText6'))),
-      'terminal:insert-custom-text-7': () => this.runInActiveView(i => i.insertSelection(atom.config.get('terminal.customTexts.customText7'))),
-      'terminal:insert-custom-text-8': () => this.runInActiveView(i => i.insertSelection(atom.config.get('terminal.customTexts.customText8'))),
-      'terminal:fullscreen': () => this.activeTerminal.maximize()
-    }))
-
-    this.subscriptions.add(atom.commands.add('.xterm', {
-      'terminal:paste': () => this.runInActiveView(i => i.paste()),
-      'terminal:copy': () => this.runInActiveView(i => i.copy())
-    }))
-
     this.subscriptions.add(atom.workspace.onDidChangeActivePaneItem(item => {
       if (!item) { return }
 
