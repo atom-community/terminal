@@ -353,6 +353,12 @@ export class AtomTerminal extends HTMLElement {
       this.terminal.focus()
     }
   }
+
+	clear () {
+		if (this.terminal) {
+			return this.terminal.clear()
+		}
+	}
 }
 
 // @ts-ignore // TODO This should be fixed soon https://developer.mozilla.org/en-US/docs/Web/API/Document/registerElement

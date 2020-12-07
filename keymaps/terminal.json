@@ -46,14 +46,16 @@
     "ctrl-shift-c": "terminal:copy",
     "shift-insert": "terminal:paste",
     "ctrl-shift-v": "terminal:paste",
-    "ctrl-shift-u": "terminal:unfocus"
+    "ctrl-shift-u": "terminal:unfocus",
+    "ctrl-l": "terminal:clear"
   },
   ".platform-win32 atom-terminal": {
     "ctrl-insert": "terminal:copy",
     "ctrl-shift-c": "terminal:copy",
     "shift-insert": "terminal:paste",
     "ctrl-shift-v": "terminal:paste",
-    "ctrl-shift-u": "terminal:unfocus"
+    "ctrl-shift-u": "terminal:unfocus",
+    "ctrl-l": "terminal:clear"
   },
   ".platform-darwin atom-terminal": {
     "ctrl-shift-c": "terminal:copy",
@@ -62,6 +64,7 @@
     "shift-insert": "terminal:paste",
     "cmd-c": "terminal:copy",
     "cmd-v": "terminal:paste",
-    "ctrl-shift-u": "terminal:unfocus"
+    "ctrl-shift-u": "terminal:unfocus",
+    "ctrl-l": "terminal:clear"
   }
 }

@@ -221,6 +221,12 @@ export class TerminalModel {
     }
   }
 
+	clear () {
+		if (this.element) {
+			return this.element.clear()
+		}
+	}
+
   setActive() {
     TerminalModel.recalculateActive(this.terminalsSet, this)
   }
