@@ -36,41 +36,41 @@
         "command": "terminal:close-all"
       }
     ],
-    "atom-text-editor": [
+    "atom-text-editor, .tree-view, .tab-bar": [
       {
         "label": "Terminal",
         "submenu": [
           {
             "label": "Open New Terminal",
-            "command": "terminal:open"
+            "command": "terminal:open-context-menu"
           },
           {
             "label": "Open New Terminal (Split Up)",
-            "command": "terminal:open-up"
+            "command": "terminal:open-up-context-menu"
           },
           {
             "label": "Open New Terminal (Split Down)",
-            "command": "terminal:open-down"
+            "command": "terminal:open-down-context-menu"
           },
           {
             "label": "Open New Terminal (Split Left)",
-            "command": "terminal:open-left"
+            "command": "terminal:open-left-context-menu"
           },
           {
             "label": "Open New Terminal (Split Right)",
-            "command": "terminal:open-right"
+            "command": "terminal:open-right-context-menu"
           },
           {
             "label": "Open New Terminal (Bottom Dock)",
-            "command": "terminal:open-bottom-dock"
+            "command": "terminal:open-bottom-dock-context-menu"
           },
           {
             "label": "Open New Terminal (Left Dock)",
-            "command": "terminal:open-left-dock"
+            "command": "terminal:open-left-dock-context-menu"
           },
           {
             "label": "Open New Terminal (Right Dock)",
-            "command": "terminal:open-right-dock"
+            "command": "terminal:open-right-dock-context-menu"
           },
           {
             "label": "Close All Terminals",

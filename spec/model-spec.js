@@ -89,6 +89,7 @@ describe("TerminalModel", () => {
 
   it("constructor with previous active item which exists in project path", async () => {
     const previousActiveItem = jasmine.createSpyObj("somemodel", ["getPath"])
+    previousActiveItem.getPath.and.returnValue("/some/dir/file")
     spyOn(atom.workspace, "getActivePaneItem").and.returnValue(previousActiveItem)
     const expected = ["/some/dir", null]
     spyOn(atom.project, "relativizePath").and.returnValue(expected)

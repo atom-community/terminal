@@ -36,6 +36,7 @@ export class TerminalModel {
     this.uri = uri
     const url = new URL(this.uri)
     this.sessionId = url.host
+    this.cwd = url.searchParams.get('cwd') || undefined
     this.terminalsSet = terminalsSet
     this.activeIndex = this.terminalsSet.size
     this.title = DEFAULT_TITLE
@@ -55,41 +56,45 @@ export class TerminalModel {
   }
 
   async initialize() {
-    this.cwd = await this.getInitialCwd()
+    if (!this.cwd) {
+      this.cwd = await this.getInitialCwd()
+    }
   }
 
-  async getInitialCwd() {
+  async getInitialCwd(): Promise<string | undefined> {
     const previousActiveItem = atom.workspace.getActivePaneItem()
     // @ts-ignore
     let cwd = previousActiveItem?.getPath?.()
-    const dir = atom.project.relativizePath(cwd)[0]
-    if (dir) {
-      // Use project paths whenever they are available by default.
-      return dir
+    if (cwd) {
+      const dir = atom.project.relativizePath(cwd)[0]
+      if (dir) {
+        // Use project paths whenever they are available by default.
+        return dir
+      }
     }
 
     try {
-      // Otherwise, if the path exists on the local file system, use the
-      // path or parent directory as appropriate.
-      const stats = await fs.stat(cwd)
-      if (stats.isDirectory()) {
-        return cwd
-      }
+      if (cwd) {
+        // Otherwise, if the path exists on the local file system, use the
+        // path or parent directory as appropriate.
+        const stats = await fs.stat(cwd)
+        if (stats.isDirectory()) {
+          return cwd
+        }
 
-      cwd = path.dirname(cwd)
-      const dirStats = await fs.stat(cwd)
-      if (dirStats.isDirectory()) {
-        return cwd
+        cwd = path.dirname(cwd)
+        const dirStats = await fs.stat(cwd)
+        if (dirStats.isDirectory()) {
+          return cwd
+        }
       }
-    } catch {}
+    } catch {
+      //failt silently
+    }
 
     cwd = atom.project.getPaths()[0]
     // no project paths
-    if (cwd) {
-      return cwd
-    }
-
-    return
+    return cwd
   }
 
   serialize() {
@@ -126,7 +131,7 @@ export class TerminalModel {
     return DEFAULT_TITLE + " (" + this.title + ")"
   }
 
-  onDidChangeTitle(callback: (value?: any) => void) {
+  onDidChangeTitle(callback: (value?: string) => void) {
     return this.emitter.on("did-change-title", callback)
   }
 
@@ -142,7 +147,7 @@ export class TerminalModel {
     return this.modified
   }
 
-  onDidChangeModified(callback: (value?: any) => void) {
+  onDidChangeModified(callback: (value?: boolean) => void) {
     return this.emitter.on("did-change-modified", callback)
   }
 
