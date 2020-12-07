@@ -70,4 +70,31 @@ describe("terminal", () => {
       expect(newTerminal.runCommand).toHaveBeenCalledWith("command 2")
     })
   })
+
+	describe('open()', () => {
+		let uri
+		beforeEach(() => {
+			uri = terminal.generateNewUri()
+			spyOn(atom.workspace, 'open')
+		})
+
+		it('simple', async () => {
+			await terminal.open(uri)
+
+			expect(atom.workspace.open).toHaveBeenCalledWith(uri, {})
+		})
+
+		it('target to cwd', async () => {
+			const testPath = '/test/path'
+			spyOn(terminal, 'getPath').and.returnValue(testPath)
+			await terminal.open(
+				uri,
+				{ target: true },
+			)
+
+			const url = new URL(atom.workspace.open.calls.mostRecent().args[0])
+
+			expect(url.searchParams.get('cwd')).toBe(testPath)
+		})
+	})
 })
