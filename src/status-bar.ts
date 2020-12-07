@@ -1,5 +1,5 @@
 const { CompositeDisposable } = require('atom')
-const { $, View } = require('atom-space-pen-views')
+const { $, View } = require('atom-space-pen-views-plus')
 
 const TerminusView = require('./view')
 const StatusIcon = require('./status-icon')
