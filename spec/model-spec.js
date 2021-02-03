@@ -101,6 +101,18 @@ describe("TerminalModel", () => {
     expect(newModel.getPath()).toBe(expected[0])
   })
 
+  it("constructor with target cwd", async () => {
+    const expected = __dirname
+		const url = new URL(uri)
+    url.searchParams.set('cwd', __filename)
+    const newModel = new TerminalModel({
+      uri: url.href,
+      terminalsSet,
+    })
+    await newModel.initializedPromise
+    expect(newModel.getPath()).toBe(expected)
+  })
+
   it("serialize()", async () => {
     expect(model.serialize()).toEqual({
       deserializer: "TerminalModel",
