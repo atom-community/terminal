@@ -90,6 +90,7 @@
     "format": "prettier --write .",
     "lint": "eslint .",
     "test": "atom --test spec",
+    "integration.test": "atom --test ./spec/terminal-spec.js",
     "clean": "shx rm -rf dist",
     "tsc": "tsc -p src/tsconfig.json",
     "dev:tsc": "tsc --watch -p src/tsconfig.json",
