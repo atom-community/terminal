@@ -56,20 +56,24 @@ export class TerminalModel {
   }
 
   async initialize() {
-    if (!this.cwd) {
-      this.cwd = await this.getInitialCwd()
-    }
+    this.cwd = await this.getInitialCwd()
   }
 
   async getInitialCwd(): Promise<string | undefined> {
-    const previousActiveItem = atom.workspace.getActivePaneItem()
-    // @ts-ignore
-    let cwd = previousActiveItem?.getPath?.()
-    if (cwd) {
-      const dir = atom.project.relativizePath(cwd)[0]
-      if (dir) {
-        // Use project paths whenever they are available by default.
-        return dir
+    let cwd;
+
+    if (this.cwd) {
+      cwd = this.cwd;
+    } else {
+      const previousActiveItem = atom.workspace.getActivePaneItem()
+      // @ts-ignore
+      cwd = previousActiveItem?.getPath?.()
+      if (cwd) {
+        const dir = atom.project.relativizePath(cwd)[0]
+        if (dir) {
+          // Use project paths whenever they are available by default.
+          return dir
+        }
       }
     }
 
