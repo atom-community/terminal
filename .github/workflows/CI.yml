@@ -27,9 +27,15 @@ jobs:
       - name: APM Version
         run: apm -v
       - name: Install Dependencies
-        run: apm install
+        run: |
+          apm install --production
+          npm install --only=dev
+
       - name: Run Tests 👩🏾‍💻
         run: npm run test
+
+      - name: Run Integration Tests 👩🏾‍💻
+        run: npm run integration.test
 
   Lint:
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
