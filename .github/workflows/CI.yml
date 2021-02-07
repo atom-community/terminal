@@ -49,14 +49,14 @@ jobs:
       - name: Commit lint ✨
         uses: wagoid/commitlint-github-action@v2
 
-      - uses: UziTech/action-setup-atom@v1
-      - name: Setup PNPM
-        uses: pnpm/action-setup@v1.2.1
-        with:
-          version: latest
+      # - uses: UziTech/action-setup-atom@v1
+      # - name: Setup PNPM
+      #   uses: pnpm/action-setup@v1.2.1
+      #   with:
+      #     version: latest
 
       - name: Install dependencies
-        run: pnpm install --only=dev --ignore-scripts
+        run: npm install --only=dev --ignore-scripts
 
       # - name: Format ✨
       #   run: pnpm test.format
