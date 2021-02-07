@@ -40,21 +40,30 @@ jobs:
   Lint:
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
-      - name: Install Node
-        uses: dcodeIO/setup-node-nvm@master
+      - uses: actions/checkout@v2
         with:
-          node-version: "lts/*"
-      # - name: Commit lint ✨
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   uses: wagoid/commitlint-github-action@v1
-      - name: Install Dependencies
-        run: npm install
+          fetch-depth: 0
+      - name: Commit lint ✨
+        uses: wagoid/commitlint-github-action@v2
+
+      - uses: UziTech/action-setup-atom@v1
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v1.2.1
+        with:
+          version: latest
+
+      - name: Install dependencies
+        run: pnpm install --only=dev --ignore-scripts
+
+      # - name: Format ✨
+      #   run: pnpm test.format
+
       - name: Lint ✨
-        run: npm run lint
+        run: pnpm test.lint
+
 
   Release:
     needs: [Test, Lint]

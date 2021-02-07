@@ -88,7 +88,9 @@
   },
   "scripts": {
     "format": "prettier --write .",
-    "lint": "eslint .",
+    "test.format": "prettier . --check",
+    "lint": "eslint . --fix",
+    "test.lint": "eslint .",
     "test": "atom --test spec",
     "integration.test": "npm run build && atom --test ./spec/terminal-spec.js",
     "clean": "shx rm -rf dist",
