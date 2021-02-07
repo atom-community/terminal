@@ -62,7 +62,7 @@ jobs:
       #   run: pnpm test.format
 
       - name: Lint ✨
-        run: npm test.lint
+        run: npm run test.lint
 
 
   Release:
