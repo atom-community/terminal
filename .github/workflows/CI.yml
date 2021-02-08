@@ -56,7 +56,7 @@ jobs:
       #     version: latest
 
       - name: Install dependencies
-        run: npm install --only=dev --ignore-scripts
+        run: npm install --ignore-scripts
 
       # - name: Format ✨
       #   run: pnpm test.format
