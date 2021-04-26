@@ -45,7 +45,7 @@ export class AtomTerminal extends HTMLElement {
       // An element resize detector is used to check when this element is
       // resized due to the pane resizing or due to the entire window
       // resizing.
-      const resizeObserver = new ResizeObserver((entries) => {
+      const resizeObserver = new ResizeObserver((entries: ResizeObserverEntry[]) => {
         const lastEntry = entries[entries.length - 1]
         this.contentRect = lastEntry.contentRect
         this.refitTerminal()
