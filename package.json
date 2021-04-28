@@ -77,9 +77,7 @@
     "atom-jasmine3-test-runner": "^5.2.2",
     "build-commit": "0.1.4",
     "cross-env": "7.0.3",
-    "eslint": "^7.25.0",
     "eslint-config-atomic": "^1.14.2",
-    "npm-check-updates": "11.5.1",
     "parcel": "^2.0.0-nightly.566",
     "prettier-config-atomic": "^2.0.2",
     "shx": "0.3.3",
@@ -99,7 +97,6 @@
     "dev": "cross-env NODE_ENV=development parcel build --target main ./src/terminal.ts --watch --no-scope-hoist",
     "build": "cross-env NODE_ENV=production parcel build --target main ./src/terminal.ts --no-scope-hoist",
     "build-commit": "build-commit -o dist",
-    "bump": "ncu -u -x coffeescript",
     "prepare": "npm run build"
   },
   "prettier": "prettier-config-atomic",
