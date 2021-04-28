@@ -32,8 +32,7 @@ export class AtomTerminal extends HTMLElement {
     this.disposables = new CompositeDisposable()
     this.initiallyVisible = false
     this.isInitialized = false
-    let resolveInit: (value?: void | PromiseLike<void | undefined>) => void,
-        rejectInit: (reason?: any) => void
+    let resolveInit: (value?: void | PromiseLike<void | undefined>) => void, rejectInit: (reason?: any) => void
     this.initializedPromise = new Promise((resolve, reject) => {
       resolveInit = resolve
       rejectInit = reject
@@ -354,11 +353,11 @@ export class AtomTerminal extends HTMLElement {
     }
   }
 
-	clear () {
-		if (this.terminal) {
-			return this.terminal.clear()
-		}
-	}
+  clear() {
+    if (this.terminal) {
+      return this.terminal.clear()
+    }
+  }
 }
 
 // @ts-ignore // TODO This should be fixed soon https://developer.mozilla.org/en-US/docs/Web/API/Document/registerElement

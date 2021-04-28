@@ -1,6 +1,7 @@
 /**
  * Get xTerm.js theme based on settings
- * @return {object} xTerm.js theme object
+ *
+ * @returns {object} XTerm.js theme object
  */
 export function getTheme(): Record<string, string> {
   const { theme, ...colors } = atom.config.get("terminal.colors")

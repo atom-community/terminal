@@ -1,10 +1,4 @@
-import {
-  CompositeDisposable,
-  Workspace,
-  Dock,
-  Pane,
-  WorkspaceOpenOptions,
-} from "atom"
+import { CompositeDisposable, Workspace, Dock, Pane, WorkspaceOpenOptions } from "atom"
 
 import { TerminalElement } from "./element"
 import { TerminalModel } from "./model"
@@ -13,8 +7,8 @@ export * from "./button"
 import { v4 as uuidv4 } from "uuid"
 
 interface OpenOptions extends WorkspaceOpenOptions {
-  target?: EventTarget | null,
-  pane?: Pane,
+  target?: EventTarget | null
+  pane?: Pane
 }
 
 const TERMINAL_BASE_URI = "terminal://"
@@ -58,7 +52,7 @@ class Terminal {
           pane.observeItems((item) => {
             // In callback, set current pane for terminal items.
             if (TerminalModel.isTerminalModel(item)) {
-              (<TerminalModel>item).setNewPane(pane)
+              ;(<TerminalModel>item).setNewPane(pane)
             }
             TerminalModel.recalculateActive(this.terminalsSet)
           })
@@ -70,7 +64,7 @@ class Terminal {
       atom.workspace.observeActivePaneItem((item) => {
         // In callback, focus specifically on terminal when item is terminal item.
         if (TerminalModel.isTerminalModel(item)) {
-          (<TerminalModel>item).focusOnTerminal()
+          ;(<TerminalModel>item).focusOnTerminal()
         }
         TerminalModel.recalculateActive(this.terminalsSet)
       }),
@@ -79,7 +73,7 @@ class Terminal {
         if (visible) {
           const item = atom.workspace.getRightDock().getActivePaneItem()
           if (TerminalModel.isTerminalModel(item)) {
-            (<TerminalModel>item).focusOnTerminal()
+            ;(<TerminalModel>item).focusOnTerminal()
           }
         }
         TerminalModel.recalculateActive(this.terminalsSet)
@@ -89,7 +83,7 @@ class Terminal {
         if (visible) {
           const item = atom.workspace.getLeftDock().getActivePaneItem()
           if (TerminalModel.isTerminalModel(item)) {
-            (<TerminalModel>item).focusOnTerminal()
+            ;(<TerminalModel>item).focusOnTerminal()
           }
         }
         TerminalModel.recalculateActive(this.terminalsSet)
@@ -99,7 +93,7 @@ class Terminal {
         if (visible) {
           const item = atom.workspace.getBottomDock().getActivePaneItem()
           if (TerminalModel.isTerminalModel(item)) {
-            (<TerminalModel>item).focusOnTerminal()
+            ;(<TerminalModel>item).focusOnTerminal()
           }
         }
         TerminalModel.recalculateActive(this.terminalsSet)
@@ -121,78 +115,51 @@ class Terminal {
         "terminal:focus": () => this.focus(),
       }),
       // @ts-ignore
-			atom.commands.add("atom-text-editor, .tree-view, .tab-bar", {
-				'terminal:open-context-menu': {
-					hiddenInCommandPalette: true,
-					didDispatch: ({ target }) => this.open(
-						this.generateNewUri(),
-						this.addDefaultPosition({ target }),
-					),
-				},
-				'terminal:open-center-context-menu': {
-					hiddenInCommandPalette: true,
-					didDispatch: ({ target }) => this.openInCenterOrDock(
-						atom.workspace,
-						{ target },
-					),
-				},
-				'terminal:open-split-up-context-menu': {
-					hiddenInCommandPalette: true,
-					didDispatch: ({ target }) => this.open(
-						this.generateNewUri(),
-						{ split: 'up', target },
-					),
-				},
-				'terminal:open-split-down-context-menu': {
-					hiddenInCommandPalette: true,
-					didDispatch: ({ target }) => this.open(
-						this.generateNewUri(),
-						{ split: 'down', target },
-					),
-				},
-				'terminal:open-split-left-context-menu': {
-					hiddenInCommandPalette: true,
-					didDispatch: ({ target }) => this.open(
-						this.generateNewUri(),
-						{ split: 'left', target },
-					),
-				},
-				'terminal:open-split-right-context-menu': {
-					hiddenInCommandPalette: true,
-					didDispatch: ({ target }) => this.open(
-						this.generateNewUri(),
-						{ split: 'right', target },
-					),
-				},
-				'terminal:open-split-bottom-dock-context-menu': {
-					hiddenInCommandPalette: true,
-					didDispatch: ({ target }) => this.openInCenterOrDock(
-						atom.workspace.getBottomDock(),
-						{ target },
-					),
-				},
-				'terminal:open-split-left-dock-context-menu': {
-					hiddenInCommandPalette: true,
-					didDispatch: ({ target }) => this.openInCenterOrDock(
-						atom.workspace.getLeftDock(),
-						{ target },
-					),
-				},
-				'terminal:open-split-right-dock-context-menu': {
-					hiddenInCommandPalette: true,
-					didDispatch: ({ target }) => this.openInCenterOrDock(
-						atom.workspace.getRightDock(),
-						{ target },
-					),
-				},
-			}),
+      atom.commands.add("atom-text-editor, .tree-view, .tab-bar", {
+        "terminal:open-context-menu": {
+          hiddenInCommandPalette: true,
+          didDispatch: ({ target }) => this.open(this.generateNewUri(), this.addDefaultPosition({ target })),
+        },
+        "terminal:open-center-context-menu": {
+          hiddenInCommandPalette: true,
+          didDispatch: ({ target }) => this.openInCenterOrDock(atom.workspace, { target }),
+        },
+        "terminal:open-split-up-context-menu": {
+          hiddenInCommandPalette: true,
+          didDispatch: ({ target }) => this.open(this.generateNewUri(), { split: "up", target }),
+        },
+        "terminal:open-split-down-context-menu": {
+          hiddenInCommandPalette: true,
+          didDispatch: ({ target }) => this.open(this.generateNewUri(), { split: "down", target }),
+        },
+        "terminal:open-split-left-context-menu": {
+          hiddenInCommandPalette: true,
+          didDispatch: ({ target }) => this.open(this.generateNewUri(), { split: "left", target }),
+        },
+        "terminal:open-split-right-context-menu": {
+          hiddenInCommandPalette: true,
+          didDispatch: ({ target }) => this.open(this.generateNewUri(), { split: "right", target }),
+        },
+        "terminal:open-split-bottom-dock-context-menu": {
+          hiddenInCommandPalette: true,
+          didDispatch: ({ target }) => this.openInCenterOrDock(atom.workspace.getBottomDock(), { target }),
+        },
+        "terminal:open-split-left-dock-context-menu": {
+          hiddenInCommandPalette: true,
+          didDispatch: ({ target }) => this.openInCenterOrDock(atom.workspace.getLeftDock(), { target }),
+        },
+        "terminal:open-split-right-dock-context-menu": {
+          hiddenInCommandPalette: true,
+          didDispatch: ({ target }) => this.openInCenterOrDock(atom.workspace.getRightDock(), { target }),
+        },
+      }),
       atom.commands.add("atom-terminal", {
         "terminal:close": () => this.close(),
         "terminal:restart": () => this.restart(),
         "terminal:copy": () => this.copy(),
         "terminal:paste": () => this.paste(),
         "terminal:unfocus": () => this.unfocus(),
-				'terminal:clear': () => this.clear(),
+        "terminal:clear": () => this.clear(),
       })
     )
   }
@@ -240,13 +207,13 @@ class Terminal {
     //   return null
     // }
 
-		const url = new URL(uri)
-		if (options.target) {
-			const target = this.getPath(options.target)
-			if (target) {
-				url.searchParams.set('cwd', target)
-			}
-		}
+    const url = new URL(uri)
+    if (options.target) {
+      const target = this.getPath(options.target)
+      if (target) {
+        url.searchParams.set("cwd", target)
+      }
+    }
     return <Promise<TerminalModel>>atom.workspace.open(url.href, options)
   }
 
@@ -260,7 +227,7 @@ class Terminal {
    * @async
    * @function
    * @param {Object} options Options to pass to call to 'atom.workspace.open()'.
-   * @return {TerminalModel} Instance of TerminalModel.
+   * @returns {TerminalModel} Instance of TerminalModel.
    */
   async openTerminal(options: OpenOptions = {}): Promise<TerminalModel> {
     options = this.addDefaultPosition(options)
@@ -273,7 +240,7 @@ class Terminal {
    * @async
    * @function
    * @param {string[]} commands Commands to run in the terminal.
-   * @return {TerminalModel} Instance of TerminalModel.
+   * @returns {TerminalModel} Instance of TerminalModel.
    */
   async runCommands(commands: string[]): Promise<TerminalModel> {
     let terminal
@@ -351,62 +318,58 @@ class Terminal {
     return options
   }
 
-	getPath (target: EventTarget | null) : string | null | undefined {
-		if (!target || !(target instanceof HTMLElement)) {
-			const paths = atom.project.getPaths()
-			if (paths && paths.length > 0) {
-				return paths[0]
-			}
-			return null
-		}
+  getPath(target: EventTarget | null): string | null | undefined {
+    if (!target || !(target instanceof HTMLElement)) {
+      const paths = atom.project.getPaths()
+      if (paths && paths.length > 0) {
+        return paths[0]
+      }
+      return null
+    }
 
-		const treeView = target.closest('.tree-view')
-		if (treeView) {
-			// called from treeview
-			const selected = treeView.querySelector('.selected > .list-item > .name, .selected > .name') as HTMLElement
-			if (selected) {
-				return selected.dataset.path
-			}
-			return null
-		}
+    const treeView = target.closest(".tree-view")
+    if (treeView) {
+      // called from treeview
+      const selected = treeView.querySelector(".selected > .list-item > .name, .selected > .name") as HTMLElement
+      if (selected) {
+        return selected.dataset.path
+      }
+      return null
+    }
 
-		const tab = target.closest('.tab-bar > .tab')
-		if (tab) {
-			// called from tab
-			const title = tab.querySelector('.title') as HTMLElement
-			if (title && title.dataset.path) {
-				return title.dataset.path
-			}
-			return null
-		}
+    const tab = target.closest(".tab-bar > .tab")
+    if (tab) {
+      // called from tab
+      const title = tab.querySelector(".title") as HTMLElement
+      if (title && title.dataset.path) {
+        return title.dataset.path
+      }
+      return null
+    }
 
-		const textEditor = target.closest('atom-text-editor')
-		if (textEditor && typeof textEditor.getModel === 'function') {
-			// called from atom-text-editor
-			const model = textEditor.getModel()
-			if (model && typeof model.getPath === 'function') {
-				const modelPath = model.getPath()
+    const textEditor = target.closest("atom-text-editor")
+    if (textEditor && typeof textEditor.getModel === "function") {
+      // called from atom-text-editor
+      const model = textEditor.getModel()
+      if (model && typeof model.getPath === "function") {
+        const modelPath = model.getPath()
         if (modelPath) {
           return modelPath
         }
-			}
-			return null
-		}
+      }
+      return null
+    }
 
-		return null
-	}
+    return null
+  }
 
-  /**
-   * Function providing service functions offered by 'terminal' service.
-   */
+  /** Function providing service functions offered by 'terminal' service. */
   provideTerminalService() {
     // TODO: provide other service functions
     return providePlatformIOIDEService()
   }
 
-  /**
-   * Function providing service functions offered by 'platformioIDETerminal' service.
-   */
+  /** Function providing service functions offered by 'platformioIDETerminal' service. */
   providePlatformIOIDEService() {
     return {
       updateProcessEnv(vars: Record<string, string>): void {

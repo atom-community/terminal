@@ -103,8 +103,8 @@ describe("TerminalModel", () => {
 
   it("constructor with target cwd", async () => {
     const expected = __dirname
-		const url = new URL(uri)
-    url.searchParams.set('cwd', __filename)
+    const url = new URL(uri)
+    url.searchParams.set("cwd", __filename)
     const newModel = new TerminalModel({
       uri: url.href,
       terminalsSet,

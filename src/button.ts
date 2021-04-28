@@ -7,6 +7,6 @@ export function consumeToolBar(getToolBar: getToolBarManager) {
   toolbar.addButton({
     icon: "terminal",
     tooltip: "Open Terminal",
-    callback: "terminal:open"
+    callback: "terminal:open",
   })
 }
