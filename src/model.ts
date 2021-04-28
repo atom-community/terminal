@@ -36,7 +36,7 @@ export class TerminalModel {
     this.uri = uri
     const url = new URL(this.uri)
     this.sessionId = url.host
-    this.cwd = url.searchParams.get('cwd') || undefined
+    this.cwd = url.searchParams.get("cwd") || undefined
     this.terminalsSet = terminalsSet
     this.activeIndex = this.terminalsSet.size
     this.title = DEFAULT_TITLE
@@ -60,10 +60,10 @@ export class TerminalModel {
   }
 
   async getInitialCwd(): Promise<string | undefined> {
-    let cwd;
+    let cwd
 
     if (this.cwd) {
-      cwd = this.cwd;
+      cwd = this.cwd
     } else {
       const previousActiveItem = atom.workspace.getActivePaneItem()
       // @ts-ignore
@@ -225,11 +225,11 @@ export class TerminalModel {
     }
   }
 
-	clear () {
-		if (this.element) {
-			return this.element.clear()
-		}
-	}
+  clear() {
+    if (this.element) {
+      return this.element.clear()
+    }
+  }
 
   setActive() {
     TerminalModel.recalculateActive(this.terminalsSet, this)
