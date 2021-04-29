@@ -29,7 +29,7 @@ rather a JavaScript object that provides methods to open terminals and run comma
 
 ### 'terminal' service v1.0.0
 
-The `terminal` service provides an [object](https://github.com/atom-ide-community/terminal/blob/29b0751250cb9262fb609db8cae87d87fb383c64/src/terminal.js#L291) with `updateProcessEnv`, `run`, `getTerminalViews`, and `open` methods.
+The `terminal` service provides an [object](https://github.com/atom-community/terminal/blob/29b0751250cb9262fb609db8cae87d87fb383c64/src/terminal.js#L291) with `updateProcessEnv`, `run`, `getTerminalViews`, and `open` methods.
 
 As an example on how to use the provided `run()` method, your
 `package.json` should have the following.
@@ -79,7 +79,7 @@ this.terminalService.run(["somecommand --foo --bar --baz"])
 Want to help develop terminal? Here's how to quickly get setup.
 
 First use the [apm](https://github.com/atom/apm) command to clone the
-[terminal repo](https://github.com/atom-ide-community/terminal).
+[terminal repo](https://github.com/atom-community/terminal).
 
 ```sh
 apm develop terminal
@@ -119,7 +119,7 @@ the lint tools, simply run `npm run lint`.
 ## Pull Requests
 
 Whenever you're ready to submit a pull request, be sure to submit it
-against a fork of the main [terminal repo](https://github.com/atom-ide-community/terminal)
+against a fork of the main [terminal repo](https://github.com/atom-community/terminal)
 master branch that you'll own. Fork the repo using Github and make note of the
 new `git` URL. Set this new git URL as the URL for the `origin` remote in your
 already cloned git repo is follows.
@@ -208,6 +208,6 @@ Click for copyright and license info about this package.
 
 Need to submit a bug report? Have a new feature you want to see implemented in
 _terminal_? Please feel free to submit them through the appropriate
-[issue template](https://github.com/atom-ide-community/terminal/issues/new/choose).
+[issue template](https://github.com/atom-community/terminal/issues/new/choose).
 
 For bug reports, please provide images or demos showing your issues if you can.

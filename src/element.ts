@@ -64,7 +64,7 @@ export class AtomTerminal extends HTMLElement {
             this.initiallyVisible = true
             try {
               await this.createTerminal()
-              // https://github.com/atom-ide-community/terminal/issues/12
+              // https://github.com/atom-community/terminal/issues/12
               setTimeout(() => {
                 this.refitTerminal()
               }, 0)

@@ -2,9 +2,9 @@
   "name": "atomic-terminal",
   "title": "Atom Terminal",
   "main": "./dist/terminal.js",
-  "repository": "https://github.com/atom-ide-community/terminal",
+  "repository": "https://github.com/atom-community/terminal",
   "bugs": {
-    "url": "https://github.com/atom-ide-community/terminal/issues/new/choose"
+    "url": "https://github.com/atom-community/terminal/issues/new/choose"
   },
   "version": "1.0.0",
   "description": "The xterm based terminal for Atom",
