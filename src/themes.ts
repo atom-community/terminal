@@ -4,7 +4,7 @@
  * @returns {object} XTerm.js theme object
  */
 export function getTheme(): Record<string, string> {
-  const { theme, ...colors } = atom.config.get("terminal.colors")
+  const { theme, ...colors } = atom.config.get("atomic-terminal.colors")
   // themes modified from https://github.com/bus-stop/terminus/tree/master/styles/themes
   switch (theme) {
     case "Atom Dark":

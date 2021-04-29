@@ -176,8 +176,8 @@ export class AtomTerminal extends HTMLElement {
       fontFamily: "monospace",
       theme: {},
     }
-    xtermOptions.fontSize = atom.config.get("terminal.fontSize")
-    xtermOptions.fontFamily = atom.config.get("terminal.fontFamily")
+    xtermOptions.fontSize = atom.config.get("atomic-terminal.fontSize")
+    xtermOptions.fontFamily = atom.config.get("atomic-terminal.fontFamily")
     xtermOptions.theme = getTheme()
     return xtermOptions
   }
@@ -197,7 +197,7 @@ export class AtomTerminal extends HTMLElement {
     }
     this.fitAddon = new FitAddon()
     this.terminal.loadAddon(this.fitAddon)
-    if (atom.config.get("terminal.webLinks")) {
+    if (atom.config.get("atomic-terminal.webLinks")) {
       const { WebLinksAddon } = await import("xterm-addon-web-links")
       this.terminal.loadAddon(
         new WebLinksAddon((_e, uri) => {
@@ -206,11 +206,11 @@ export class AtomTerminal extends HTMLElement {
       )
     }
     this.terminal.open(this)
-    if (atom.config.get("terminal.webgl")) {
+    if (atom.config.get("atomic-terminal.webgl")) {
       const { WebglAddon } = await import("xterm-addon-webgl")
       this.terminal.loadAddon(new WebglAddon())
     }
-    if (atom.config.get("terminal.ligatures")) {
+    if (atom.config.get("atomic-terminal.ligatures")) {
       // ligatures only work if WebGL is disabled
       const { LigaturesAddon } = await import("xterm-addon-ligatures")
       this.terminal.loadAddon(new LigaturesAddon())
@@ -240,7 +240,7 @@ export class AtomTerminal extends HTMLElement {
     )
     this.disposables.add(
       this.terminal.onSelectionChange(() => {
-        if (this.terminal && atom.config.get("terminal.copyOnSelect")) {
+        if (this.terminal && atom.config.get("atomic-terminal.copyOnSelect")) {
           let text = this.terminal.getSelection()
           if (text) {
             const rawLines = text.split(/\r?\n/g)
@@ -266,8 +266,8 @@ export class AtomTerminal extends HTMLElement {
     }
 
     // Setup pty process.
-    this.ptyProcessCommand = atom.config.get("terminal.shell")
-    const encoding = atom.config.get("terminal.encoding")
+    this.ptyProcessCommand = atom.config.get("atomic-terminal.shell")
+    const encoding = atom.config.get("atomic-terminal.encoding")
 
     // Attach pty process to terminal.
     // NOTE: This must be done after the terminal is attached to the
@@ -361,6 +361,6 @@ export class AtomTerminal extends HTMLElement {
 }
 
 // @ts-ignore // TODO This should be fixed soon https://developer.mozilla.org/en-US/docs/Web/API/Document/registerElement
-export const TerminalElement = document.registerElement("atom-terminal", {
+export const TerminalElement = document.registerElement("atomic-terminal", {
   prototype: AtomTerminal.prototype,
 })

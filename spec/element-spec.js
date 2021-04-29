@@ -17,7 +17,7 @@ describe("TerminalElement", () => {
   const savedPlatform = process.platform
   let element, tmpdir
 
-  const createNewElement = async (uri = "terminal://somesessionid/") => {
+  const createNewElement = async (uri = "atomic-terminal://somesessionid/") => {
     const terminalsSet = new Set()
     const model = new TerminalModel({
       uri: uri,
@@ -123,7 +123,7 @@ describe("TerminalElement", () => {
     })
 
     it("createTerminal() enable web-link addon", async () => {
-      atom.config.set("terminal.webLinks", true)
+      atom.config.set("atomic-terminal.webLinks", true)
       await createNewElement()
       const wasAdded = Terminal.prototype.loadAddon.calls.all().some((call) => {
         return call.args[0] instanceof WebLinksAddon
@@ -132,7 +132,7 @@ describe("TerminalElement", () => {
     })
 
     it("createTerminal() disable web-link addon", async () => {
-      atom.config.set("terminal.webLinks", false)
+      atom.config.set("atomic-terminal.webLinks", false)
       await createNewElement()
       const wasAdded = Terminal.prototype.loadAddon.calls.all().some((call) => {
         return call.args[0] instanceof WebLinksAddon
@@ -142,7 +142,7 @@ describe("TerminalElement", () => {
 
     if (process.platform !== "linux") {
       it("createTerminal() enable webgl addon", async () => {
-        atom.config.set("terminal.webgl", true)
+        atom.config.set("atomic-terminal.webgl", true)
         await createNewElement()
         const wasAdded = Terminal.prototype.loadAddon.calls.all().some((call) => {
           return call.args[0] instanceof WebglAddon
@@ -152,7 +152,7 @@ describe("TerminalElement", () => {
     }
 
     it("createTerminal() disable webgl addon", async () => {
-      atom.config.set("terminal.webgl", false)
+      atom.config.set("atomic-terminal.webgl", false)
       await createNewElement()
       const wasAdded = Terminal.prototype.loadAddon.calls.all().some((call) => {
         return call.args[0] instanceof WebglAddon
@@ -181,7 +181,7 @@ describe("TerminalElement", () => {
 
   it("restartPtyProcess() command not found", async () => {
     spyOn(atom.notifications, "addError")
-    atom.config.set("terminal.shell", "somecommand")
+    atom.config.set("atomic-terminal.shell", "somecommand")
     const fakeCall = () => {
       throw Error("File not found: somecommand")
     }
@@ -196,7 +196,7 @@ describe("TerminalElement", () => {
 
   it("restartPtyProcess() some other error thrown", async () => {
     spyOn(atom.notifications, "addError")
-    atom.config.set("terminal.shell", "somecommand")
+    atom.config.set("atomic-terminal.shell", "somecommand")
     const fakeCall = () => {
       throw Error("Something went wrong")
     }
@@ -701,7 +701,7 @@ describe("TerminalElement", () => {
 
   it("copy on select", async () => {
     spyOn(atom.clipboard, "write")
-    atom.config.set("terminal.copyOnSelect", true)
+    atom.config.set("atomic-terminal.copyOnSelect", true)
     await new Promise((resolve) => element.terminal.write("test", resolve))
     element.terminal.selectLines(0, 0)
     const selection = element.terminal.getSelection()
@@ -710,7 +710,7 @@ describe("TerminalElement", () => {
 
   it("does not copy on clear selection", async () => {
     spyOn(atom.clipboard, "write")
-    atom.config.set("terminal.copyOnSelect", true)
+    atom.config.set("atomic-terminal.copyOnSelect", true)
     await new Promise((resolve) => element.terminal.write("test", resolve))
     element.terminal.selectLines(0, 0)
     atom.clipboard.write.calls.reset()
@@ -720,7 +720,7 @@ describe("TerminalElement", () => {
 
   it("does not copy if copyOnSelect is false", async () => {
     spyOn(atom.clipboard, "write")
-    atom.config.set("terminal.copyOnSelect", false)
+    atom.config.set("atomic-terminal.copyOnSelect", false)
     await new Promise((resolve) => element.terminal.write("test", resolve))
     element.terminal.selectLines(0, 0)
     expect(atom.clipboard.write).not.toHaveBeenCalled()
@@ -737,7 +737,7 @@ describe("TerminalElement", () => {
   })
 
   it("getXtermOptions() fontSize changed", () => {
-    atom.config.set("terminal.fontSize", 8)
+    atom.config.set("atomic-terminal.fontSize", 8)
     const expected = {
       cursorBlink: true,
       fontSize: 8,
@@ -748,7 +748,7 @@ describe("TerminalElement", () => {
   })
 
   it("getXtermOptions() fontFamily changed", () => {
-    atom.config.set("terminal.fontFamily", "serif")
+    atom.config.set("atomic-terminal.fontFamily", "serif")
     const expected = {
       cursorBlink: true,
       fontSize: atom.config.get("editor.fontSize"),
@@ -759,7 +759,7 @@ describe("TerminalElement", () => {
   })
 
   it("getXtermOptions() theme changed", () => {
-    atom.config.set("terminal.colors.theme", "Red")
+    atom.config.set("atomic-terminal.colors.theme", "Red")
     const expected = {
       cursorBlink: true,
       fontSize: atom.config.get("editor.fontSize"),

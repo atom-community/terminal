@@ -1,39 +1,39 @@
 {
   "context-menu": {
-    "atom-terminal": [
+    "atomic-terminal": [
       {
         "label": "Open New Terminal",
-        "command": "terminal:open"
+        "command": "atomic-terminal:open"
       },
       {
         "label": "Close",
-        "command": "terminal:close"
+        "command": "atomic-terminal:close"
       },
       {
         "label": "Restart",
-        "command": "terminal:restart"
+        "command": "atomic-terminal:restart"
       },
       {
         "label": "Clear",
-        "command": "terminal:clear"
+        "command": "atomic-terminal:clear"
       },
       {
         "type": "separator"
       },
       {
         "label": "Copy",
-        "command": "terminal:copy"
+        "command": "atomic-terminal:copy"
       },
       {
         "label": "Paste",
-        "command": "terminal:paste"
+        "command": "atomic-terminal:paste"
       },
       {
         "type": "separator"
       },
       {
         "label": "Close All Terminals",
-        "command": "terminal:close-all"
+        "command": "atomic-terminal:close-all"
       }
     ],
     "atom-text-editor, .tree-view, .tab-bar": [
@@ -42,43 +42,43 @@
         "submenu": [
           {
             "label": "Open New Terminal",
-            "command": "terminal:open-context-menu"
+            "command": "atomic-terminal:open-context-menu"
           },
           {
             "label": "Open New Terminal (Split Up)",
-            "command": "terminal:open-up-context-menu"
+            "command": "atomic-terminal:open-up-context-menu"
           },
           {
             "label": "Open New Terminal (Split Down)",
-            "command": "terminal:open-down-context-menu"
+            "command": "atomic-terminal:open-down-context-menu"
           },
           {
             "label": "Open New Terminal (Split Left)",
-            "command": "terminal:open-left-context-menu"
+            "command": "atomic-terminal:open-left-context-menu"
           },
           {
             "label": "Open New Terminal (Split Right)",
-            "command": "terminal:open-right-context-menu"
+            "command": "atomic-terminal:open-right-context-menu"
           },
           {
             "label": "Open New Terminal (Bottom Dock)",
-            "command": "terminal:open-bottom-dock-context-menu"
+            "command": "atomic-terminal:open-bottom-dock-context-menu"
           },
           {
             "label": "Open New Terminal (Left Dock)",
-            "command": "terminal:open-left-dock-context-menu"
+            "command": "atomic-terminal:open-left-dock-context-menu"
           },
           {
             "label": "Open New Terminal (Right Dock)",
-            "command": "terminal:open-right-dock-context-menu"
+            "command": "atomic-terminal:open-right-dock-context-menu"
           },
           {
             "label": "Close All Terminals",
-            "command": "terminal:close-all"
+            "command": "atomic-terminal:close-all"
           },
           {
             "label": "Focus Last Terminal",
-            "command": "terminal:focus"
+            "command": "atomic-terminal:focus"
           }
         ]
       }
@@ -93,43 +93,43 @@
           "submenu": [
             {
               "label": "Open New Terminal",
-              "command": "terminal:open"
+              "command": "atomic-terminal:open"
             },
             {
               "label": "Open New Terminal (Split Up)",
-              "command": "terminal:open-up"
+              "command": "atomic-terminal:open-up"
             },
             {
               "label": "Open New Terminal (Split Down)",
-              "command": "terminal:open-down"
+              "command": "atomic-terminal:open-down"
             },
             {
               "label": "Open New Terminal (Split Left)",
-              "command": "terminal:open-left"
+              "command": "atomic-terminal:open-left"
             },
             {
               "label": "Open New Terminal (Split Right)",
-              "command": "terminal:open-right"
+              "command": "atomic-terminal:open-right"
             },
             {
               "label": "Open New Terminal (Bottom Dock)",
-              "command": "terminal:open-bottom-dock"
+              "command": "atomic-terminal:open-bottom-dock"
             },
             {
               "label": "Open New Terminal (Left Dock)",
-              "command": "terminal:open-left-dock"
+              "command": "atomic-terminal:open-left-dock"
             },
             {
               "label": "Open New Terminal (Right Dock)",
-              "command": "terminal:open-right-dock"
+              "command": "atomic-terminal:open-right-dock"
             },
             {
               "label": "Close All Terminals",
-              "command": "terminal:close-all"
+              "command": "atomic-terminal:close-all"
             },
             {
               "label": "Focus Last Terminal",
-              "command": "terminal:focus"
+              "command": "atomic-terminal:focus"
             }
           ]
         }

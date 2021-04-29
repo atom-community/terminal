@@ -40,7 +40,7 @@ export class TerminalModel {
     this.terminalsSet = terminalsSet
     this.activeIndex = this.terminalsSet.size
     this.title = DEFAULT_TITLE
-    this.fontSize = atom.config.get("terminal.fontSize")
+    this.fontSize = atom.config.get("atomic-terminal.fontSize")
     this.modified = false
     this.emitter = new Emitter()
     this.terminalsSet.add(this)
@@ -240,7 +240,7 @@ export class TerminalModel {
   }
 
   isActiveTerminal() {
-    return this.activeIndex === 0 && (atom.config.get("terminal.allowHiddenToStayActive") || this.isVisible())
+    return this.activeIndex === 0 && (atom.config.get("atomic-terminal.allowHiddenToStayActive") || this.isVisible())
   }
 
   setNewPane(pane: Pane) {
@@ -263,7 +263,7 @@ export class TerminalModel {
   }
 
   static recalculateActive(terminalsSet: Set<TerminalModel>, active?: TerminalModel) {
-    const allowHidden = atom.config.get("terminal.allowHiddenToStayActive")
+    const allowHidden = atom.config.get("atomic-terminal.allowHiddenToStayActive")
     const terminals = [...terminalsSet]
     terminals.sort((a, b) => {
       // active before other

@@ -291,15 +291,15 @@ export async function setAutoShell(whichFun: typeof which): Promise<void> {
     }
   }
 
-  if (shellStartCommand && atom.config.get("terminal.shell") === getDefaultShell()) {
-    atom.config.set("terminal.shell", shellStartCommand)
+  if (shellStartCommand && atom.config.get("atomic-terminal.shell") === getDefaultShell()) {
+    atom.config.set("atomic-terminal.shell", shellStartCommand)
   }
 }
 
 import which from "which"
 
 // set shell command automatically on first install
-if (localStorage.getItem("terminal.autoShellSet") === null) {
-  localStorage.setItem("terminal.autoShellSet", "true")
+if (localStorage.getItem("atomic-terminal.autoShellSet") === null) {
+  localStorage.setItem("atomic-terminal.autoShellSet", "true")
   setAutoShell(which)
 }

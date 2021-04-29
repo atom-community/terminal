@@ -11,7 +11,7 @@ interface OpenOptions extends WorkspaceOpenOptions {
   pane?: Pane
 }
 
-const TERMINAL_BASE_URI = "terminal://"
+const TERMINAL_BASE_URI = "atomic-terminal://"
 
 class Terminal {
   // TODO: maybe private?
@@ -102,64 +102,64 @@ class Terminal {
       // Add commands.
       // @ts-ignore
       atom.commands.add("atom-workspace", {
-        "terminal:open": () => this.open(this.generateNewUri(), this.addDefaultPosition()),
-        "terminal:open-center": () => this.openInCenterOrDock(atom.workspace),
-        "terminal:open-up": () => this.open(this.generateNewUri(), { split: "up" }),
-        "terminal:open-down": () => this.open(this.generateNewUri(), { split: "down" }),
-        "terminal:open-left": () => this.open(this.generateNewUri(), { split: "left" }),
-        "terminal:open-right": () => this.open(this.generateNewUri(), { split: "right" }),
-        "terminal:open-bottom-dock": () => this.openInCenterOrDock(atom.workspace.getBottomDock()),
-        "terminal:open-left-dock": () => this.openInCenterOrDock(atom.workspace.getLeftDock()),
-        "terminal:open-right-dock": () => this.openInCenterOrDock(atom.workspace.getRightDock()),
-        "terminal:close-all": () => this.exitAllTerminals(),
-        "terminal:focus": () => this.focus(),
+        "atomic-terminal:open": () => this.open(this.generateNewUri(), this.addDefaultPosition()),
+        "atomic-terminal:open-center": () => this.openInCenterOrDock(atom.workspace),
+        "atomic-terminal:open-up": () => this.open(this.generateNewUri(), { split: "up" }),
+        "atomic-terminal:open-down": () => this.open(this.generateNewUri(), { split: "down" }),
+        "atomic-terminal:open-left": () => this.open(this.generateNewUri(), { split: "left" }),
+        "atomic-terminal:open-right": () => this.open(this.generateNewUri(), { split: "right" }),
+        "atomic-terminal:open-bottom-dock": () => this.openInCenterOrDock(atom.workspace.getBottomDock()),
+        "atomic-terminal:open-left-dock": () => this.openInCenterOrDock(atom.workspace.getLeftDock()),
+        "atomic-terminal:open-right-dock": () => this.openInCenterOrDock(atom.workspace.getRightDock()),
+        "atomic-terminal:close-all": () => this.exitAllTerminals(),
+        "atomic-terminal:focus": () => this.focus(),
       }),
       // @ts-ignore
       atom.commands.add("atom-text-editor, .tree-view, .tab-bar", {
-        "terminal:open-context-menu": {
+        "atomic-terminal:open-context-menu": {
           hiddenInCommandPalette: true,
           didDispatch: ({ target }) => this.open(this.generateNewUri(), this.addDefaultPosition({ target })),
         },
-        "terminal:open-center-context-menu": {
+        "atomic-terminal:open-center-context-menu": {
           hiddenInCommandPalette: true,
           didDispatch: ({ target }) => this.openInCenterOrDock(atom.workspace, { target }),
         },
-        "terminal:open-split-up-context-menu": {
+        "atomic-terminal:open-split-up-context-menu": {
           hiddenInCommandPalette: true,
           didDispatch: ({ target }) => this.open(this.generateNewUri(), { split: "up", target }),
         },
-        "terminal:open-split-down-context-menu": {
+        "atomic-terminal:open-split-down-context-menu": {
           hiddenInCommandPalette: true,
           didDispatch: ({ target }) => this.open(this.generateNewUri(), { split: "down", target }),
         },
-        "terminal:open-split-left-context-menu": {
+        "atomic-terminal:open-split-left-context-menu": {
           hiddenInCommandPalette: true,
           didDispatch: ({ target }) => this.open(this.generateNewUri(), { split: "left", target }),
         },
-        "terminal:open-split-right-context-menu": {
+        "atomic-terminal:open-split-right-context-menu": {
           hiddenInCommandPalette: true,
           didDispatch: ({ target }) => this.open(this.generateNewUri(), { split: "right", target }),
         },
-        "terminal:open-split-bottom-dock-context-menu": {
+        "atomic-terminal:open-split-bottom-dock-context-menu": {
           hiddenInCommandPalette: true,
           didDispatch: ({ target }) => this.openInCenterOrDock(atom.workspace.getBottomDock(), { target }),
         },
-        "terminal:open-split-left-dock-context-menu": {
+        "atomic-terminal:open-split-left-dock-context-menu": {
           hiddenInCommandPalette: true,
           didDispatch: ({ target }) => this.openInCenterOrDock(atom.workspace.getLeftDock(), { target }),
         },
-        "terminal:open-split-right-dock-context-menu": {
+        "atomic-terminal:open-split-right-dock-context-menu": {
           hiddenInCommandPalette: true,
           didDispatch: ({ target }) => this.openInCenterOrDock(atom.workspace.getRightDock(), { target }),
         },
       }),
-      atom.commands.add("atom-terminal", {
-        "terminal:close": () => this.close(),
-        "terminal:restart": () => this.restart(),
-        "terminal:copy": () => this.copy(),
-        "terminal:paste": () => this.paste(),
-        "terminal:unfocus": () => this.unfocus(),
-        "terminal:clear": () => this.clear(),
+      atom.commands.add("atomic-terminal", {
+        "atomic-terminal:close": () => this.close(),
+        "atomic-terminal:restart": () => this.restart(),
+        "atomic-terminal:copy": () => this.copy(),
+        "atomic-terminal:paste": () => this.paste(),
+        "atomic-terminal:unfocus": () => this.unfocus(),
+        "atomic-terminal:clear": () => this.clear(),
       })
     )
   }
@@ -173,7 +173,7 @@ class Terminal {
   }
 
   deserializeTerminalModel(serializedModel: TerminalModel) {
-    if (atom.config.get("terminal.allowRelaunchingTerminalsOnStartup")) {
+    if (atom.config.get("atomic-terminal.allowRelaunchingTerminalsOnStartup")) {
       return new TerminalModel({
         uri: serializedModel.uri,
         terminalsSet: this.terminalsSet,
@@ -244,7 +244,7 @@ class Terminal {
    */
   async runCommands(commands: string[]): Promise<TerminalModel> {
     let terminal
-    if (atom.config.get("terminal.runInActive")) {
+    if (atom.config.get("atomic-terminal.runInActive")) {
       terminal = this.getActiveTerminal()
     }
 
@@ -264,7 +264,7 @@ class Terminal {
   }
 
   addDefaultPosition(options: OpenOptions = {}): OpenOptions {
-    const position = atom.config.get("terminal.defaultOpenPosition")
+    const position = atom.config.get("atomic-terminal.defaultOpenPosition")
     switch (position) {
       case "Center": {
         const pane = atom.workspace.getActivePane()

@@ -28,7 +28,7 @@ module.exports = createRunner(
     const warn = console.warn.bind(console)
     beforeEach(() => {
       const { config } = require("../dist/config")
-      setDefaultSettings("terminal", config)
+      setDefaultSettings("atomic-terminal", config)
       spyOn(console, "warn").and.callFake((...args) => {
         if (args[0].includes("not attached to the DOM")) {
           return
