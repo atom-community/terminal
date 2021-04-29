@@ -6,7 +6,7 @@
   "bugs": {
     "url": "https://github.com/atom-ide-community/terminal/issues/new/choose"
   },
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "The xterm based terminal for Atom",
   "keywords": [
     "terminal",
