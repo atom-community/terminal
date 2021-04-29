@@ -13,7 +13,7 @@ describe("TerminalModel", () => {
   let model, pane, element, tmpdir, uri, terminalsSet
 
   beforeEach(async () => {
-    uri = "terminal://somesessionid/"
+    uri = "atomic-terminal://somesessionid/"
     terminalsSet = new Set()
     model = new TerminalModel({ uri, terminalsSet })
     await model.initializedPromise
@@ -26,7 +26,7 @@ describe("TerminalModel", () => {
       "getCurrentAnchorHref",
       "restartPtyProcess",
     ])
-    element.terminal = jasmine.createSpyObj("terminal", ["getSelection"])
+    element.terminal = jasmine.createSpyObj("atomic-terminal", ["getSelection"])
     element.ptyProcess = jasmine.createSpyObj("ptyProcess", ["write"])
     tmpdir = await temp.mkdir()
   })
@@ -446,7 +446,7 @@ describe("TerminalModel", () => {
   })
 
   it("isActiveTerminal() allowHiddenToStayActive", () => {
-    atom.config.set("terminal.allowHiddenToStayActive", true)
+    atom.config.set("atomic-terminal.allowHiddenToStayActive", true)
     model.activeIndex = 0
     spyOn(model, "isVisible").and.returnValue(false)
     expect(model.isActiveTerminal()).toBe(true)
@@ -493,7 +493,7 @@ describe("TerminalModel", () => {
     })
 
     it("allowHiddenToStayActive", () => {
-      atom.config.set("terminal.allowHiddenToStayActive", true)
+      atom.config.set("atomic-terminal.allowHiddenToStayActive", true)
       const terminals = createTerminals(2)
       spyOn(terminals[1], "isVisible").and.returnValue(true)
       TerminalModel.recalculateActive(new Set(terminals))

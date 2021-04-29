@@ -1,5 +1,5 @@
 {
-  "name": "terminal",
+  "name": "atomic-terminal",
   "title": "Atom Terminal",
   "main": "./dist/terminal.js",
   "repository": "https://github.com/atom-ide-community/terminal",

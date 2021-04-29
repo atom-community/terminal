@@ -43,7 +43,7 @@ describe("terminal", () => {
     })
 
     it("runs commands in new terminal", async () => {
-      atom.config.set("terminal.runInActive", false)
+      atom.config.set("atomic-terminal.runInActive", false)
       await terminal.runCommands(commands)
 
       expect(terminal.getActiveTerminal).not.toHaveBeenCalled()
@@ -52,7 +52,7 @@ describe("terminal", () => {
     })
 
     it("runs commands in active terminal", async () => {
-      atom.config.set("terminal.runInActive", true)
+      atom.config.set("atomic-terminal.runInActive", true)
       await terminal.runCommands(commands)
 
       expect(terminal.open).not.toHaveBeenCalled()
@@ -62,7 +62,7 @@ describe("terminal", () => {
 
     it("runs commands in new terminal if none active", async () => {
       terminal.getActiveTerminal.and.returnValue()
-      atom.config.set("terminal.runInActive", true)
+      atom.config.set("atomic-terminal.runInActive", true)
       await terminal.runCommands(commands)
 
       expect(terminal.getActiveTerminal).toHaveBeenCalled()

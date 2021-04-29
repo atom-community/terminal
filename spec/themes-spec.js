@@ -5,7 +5,7 @@ import { getTheme } from "../dist/themes"
 describe("themes", () => {
   describe("getTheme()", () => {
     it("Custom", () => {
-      atom.config.set("terminal.colors.theme", "Custom")
+      atom.config.set("atomic-terminal.colors.theme", "Custom")
       expect(getTheme()).toEqual({
         background: "#000000",
         foreground: "#ffffff",
@@ -32,7 +32,7 @@ describe("themes", () => {
     })
 
     it("Atom Dark", () => {
-      atom.config.set("terminal.colors.theme", "Atom Dark")
+      atom.config.set("atomic-terminal.colors.theme", "Atom Dark")
       expect(getTheme()).toEqual({
         background: "#1d1f21",
         foreground: "#c5c8c6",
@@ -59,7 +59,7 @@ describe("themes", () => {
     })
 
     it("Atom Light", () => {
-      atom.config.set("terminal.colors.theme", "Atom Light")
+      atom.config.set("atomic-terminal.colors.theme", "Atom Light")
       expect(getTheme()).toEqual({
         background: "#ffffff",
         foreground: "#555555",
@@ -86,7 +86,7 @@ describe("themes", () => {
     })
 
     it("Base16 Tomorrow Dark", () => {
-      atom.config.set("terminal.colors.theme", "Base16 Tomorrow Dark")
+      atom.config.set("atomic-terminal.colors.theme", "Base16 Tomorrow Dark")
       expect(getTheme()).toEqual({
         background: "#1d1f21",
         foreground: "#c5c8c6",
@@ -114,7 +114,7 @@ describe("themes", () => {
     })
 
     it("Base16 Tomorrow Light", () => {
-      atom.config.set("terminal.colors.theme", "Base16 Tomorrow Light")
+      atom.config.set("atomic-terminal.colors.theme", "Base16 Tomorrow Light")
       expect(getTheme()).toEqual({
         background: "#ffffff",
         foreground: "#1d1f21",
@@ -142,7 +142,7 @@ describe("themes", () => {
     })
 
     it("Christmas", () => {
-      atom.config.set("terminal.colors.theme", "Christmas")
+      atom.config.set("atomic-terminal.colors.theme", "Christmas")
       expect(getTheme()).toEqual({
         background: "#0c0047",
         foreground: "#f81705",
@@ -169,7 +169,7 @@ describe("themes", () => {
     })
 
     it("City Lights", () => {
-      atom.config.set("terminal.colors.theme", "City Lights")
+      atom.config.set("atomic-terminal.colors.theme", "City Lights")
       expect(getTheme()).toEqual({
         background: "#181d23",
         foreground: "#666d81",
@@ -197,7 +197,7 @@ describe("themes", () => {
     })
 
     it("Dracula", () => {
-      atom.config.set("terminal.colors.theme", "Dracula")
+      atom.config.set("atomic-terminal.colors.theme", "Dracula")
       expect(getTheme()).toEqual({
         background: "#1e1f29",
         foreground: "white",
@@ -224,7 +224,7 @@ describe("themes", () => {
     })
 
     it("Grass", () => {
-      atom.config.set("terminal.colors.theme", "Grass")
+      atom.config.set("atomic-terminal.colors.theme", "Grass")
       expect(getTheme()).toEqual({
         background: "rgb(19, 119, 61)",
         foreground: "rgb(255, 240, 165)",
@@ -251,7 +251,7 @@ describe("themes", () => {
     })
 
     it("Homebrew", () => {
-      atom.config.set("terminal.colors.theme", "Homebrew")
+      atom.config.set("atomic-terminal.colors.theme", "Homebrew")
       expect(getTheme()).toEqual({
         background: "#000000",
         foreground: "rgb(41, 254, 20)",
@@ -278,7 +278,7 @@ describe("themes", () => {
     })
 
     it("Inverse", () => {
-      atom.config.set("terminal.colors.theme", "Inverse")
+      atom.config.set("atomic-terminal.colors.theme", "Inverse")
       expect(getTheme()).toEqual({
         background: "#ffffff",
         foreground: "#000000",
@@ -305,7 +305,7 @@ describe("themes", () => {
     })
 
     it("Linux", () => {
-      atom.config.set("terminal.colors.theme", "Linux")
+      atom.config.set("atomic-terminal.colors.theme", "Linux")
       expect(getTheme()).toEqual({
         background: "#000000",
         foreground: "rgb(230, 230, 230)",
@@ -332,7 +332,7 @@ describe("themes", () => {
     })
 
     it("Man Page", () => {
-      atom.config.set("terminal.colors.theme", "Man Page")
+      atom.config.set("atomic-terminal.colors.theme", "Man Page")
       expect(getTheme()).toEqual({
         background: "rgb(254, 244, 156)",
         foreground: "black",
@@ -359,7 +359,7 @@ describe("themes", () => {
     })
 
     it("Novel", () => {
-      atom.config.set("terminal.colors.theme", "Novel")
+      atom.config.set("atomic-terminal.colors.theme", "Novel")
       expect(getTheme()).toEqual({
         background: "rgb(223, 219, 196)",
         foreground: "rgb(77, 47, 46)",
@@ -386,7 +386,7 @@ describe("themes", () => {
     })
 
     it("Ocean", () => {
-      atom.config.set("terminal.colors.theme", "Ocean")
+      atom.config.set("atomic-terminal.colors.theme", "Ocean")
       expect(getTheme()).toEqual({
         background: "rgb(44, 102, 201)",
         foreground: "white",
@@ -413,7 +413,7 @@ describe("themes", () => {
     })
 
     it("One Dark", () => {
-      atom.config.set("terminal.colors.theme", "One Dark")
+      atom.config.set("atomic-terminal.colors.theme", "One Dark")
       expect(getTheme()).toEqual({
         background: "#282c34",
         foreground: "#abb2bf",
@@ -440,7 +440,7 @@ describe("themes", () => {
     })
 
     it("One Light", () => {
-      atom.config.set("terminal.colors.theme", "One Light")
+      atom.config.set("atomic-terminal.colors.theme", "One Light")
       expect(getTheme()).toEqual({
         background: "hsl(230, 1%, 98%)",
         foreground: "hsl(230, 8%, 24%)",
@@ -467,7 +467,7 @@ describe("themes", () => {
     })
 
     it("Predawn", () => {
-      atom.config.set("terminal.colors.theme", "Predawn")
+      atom.config.set("atomic-terminal.colors.theme", "Predawn")
       expect(getTheme()).toEqual({
         background: "#282828",
         foreground: "#f1f1f1",
@@ -494,7 +494,7 @@ describe("themes", () => {
     })
 
     it("Pro", () => {
-      atom.config.set("terminal.colors.theme", "Pro")
+      atom.config.set("atomic-terminal.colors.theme", "Pro")
       expect(getTheme()).toEqual({
         background: "#000000",
         foreground: "rgb(244, 244, 244)",
@@ -521,7 +521,7 @@ describe("themes", () => {
     })
 
     it("Red Sands", () => {
-      atom.config.set("terminal.colors.theme", "Red Sands")
+      atom.config.set("atomic-terminal.colors.theme", "Red Sands")
       expect(getTheme()).toEqual({
         background: "rgb(143, 53, 39)",
         foreground: "rgb(215, 201, 167)",
@@ -548,7 +548,7 @@ describe("themes", () => {
     })
 
     it("Red", () => {
-      atom.config.set("terminal.colors.theme", "Red")
+      atom.config.set("atomic-terminal.colors.theme", "Red")
       expect(getTheme()).toEqual({
         background: "#000000",
         foreground: "rgb(255, 38, 14)",
@@ -575,7 +575,7 @@ describe("themes", () => {
     })
 
     it("Silver Aerogel", () => {
-      atom.config.set("terminal.colors.theme", "Silver Aerogel")
+      atom.config.set("atomic-terminal.colors.theme", "Silver Aerogel")
       expect(getTheme()).toEqual({
         background: "rgb(146, 146, 146)",
         foreground: "#000000",
@@ -602,7 +602,7 @@ describe("themes", () => {
     })
 
     it("Solarized Dark", () => {
-      atom.config.set("terminal.colors.theme", "Solarized Dark")
+      atom.config.set("atomic-terminal.colors.theme", "Solarized Dark")
       expect(getTheme()).toEqual({
         background: "#042029",
         foreground: "#708284",
@@ -629,7 +629,7 @@ describe("themes", () => {
     })
 
     it("Solarized Light", () => {
-      atom.config.set("terminal.colors.theme", "Solarized Light")
+      atom.config.set("atomic-terminal.colors.theme", "Solarized Light")
       expect(getTheme()).toEqual({
         background: "#fdf6e3",
         foreground: "#657a81",
@@ -656,7 +656,7 @@ describe("themes", () => {
     })
 
     it("Solid Colors", () => {
-      atom.config.set("terminal.colors.theme", "Solid Colors")
+      atom.config.set("atomic-terminal.colors.theme", "Solid Colors")
       expect(getTheme()).toEqual({
         background: "rgb(120, 132, 151)",
         foreground: "#000000",
@@ -683,7 +683,7 @@ describe("themes", () => {
     })
 
     it("Standard", () => {
-      atom.config.set("terminal.colors.theme", "Standard")
+      atom.config.set("atomic-terminal.colors.theme", "Standard")
       const root = getComputedStyle(document.documentElement)
       expect(getTheme()).toEqual({
         background: root.getPropertyValue("--standard-app-background-color"),

@@ -64,7 +64,7 @@ describe("config", () => {
       Object.defineProperty(process, "platform", {
         value: "win32",
       })
-      atom.config.set("terminal.shell", getDefaultShell())
+      atom.config.set("atomic-terminal.shell", getDefaultShell())
     })
 
     afterEach(() => {
@@ -82,7 +82,7 @@ describe("config", () => {
         throw new Error("ENOENT")
       })
 
-      expect(atom.config.get("terminal.shell")).toBe(shell)
+      expect(atom.config.get("atomic-terminal.shell")).toBe(shell)
     })
 
     it("should set terminal.shell to powershell", async () => {
@@ -94,7 +94,7 @@ describe("config", () => {
         throw new Error("ENOENT")
       })
 
-      expect(atom.config.get("terminal.shell")).toBe(shell)
+      expect(atom.config.get("atomic-terminal.shell")).toBe(shell)
     })
 
     it("should set terminal.shell to powershell", async () => {
@@ -103,7 +103,7 @@ describe("config", () => {
         throw new Error("ENOENT")
       })
 
-      expect(atom.config.get("terminal.shell")).toBe(shell)
+      expect(atom.config.get("atomic-terminal.shell")).toBe(shell)
     })
   })
 })
