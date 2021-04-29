@@ -1,5 +1,5 @@
 import { CompositeDisposable, Workspace, Dock, Pane, WorkspaceOpenOptions } from "atom"
-import {StatusBar, Tile as StatusBarTile} from "atom/status-bar"
+import { StatusBar, Tile as StatusBarTile } from "atom/status-bar"
 
 import { TerminalElement } from "./element"
 import { TerminalModel } from "./model"
@@ -391,8 +391,8 @@ class Terminal {
     }
   }
 
-  consumeStatusBar (statusBarProvider: StatusBar) {
-    this.statusBarTile = new (require('./status-bar'))(statusBarProvider)
+  consumeStatusBar(statusBarProvider: StatusBar) {
+    this.statusBarTile = new (require("./status-bar"))(statusBarProvider)
   }
 
   close() {

@@ -1,26 +1,26 @@
 let RenameDialog = null
 
 class StatusIcon extends HTMLLIElement {
-  constructor (...args) {
+  constructor(...args) {
     super(...args)
-    this.setAttribute('is', 'terminal-status-icon')
+    this.setAttribute("is", "terminal-status-icon")
   }
 
-  initialize (terminalView) {
+  initialize(terminalView) {
     this.terminalView = terminalView
-    this.classList.add('terminal-status-icon')
+    this.classList.add("terminal-status-icon")
 
-    this.icon = document.createElement('i')
-    this.icon.classList.add('icon', 'icon-terminal')
+    this.icon = document.createElement("i")
+    this.icon.classList.add("icon", "icon-terminal")
     this.appendChild(this.icon)
 
-    this.name = document.createElement('span')
-    this.name.classList.add('name')
+    this.name = document.createElement("span")
+    this.name.classList.add("name")
     this.appendChild(this.name)
 
     this.dataset.type = this.terminalView.constructor ? this.terminalView.constructor.name : undefined
 
-    this.addEventListener('click', ({ which }) => {
+    this.addEventListener("click", ({ which }) => {
       if (which === 1) {
         this.terminalView.toggle()
         return true
@@ -33,24 +33,24 @@ class StatusIcon extends HTMLLIElement {
     this.setupTooltip()
   }
 
-  setupTooltip () {
-    const onMouseEnter = event => {
-      if (event.detail !== 'terminal') {
+  setupTooltip() {
+    const onMouseEnter = (event) => {
+      if (event.detail !== "terminal") {
         this.updateTooltip()
       }
     }
 
     this.mouseEnterSubscription = {
       dispose: () => {
-        this.removeEventListener('mouseenter', onMouseEnter)
+        this.removeEventListener("mouseenter", onMouseEnter)
         this.mouseEnterSubscription = null
-      }
+      },
     }
 
-    this.addEventListener('mouseenter', onMouseEnter)
+    this.addEventListener("mouseenter", onMouseEnter)
   }
 
-  updateTooltip () {
+  updateTooltip() {
     this.removeTooltip()
 
     const process = this.terminalView.getTerminalTitle()
@@ -60,69 +60,77 @@ class StatusIcon extends HTMLLIElement {
         html: false,
         delay: {
           show: 1000,
-          hide: 100
-        }
+          hide: 100,
+        },
       })
     }
 
-    this.dispatchEvent(new CustomEvent('mouseenter', { bubbles: true, detail: 'terminal' }))
+    this.dispatchEvent(new CustomEvent("mouseenter", { bubbles: true, detail: "terminal" }))
   }
 
-  removeTooltip () {
-    if (this.tooltip) { this.tooltip.dispose() }
+  removeTooltip() {
+    if (this.tooltip) {
+      this.tooltip.dispose()
+    }
     this.tooltip = null
   }
 
-  destroy () {
+  destroy() {
     this.removeTooltip()
-    if (this.mouseEnterSubscription) { this.mouseEnterSubscription.dispose() }
+    if (this.mouseEnterSubscription) {
+      this.mouseEnterSubscription.dispose()
+    }
     this.remove()
   }
 
-  activate () {
-    this.classList.add('active')
+  activate() {
+    this.classList.add("active")
     this.active = true
   }
 
-  deactivate () {
-    this.classList.remove('active')
+  deactivate() {
+    this.classList.remove("active")
     this.active = false
   }
 
-  toggle () {
+  toggle() {
     if (this.active) {
-      this.classList.remove('active')
+      this.classList.remove("active")
     } else {
-      this.classList.add('active')
+      this.classList.add("active")
     }
     this.active = !this.active
   }
 
-  isActive () {
+  isActive() {
     return this.active
   }
 
-  rename () {
-    if (!RenameDialog) { RenameDialog = require('./rename-dialog') }
+  rename() {
+    if (!RenameDialog) {
+      RenameDialog = require("./rename-dialog")
+    }
     const dialog = new RenameDialog(this)
     dialog.attach()
   }
 
-  getName () {
+  getName() {
     return this.name.textContent.substring(1)
   }
 
-  updateName (name) {
+  updateName(name) {
     if (name !== this.getName()) {
-      if (name) { name = '&nbsp;' + name }
+      if (name) {
+        name = "&nbsp;" + name
+      }
       this.name.innerHTML = name
-      this.terminalView.emit('did-change-title')
+      this.terminalView.emit("did-change-title")
     }
   }
 }
 
 StatusIcon.prototype.active = false
 
-customElements.define('terminal-status-icon', StatusIcon, { extends: 'li' })
+customElements.define("terminal-status-icon", StatusIcon, { extends: "li" })
 
 module.exports = StatusIcon
