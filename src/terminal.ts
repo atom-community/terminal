@@ -2,6 +2,7 @@ import { CompositeDisposable, Workspace, Dock, Pane, WorkspaceOpenOptions } from
 
 import { TerminalElement } from "./element"
 import { TerminalModel } from "./model"
+import { addToolbarButton, removeToolbarButton } from "./button"
 export * from "./button"
 
 import { v4 as uuidv4 } from "uuid"
@@ -99,6 +100,14 @@ class Terminal {
         TerminalModel.recalculateActive(this.terminalsSet)
       }),
 
+      atom.config.onDidChange("atomic-terminal.toolbarButton", ({newValue}) => {
+        if (newValue) {
+          addToolbarButton()
+        } else {
+          removeToolbarButton()
+        }
+      }),
+
       // Add commands.
       // @ts-ignore
       atom.commands.add("atom-workspace", {
@@ -169,6 +178,7 @@ class Terminal {
 
   destroy() {
     this.exitAllTerminals()
+    removeToolbarButton()
     this.disposables.dispose()
   }
 

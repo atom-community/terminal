@@ -104,6 +104,12 @@ export const config = configOrder({
     type: "boolean",
     default: true,
   },
+  toolbarButton: {
+    title: "Add Toolbar Button",
+    description: "Add button to open a terminal from the toolbar.",
+    type: "boolean",
+    default: true,
+  },
   colors: {
     title: "Colors",
     description: "Settings for the terminal colors.",
