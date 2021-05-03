@@ -346,10 +346,14 @@ export class AtomTerminal extends HTMLElement {
     }
   }
 
-  focusOnTerminal() {
+  focusOnTerminal(double = false) {
     if (this.terminal && this.model) {
       this.model.setActive()
       this.terminal.focus()
+			if (double) {
+				// second focus will send command to pty
+				this.terminal.focus()
+			}
     }
   }
 

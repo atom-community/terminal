@@ -423,7 +423,7 @@ class Terminal {
   async focus() {
     const terminal = [...this.terminalsSet].find((t) => t.activeIndex === 0)
     if (terminal) {
-      terminal.focusOnTerminal()
+      terminal.focusOnTerminal(true)
     } else {
       const options = this.addDefaultPosition()
       await this.open(this.generateNewUri(), options)
