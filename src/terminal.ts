@@ -37,7 +37,7 @@ class Terminal {
       atom.workspace.addOpener((uri) => {
         if (uri.startsWith(TERMINAL_BASE_URI)) {
           const item = new TerminalModel({
-            uri: uri,
+            uri,
             terminalsSet: this.terminalsSet,
           })
           return item
@@ -218,7 +218,7 @@ class Terminal {
   }
 
   generateNewUri() {
-    return TERMINAL_BASE_URI + uuidv4() + "/"
+    return `${TERMINAL_BASE_URI + uuidv4()}/`
   }
 
   /**
@@ -423,7 +423,7 @@ class Terminal {
   async focus() {
     const terminal = [...this.terminalsSet].find((t) => t.activeIndex === 0)
     if (terminal) {
-      terminal.focusOnTerminal()
+      terminal.focusOnTerminal(true)
     } else {
       const options = this.addDefaultPosition()
       await this.open(this.generateNewUri(), options)

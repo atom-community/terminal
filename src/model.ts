@@ -132,7 +132,7 @@ export class TerminalModel {
     if (this.title === DEFAULT_TITLE) {
       return DEFAULT_TITLE
     }
-    return DEFAULT_TITLE + " (" + this.title + ")"
+    return `${DEFAULT_TITLE} (${this.title})`
   }
 
   onDidChangeTitle(callback: (value?: string) => void) {
@@ -185,9 +185,12 @@ export class TerminalModel {
     }
   }
 
-  focusOnTerminal() {
+  focusOnTerminal(double = false) {
     if (this.element) {
-      this.element.focusOnTerminal()
+      if (this.pane) {
+        this.pane.activateItem(this)
+      }
+      this.element.focusOnTerminal(double)
       const oldIsModified = this.modified
       this.modified = false
       if (oldIsModified !== this.modified) {

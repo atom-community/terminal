@@ -20,8 +20,8 @@ describe("TerminalElement", () => {
   const createNewElement = async (uri = "atomic-terminal://somesessionid/") => {
     const terminalsSet = new Set()
     const model = new TerminalModel({
-      uri: uri,
-      terminalsSet: terminalsSet,
+      uri,
+      terminalsSet,
     })
     await model.initializedPromise
     model.pane = jasmine.createSpyObj("pane", ["removeItem", "getActiveItem", "destroyItem"])
@@ -544,12 +544,18 @@ describe("TerminalElement", () => {
     spyOn(element.model, "setActive")
     element.focusOnTerminal()
     expect(element.model.setActive).toHaveBeenCalled()
-    expect(element.terminal.focus).toHaveBeenCalled()
+    expect(element.terminal.focus).toHaveBeenCalledTimes(1)
   })
 
   it("focusOnTerminal() terminal not set", () => {
     element.terminal = null
     element.focusOnTerminal()
+  })
+
+  it("focusOnTerminal(true) calls focus twice", () => {
+    spyOn(element.terminal, "focus")
+    element.focusOnTerminal(true)
+    expect(element.terminal.focus).toHaveBeenCalledTimes(2)
   })
 
   it("on 'data' handler no custom title on win32 platform", async () => {
