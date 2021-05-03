@@ -4,9 +4,23 @@ let toolbar: ToolBarManager
 
 export function consumeToolBar(getToolBar: getToolBarManager) {
   toolbar = getToolBar("atomic-terminal") // getting toolbar object
-  toolbar.addButton({
-    icon: "terminal",
-    tooltip: "Open Terminal",
-    callback: "atomic-terminal:open",
-  })
+  if (atom.config.get("atomic-toolbar.toolbarButton")) {
+    addToolbarButton()
+  }
+}
+
+export function addToolbarButton() {
+  if (toolbar) {
+    toolbar.addButton({
+      icon: "terminal",
+      tooltip: "Open Terminal",
+      callback: "atomic-terminal:open",
+    })
+  }
+}
+
+export function removeToolbarButton() {
+  if (toolbar) {
+    toolbar.removeItems()
+  }
 }
