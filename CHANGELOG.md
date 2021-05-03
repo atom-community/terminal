@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/atom-community/terminal/compare/v1.0.1...v1.1.0) (2021-05-03)
+
+
+### Features
+
+* add setting to remove toolbar button ([6b66057](https://github.com/atom-community/terminal/commit/6b66057c5a0ea4590d5d595a9f03f46fbc484e32))
+
 ## [1.0.1](https://github.com/atom-community/terminal/compare/v1.0.0...v1.0.1) (2021-05-03)
 
 
