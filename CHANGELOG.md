@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/atom-community/terminal/compare/v1.0.0...v1.0.1) (2021-05-03)
+
+
+### Bug Fixes
+
+* activate pane on focus ([cee1511](https://github.com/atom-community/terminal/commit/cee1511f594467a1601f96c43fd1645bb4216f57))
+
 # 1.0.0 (2021-04-29)
 
 
