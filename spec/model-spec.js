@@ -17,7 +17,7 @@ describe("TerminalModel", () => {
     terminalsSet = new Set()
     model = new TerminalModel({ uri, terminalsSet })
     await model.initializedPromise
-    pane = jasmine.createSpyObj("pane", ["destroyItem", "getActiveItem"])
+    pane = jasmine.createSpyObj("pane", ["destroyItem", "getActiveItem", "activateItem"])
     element = jasmine.createSpyObj("element", [
       "destroy",
       "refitTerminal",
@@ -304,6 +304,19 @@ describe("TerminalModel", () => {
     spyOn(model.emitter, "emit")
     model.focusOnTerminal()
     expect(model.emitter.emit).toHaveBeenCalled()
+  })
+
+  it("focusOnTerminal() activates the pane item", () => {
+    model.element = element
+    model.pane = pane
+    model.focusOnTerminal()
+    expect(model.pane.activateItem).toHaveBeenCalledWith(model)
+  })
+
+  it("focusOnTerminal() passes along double", () => {
+    model.element = element
+    model.focusOnTerminal(true)
+    expect(model.element.focusOnTerminal).toHaveBeenCalledWith(true)
   })
 
   it("exit()", () => {
