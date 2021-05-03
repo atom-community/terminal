@@ -5,7 +5,7 @@ let toolbar: ToolBarManager
 export function consumeToolBar(getToolBar: getToolBarManager) {
   toolbar = getToolBar("atomic-terminal") // getting toolbar object
   if (atom.config.get("atomic-toolbar.toolbarButton")) {
-    addToolbarButton();
+    addToolbarButton()
   }
 }
 
@@ -21,6 +21,6 @@ export function addToolbarButton() {
 
 export function removeToolbarButton() {
   if (toolbar) {
-    toolbar.removeItems();
+    toolbar.removeItems()
   }
 }

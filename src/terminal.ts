@@ -100,7 +100,7 @@ class Terminal {
         TerminalModel.recalculateActive(this.terminalsSet)
       }),
 
-      atom.config.onDidChange("atomic-terminal.toolbarButton", ({newValue}) => {
+      atom.config.onDidChange("atomic-terminal.toolbarButton", ({ newValue }) => {
         if (newValue) {
           addToolbarButton()
         } else {
