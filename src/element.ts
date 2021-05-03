@@ -313,9 +313,9 @@ export class AtomTerminal extends HTMLElement {
         })
       }
     } catch (err) {
-      let message = "Launching '" + this.ptyProcessCommand + "' raised the following error: " + err.message
+      let message = `Launching '${this.ptyProcessCommand}' raised the following error: ${err.message}`
       if (err.message.startsWith("File not found:")) {
-        message = "Could not open shell '" + this.ptyProcessCommand + "'."
+        message = `Could not open shell '${this.ptyProcessCommand}'.`
       }
       atom.notifications.addError("Terminal Error", { detail: message })
       if (this.model) {
@@ -350,10 +350,10 @@ export class AtomTerminal extends HTMLElement {
     if (this.terminal && this.model) {
       this.model.setActive()
       this.terminal.focus()
-			if (double) {
-				// second focus will send command to pty
-				this.terminal.focus()
-			}
+      if (double) {
+        // second focus will send command to pty
+        this.terminal.focus()
+      }
     }
   }
 

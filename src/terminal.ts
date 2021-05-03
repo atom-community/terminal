@@ -37,7 +37,7 @@ class Terminal {
       atom.workspace.addOpener((uri) => {
         if (uri.startsWith(TERMINAL_BASE_URI)) {
           const item = new TerminalModel({
-            uri: uri,
+            uri,
             terminalsSet: this.terminalsSet,
           })
           return item
@@ -218,7 +218,7 @@ class Terminal {
   }
 
   generateNewUri() {
-    return TERMINAL_BASE_URI + uuidv4() + "/"
+    return `${TERMINAL_BASE_URI + uuidv4()}/`
   }
 
   /**

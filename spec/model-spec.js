@@ -362,14 +362,14 @@ describe("TerminalModel", () => {
     const activePane = atom.workspace.getCenter().getActivePane()
     const newTerminalsSet = new Set()
     const model1 = new TerminalModel({
-      uri: uri,
+      uri,
       terminalsSet: newTerminalsSet,
     })
     await model1.initializedPromise
     activePane.addItem(model1)
     model1.setNewPane(activePane)
     const model2 = new TerminalModel({
-      uri: uri,
+      uri,
       terminalsSet: newTerminalsSet,
     })
     await model2.initializedPromise

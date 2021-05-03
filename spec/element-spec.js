@@ -20,8 +20,8 @@ describe("TerminalElement", () => {
   const createNewElement = async (uri = "atomic-terminal://somesessionid/") => {
     const terminalsSet = new Set()
     const model = new TerminalModel({
-      uri: uri,
-      terminalsSet: terminalsSet,
+      uri,
+      terminalsSet,
     })
     await model.initializedPromise
     model.pane = jasmine.createSpyObj("pane", ["removeItem", "getActiveItem", "destroyItem"])
