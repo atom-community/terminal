@@ -4,7 +4,7 @@ let toolbar: ToolBarManager | undefined = undefined
 
 export function consumeToolBar(getToolBar: getToolBarManager) {
   toolbar = getToolBar("atomic-terminal") // getting toolbar object
-  if (atom.config.get("atomic-toolbar.toolbarButton")) {
+  if (atom.config.get("atomic-terminal.toolbarButton")) {
     addToolbarButton()
   }
 }
