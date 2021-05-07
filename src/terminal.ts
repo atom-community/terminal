@@ -3,7 +3,7 @@ import { CompositeDisposable, Workspace, Dock, Pane, WorkspaceOpenOptions } from
 import { TerminalElement } from "./element"
 import { TerminalModel } from "./model"
 import { addToolbarButton, removeToolbarButton } from "./button"
-export * from "./button"
+export { consumeToolBar } from "./button"
 
 import { v4 as uuidv4 } from "uuid"
 
