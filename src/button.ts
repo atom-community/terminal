@@ -1,6 +1,6 @@
 import { ToolBarManager, getToolBarManager } from "atom/tool-bar"
 
-let toolbar: ToolBarManager
+let toolbar: ToolBarManager | undefined = undefined
 
 export function consumeToolBar(getToolBar: getToolBarManager) {
   toolbar = getToolBar("atomic-terminal") // getting toolbar object
