@@ -14,7 +14,7 @@ function setDefaultSettings(namespace, settings) {
   }
 }
 
-execSync("npm run tsc", { cwd: __dirname })
+execSync("npm run build.tsc", { cwd: __dirname })
 
 module.exports = createRunner(
   {
