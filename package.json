@@ -92,9 +92,8 @@
     "test": "atom --test spec",
     "integration.test": "npm run build && atom --test ./spec/terminal-spec.js",
     "clean": "shx rm -rf dist",
-    "tsc": "tsc -p src/tsconfig.json",
-    "dev:tsc": "tsc --watch -p src/tsconfig.json",
-    "dev": "cross-env NODE_ENV=development parcel build --target main ./src/terminal.ts --watch --no-scope-hoist",
+    "build.tsc": "tsc -p src/tsconfig.json",
+    "dev": "tsc --watch -p src/tsconfig.json",
     "build": "cross-env NODE_ENV=production parcel build --target main ./src/terminal.ts --no-scope-hoist",
     "build-commit": "build-commit -o dist",
     "prepare": "npm run build"
