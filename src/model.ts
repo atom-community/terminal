@@ -6,7 +6,7 @@ import * as os from "os"
 
 import { AtomTerminal } from "./element"
 
-import { URL } from "whatwg-url"
+import { URL } from "url"
 
 const DEFAULT_TITLE = "Terminal"
 
