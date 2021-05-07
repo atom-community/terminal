@@ -1,3 +1,11 @@
+## [1.1.1](https://github.com/atom-community/terminal/compare/v1.1.0...v1.1.1) (2021-05-07)
+
+
+### Bug Fixes
+
+* toolbar config was wrong ([08625fb](https://github.com/atom-community/terminal/commit/08625fb3c83c586ec384ca2e9f2535c4958c03c4))
+* use node url instead of whatwg-url ([71de4dc](https://github.com/atom-community/terminal/commit/71de4dc495f244257de8887fd860f5df9929f2ee))
+
 # [1.1.0](https://github.com/atom-community/terminal/compare/v1.0.1...v1.1.0) (2021-05-03)
 
 
