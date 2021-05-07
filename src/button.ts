@@ -10,17 +10,13 @@ export function consumeToolBar(getToolBar: getToolBarManager) {
 }
 
 export function addToolbarButton() {
-  if (toolbar) {
-    toolbar.addButton({
-      icon: "terminal",
-      tooltip: "Open Terminal",
-      callback: "atomic-terminal:open",
-    })
-  }
+  toolbar?.addButton({
+    icon: "terminal",
+    tooltip: "Open Terminal",
+    callback: "atomic-terminal:open",
+  })
 }
 
 export function removeToolbarButton() {
-  if (toolbar) {
-    toolbar.removeItems()
-  }
+  toolbar?.removeItems()
 }
