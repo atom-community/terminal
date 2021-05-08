@@ -5,7 +5,7 @@ import { shell } from "electron"
 
 import { config } from "../dist/config"
 import { getTheme } from "../dist/themes"
-import { TerminalElement } from "../dist/element"
+import { createTerminalElement } from "../dist/element"
 import { TerminalModel } from "../dist/model"
 
 import path from "path"
@@ -25,7 +25,7 @@ describe("TerminalElement", () => {
     })
     await model.initializedPromise
     model.pane = jasmine.createSpyObj("pane", ["removeItem", "getActiveItem", "destroyItem"])
-    const terminalElement = new TerminalElement()
+    const terminalElement = createTerminalElement()
     await terminalElement.initialize(model)
     await terminalElement.createTerminal()
     return terminalElement
