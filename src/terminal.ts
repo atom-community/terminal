@@ -1,6 +1,6 @@
 import { CompositeDisposable, Workspace, Dock, Pane, WorkspaceOpenOptions } from "atom"
 
-import { TerminalElement } from "./element"
+import { createTerminalElement } from "./element"
 import { TerminalModel } from "./model"
 import { addToolbarButton, removeToolbarButton } from "./button"
 export { consumeToolBar } from "./button"
@@ -29,7 +29,7 @@ class Terminal {
     this.disposables.add(
       // Register view provider for terminal emulator item.
       atom.views.addViewProvider(TerminalModel, (terminalModel) => {
-        const terminalElement = new TerminalElement()
+        const terminalElement = createTerminalElement()
         terminalElement.initialize(terminalModel)
         return terminalElement
       }),

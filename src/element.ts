@@ -364,7 +364,10 @@ export class AtomTerminal extends HTMLElement {
   }
 }
 
-// @ts-ignore // TODO This should be fixed soon https://developer.mozilla.org/en-US/docs/Web/API/Document/registerElement
-export const TerminalElement = document.registerElement("atomic-terminal", {
-  prototype: AtomTerminal.prototype,
-})
+if (!window.customElements.get("atomic-terminal")) {
+  window.customElements.define("atomic-terminal", AtomTerminal)
+}
+
+export function createTerminalElement() {
+  return document.createElement("atomic-terminal") as AtomTerminal
+}
