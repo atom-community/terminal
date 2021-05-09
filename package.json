@@ -54,7 +54,7 @@
     }
   },
   "dependencies": {
-    "fs-extra": "^9.1.0",
+    "fs-extra": "^10.0.0",
     "node-pty-prebuilt-multiarch": "^0.10.0",
     "uuid": "^8.3.2",
     "which": "^2.0.2",
