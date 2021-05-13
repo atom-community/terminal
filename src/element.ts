@@ -211,7 +211,6 @@ export class AtomTerminal extends HTMLElement {
       this.terminal.loadAddon(new WebglAddon())
     }
     if (atom.config.get("atomic-terminal.ligatures")) {
-      // ligatures only work if WebGL is disabled
       const { LigaturesAddon } = await import("xterm-addon-ligatures")
       this.terminal.loadAddon(new LigaturesAddon())
     }

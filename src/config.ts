@@ -43,7 +43,7 @@ export const config = configOrder({
   },
   webgl: {
     title: "WebGL Renderer",
-    description: "Enable the WebGL-based renderer. Faster but experimental. ⚠️",
+    description: "Enable the WebGL-based renderer.",
     type: "boolean",
     default: false,
   },
@@ -55,7 +55,7 @@ export const config = configOrder({
   },
   ligatures: {
     title: "Ligatures",
-    description: "Enables ligatures support (currently works without WebGL).",
+    description: "Enables ligatures support.",
     type: "boolean",
     default: true,
   },
