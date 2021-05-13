@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/atom-community/terminal/compare/v1.1.2...v1.1.3) (2021-05-13)
+
+
+### Bug Fixes
+
+* update dependencies ([dcae454](https://github.com/atom-community/terminal/commit/dcae45439510fcb62d88044fa65450f13f63a842))
+
 ## [1.1.2](https://github.com/atom-community/terminal/compare/v1.1.1...v1.1.2) (2021-05-08)
 
 
