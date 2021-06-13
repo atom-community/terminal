@@ -4,7 +4,7 @@ specifiers:
   '@types/atom': 1.40.10
   '@types/fs-extra': ^9.0.11
   '@types/jasmine': ^3.7.7
-  '@types/node': ^15.12.1
+  '@types/node': ^15.12.2
   '@types/resize-observer-browser': ^0.1.5
   '@types/uuid': ^8.3.0
   '@types/which': ^2.0.0
@@ -42,7 +42,7 @@ devDependencies:
   '@types/atom': 1.40.10
   '@types/fs-extra': 9.0.11
   '@types/jasmine': 3.7.7
-  '@types/node': 15.12.1
+  '@types/node': 15.12.2
   '@types/resize-observer-browser': 0.1.5
   '@types/uuid': 8.3.0
   '@types/which': 2.0.0
@@ -1854,6 +1854,10 @@ packages:
 
   /@types/node/15.12.1:
     resolution: {integrity: sha512-zyxJM8I1c9q5sRMtVF+zdd13Jt6RU4r4qfhTd7lQubyThvLfx6yYekWSQjGCGV2Tkecgxnlpl/DNlb6Hg+dmEw==}
+    dev: true
+
+  /@types/node/15.12.2:
+    resolution: {integrity: sha512-zjQ69G564OCIWIOHSXyQEEDpdpGl+G348RAKY0XXy9Z5kU9Vzv1GMNnkar/ZJ8dzXB3COzD9Mo9NtRZ4xfgUww==}
     dev: true
 
   /@types/q/1.5.4:
