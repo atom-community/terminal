@@ -17,16 +17,53 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-// The ui-variables file is provided by whatever theme is selected by the
-// user at runtime. See also
-// https://flight-manual.atom.io/hacking-atom/sections/creating-a-theme/#creating-a-ui-theme .
+
+@app-background-color: #000000;
+@text-color: #ffffff;
+@background-color-selected: #4d4d4d;
+@text-color-highlight: #ffffff;
+@terminal-color-black: #2e3436;
+@terminal-color-red: #cc0000;
+@terminal-color-green: #4e9a06;
+@terminal-color-yellow: #c4a000;
+@terminal-color-blue: #3465a4;
+@terminal-color-magenta: #75507b;
+@terminal-color-cyan: #06989a;
+@terminal-color-white: #d3d7cf;
+@terminal-color-bright-black: #555753;
+@terminal-color-bright-red: #ef2929;
+@terminal-color-bright-green: #8ae234;
+@terminal-color-bright-yellow: #fce94f;
+@terminal-color-bright-blue: #729fcf;
+@terminal-color-bright-magenta: #ad7fa8;
+@terminal-color-bright-cyan: #34e2e2;
+@terminal-color-bright-white: #eeeeec;
+
 @import "ui-variables";
+@import "syntax-variables";
 
 :root {
   --standard-app-background-color: @app-background-color;
   --standard-text-color: @text-color;
   --standard-background-color-selected: @background-color-selected;
   --standard-text-color-highlight: @text-color-highlight;
+
+  --standard-color-black: @terminal-color-black;
+  --standard-color-red: @terminal-color-red;
+  --standard-color-green: @terminal-color-green;
+  --standard-color-yellow: @terminal-color-yellow;
+  --standard-color-blue: @terminal-color-blue;
+  --standard-color-magenta: @terminal-color-magenta;
+  --standard-color-cyan: @terminal-color-cyan;
+  --standard-color-white: @terminal-color-white;
+  --standard-color-bright-black: @terminal-color-bright-black;
+  --standard-color-bright-red: @terminal-color-bright-red;
+  --standard-color-bright-green: @terminal-color-bright-green;
+  --standard-color-bright-yellow: @terminal-color-bright-yellow;
+  --standard-color-bright-blue: @terminal-color-bright-blue;
+  --standard-color-bright-magenta: @terminal-color-bright-magenta;
+  --standard-color-bright-cyan: @terminal-color-bright-cyan;
+  --standard-color-bright-white: @terminal-color-bright-white;
 }
 
 // Load the static styles here.
