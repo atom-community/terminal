@@ -180,7 +180,7 @@ export function getTheme(): Record<string, string> {
       break
     }
     default:
-      // do nothing
+    // do nothing
   }
 
   return colors
