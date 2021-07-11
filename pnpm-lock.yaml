@@ -1,11 +1,11 @@
 lockfileVersion: 5.3
 
 specifiers:
-  '@types/atom': 1.40.10
-  '@types/fs-extra': ^9.0.11
-  '@types/jasmine': ^3.7.7
-  '@types/node': ^16.0.0
-  '@types/resize-observer-browser': ^0.1.5
+  '@types/atom': 1.40.11
+  '@types/fs-extra': ^9.0.12
+  '@types/jasmine': ^3.8.1
+  '@types/node': ^16.3.1
+  '@types/resize-observer-browser': ^0.1.6
   '@types/uuid': ^8.3.1
   '@types/which': ^2.0.1
   atom-jasmine3-test-runner: ^5.2.7
@@ -39,11 +39,11 @@ dependencies:
   xterm-addon-webgl: 0.11.1_xterm@4.13.0
 
 devDependencies:
-  '@types/atom': 1.40.10
-  '@types/fs-extra': 9.0.11
-  '@types/jasmine': 3.7.7
-  '@types/node': 16.0.0
-  '@types/resize-observer-browser': 0.1.5
+  '@types/atom': 1.40.11
+  '@types/fs-extra': 9.0.12
+  '@types/jasmine': 3.8.1
+  '@types/node': 16.3.1
+  '@types/resize-observer-browser': 0.1.6
   '@types/uuid': 8.3.1
   '@types/which': 2.0.1
   atom-jasmine3-test-runner: 5.2.7
@@ -1846,11 +1846,18 @@ packages:
     dependencies:
       '@types/node': 15.12.1
     dev: true
+    optional: true
 
-  /@types/fs-extra/9.0.11:
-    resolution: {integrity: sha512-mZsifGG4QeQ7hlkhO56u7zt/ycBgGxSVsFI/6lGTU34VtwkiqrrSDgw0+ygs8kFGWcXnFQWMrzF2h7TtDFNixA==}
+  /@types/atom/1.40.11:
+    resolution: {integrity: sha512-TsPltugw2wKtR5p6ICv73t9kxdx59fTfdcD8Xe/0EEjF5vHBz99Z7Kj/rPRpyM/4ZcY1GrkQh8hgOw/OJRCs0g==}
     dependencies:
-      '@types/node': 15.12.1
+      '@types/node': 16.3.1
+    dev: true
+
+  /@types/fs-extra/9.0.12:
+    resolution: {integrity: sha512-I+bsBr67CurCGnSenZZ7v94gd3tc3+Aj2taxMT4yu4ABLuOgOjeFxX3dokG24ztSRg5tnT00sL8BszO7gSMoIw==}
+    dependencies:
+      '@types/node': 16.3.1
     dev: true
 
   /@types/http-proxy/1.17.6:
@@ -1861,6 +1868,11 @@ packages:
 
   /@types/jasmine/3.7.7:
     resolution: {integrity: sha512-yZzGe1d1T0y+imXDZ79F030nn8qbmiwpWKCZKvKN0KbTzwXAVYShUxkIxu1ba+vhIdabTGVGCfbtZC0oOam8TQ==}
+    dev: true
+    optional: true
+
+  /@types/jasmine/3.8.1:
+    resolution: {integrity: sha512-ioRNoJvv0eXL1c9BZKpnywZWb5YflhaSiF3IOp9deyoh30MOwkB3bNuzi4UW76EFEhcmqpoEpdWhcUAAilomTw==}
     dev: true
 
   /@types/json-schema/7.0.7:
@@ -1881,16 +1893,16 @@ packages:
     resolution: {integrity: sha512-zyxJM8I1c9q5sRMtVF+zdd13Jt6RU4r4qfhTd7lQubyThvLfx6yYekWSQjGCGV2Tkecgxnlpl/DNlb6Hg+dmEw==}
     dev: true
 
-  /@types/node/16.0.0:
-    resolution: {integrity: sha512-TmCW5HoZ2o2/z2EYi109jLqIaPIi9y/lc2LmDCWzuCi35bcaQ+OtUh6nwBiFK7SOu25FAU5+YKdqFZUwtqGSdg==}
+  /@types/node/16.3.1:
+    resolution: {integrity: sha512-N87VuQi7HEeRJkhzovao/JviiqKjDKMVKxKMfUvSKw+MbkbW8R0nA3fi/MQhhlxV2fQ+2ReM+/Nt4efdrJx3zA==}
     dev: true
 
   /@types/q/1.5.4:
     resolution: {integrity: sha512-1HcDas8SEj4z1Wc696tH56G8OlRaH/sqZOynNNB+HF0WOeXPaxTtbYzJY2oEfiUxjSKjhCKr+MvR7dCHcEelug==}
     dev: true
 
-  /@types/resize-observer-browser/0.1.5:
-    resolution: {integrity: sha512-8k/67Z95Goa6Lznuykxkfhq9YU3l1Qe6LNZmwde1u7802a3x8v44oq0j91DICclxatTr0rNnhXx7+VTIetSrSQ==}
+  /@types/resize-observer-browser/0.1.6:
+    resolution: {integrity: sha512-61IfTac0s9jvNtBCpyo86QeaN8qqpMGHdK0uGKCCIy2dt5/Yk84VduHIdWAcmkC5QvdkPL0p5eWYgUZtHKKUVg==}
     dev: true
 
   /@types/unist/2.0.3:
