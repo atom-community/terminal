@@ -246,6 +246,12 @@ export class TerminalModel {
     return this.activeIndex === 0 && (atom.config.get("atomic-terminal.allowHiddenToStayActive") || this.isVisible())
   }
 
+  updateTheme() {
+    if (this.element) {
+      return this.element.updateTheme()
+    }
+  }
+
   setNewPane(pane: Pane) {
     this.pane = pane
     // @ts-ignore
