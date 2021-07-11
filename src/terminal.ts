@@ -36,7 +36,9 @@ class Terminal {
     // Set holding all terminals available at any moment.
     this.terminalsSet = new Set()
 
-    const debounceUpdateTheme = debounce(() => {
+    const debounceUpdateTheme = debounce(async () => {
+      // @ts-ignore
+      await atom.packages.getLoadedPackage("atomic-terminal").reloadStylesheets()
       this.updateTheme()
     })
 
