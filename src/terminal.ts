@@ -36,11 +36,16 @@ class Terminal {
     // Set holding all terminals available at any moment.
     this.terminalsSet = new Set()
 
-    const debounceUpdateTheme = debounce(async () => {
+    const debounceUpdateTheme = debounce(async (style) => {
+      // @ts-ignore
+      if (style.sourcePath.includes("atomic-terminal")) {
+        return
+      }
+
       // @ts-ignore
       await atom.packages.getLoadedPackage("atomic-terminal").reloadStylesheets()
       this.updateTheme()
-    })
+    }, 1)
 
     this.disposables.add(
       // Register view provider for terminal emulator item.
