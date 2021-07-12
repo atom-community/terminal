@@ -361,6 +361,13 @@ export class AtomTerminal extends HTMLElement {
       return this.terminal.clear()
     }
   }
+
+  updateTheme() {
+    if (this.terminal) {
+      this.setMainBackgroundColor()
+      this.terminal.setOption("theme", getTheme())
+    }
+  }
 }
 
 if (!window.customElements.get("atomic-terminal")) {

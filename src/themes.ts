@@ -155,15 +155,32 @@ export function getTheme(): Record<string, string> {
       colors.cursor = "#ffffff"
       break
     case "Standard": {
-      if (document.documentElement !== null) {
-        const root = getComputedStyle(document.documentElement)
-        colors.background = root.getPropertyValue("--standard-app-background-color")
-        colors.foreground = root.getPropertyValue("--standard-text-color")
-        colors.selection = root.getPropertyValue("--standard-background-color-selected")
-        colors.cursor = root.getPropertyValue("--standard-text-color-highlight")
-      }
+      const root = getComputedStyle(document.documentElement)
+      colors.background = root.getPropertyValue("--standard-app-background-color")
+      colors.foreground = root.getPropertyValue("--standard-text-color")
+      colors.selection = root.getPropertyValue("--standard-background-color-selected")
+      colors.cursor = root.getPropertyValue("--standard-text-color-highlight")
+
+      colors.black = root.getPropertyValue("--standard-color-black")
+      colors.red = root.getPropertyValue("--standard-color-red")
+      colors.green = root.getPropertyValue("--standard-color-green")
+      colors.yellow = root.getPropertyValue("--standard-color-yellow")
+      colors.blue = root.getPropertyValue("--standard-color-blue")
+      colors.magenta = root.getPropertyValue("--standard-color-magenta")
+      colors.cyan = root.getPropertyValue("--standard-color-cyan")
+      colors.white = root.getPropertyValue("--standard-color-white")
+      colors.brightBlack = root.getPropertyValue("--standard-color-bright-black")
+      colors.brightRed = root.getPropertyValue("--standard-color-bright-red")
+      colors.brightGreen = root.getPropertyValue("--standard-color-bright-green")
+      colors.brightYellow = root.getPropertyValue("--standard-color-bright-yellow")
+      colors.brightBlue = root.getPropertyValue("--standard-color-bright-blue")
+      colors.brightMagenta = root.getPropertyValue("--standard-color-bright-magenta")
+      colors.brightCyan = root.getPropertyValue("--standard-color-bright-cyan")
+      colors.brightWhite = root.getPropertyValue("--standard-color-bright-white")
       break
     }
+    default:
+    // do nothing
   }
 
   return colors

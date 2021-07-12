@@ -12,6 +12,16 @@ interface OpenOptions extends WorkspaceOpenOptions {
   pane?: Pane
 }
 
+function debounce(callback: (...args: unknown[]) => void, wait: number = 300) {
+  let timeoutId: NodeJS.Timeout
+  return (...args: unknown[]) => {
+    clearTimeout(timeoutId)
+    timeoutId = setTimeout(() => {
+      callback(...args)
+    }, wait)
+  }
+}
+
 const TERMINAL_BASE_URI = "atomic-terminal://"
 
 class Terminal {
@@ -25,6 +35,17 @@ class Terminal {
 
     // Set holding all terminals available at any moment.
     this.terminalsSet = new Set()
+
+    const debounceUpdateTheme = debounce(async (style) => {
+      // @ts-ignore
+      if (style.sourcePath.includes("atomic-terminal")) {
+        return
+      }
+
+      // @ts-ignore
+      await atom.packages.getLoadedPackage("atomic-terminal").reloadStylesheets()
+      this.updateTheme()
+    }, 1)
 
     this.disposables.add(
       // Register view provider for terminal emulator item.
@@ -100,13 +121,23 @@ class Terminal {
         TerminalModel.recalculateActive(this.terminalsSet)
       }),
 
-      atom.config.onDidChange("atomic-terminal.toolbarButton", ({ newValue }) => {
+      atom.config.onDidChange("atomic-terminal.toolbarButton", ({ newValue }: { newValue: boolean }) => {
         if (newValue) {
           addToolbarButton()
         } else {
           removeToolbarButton()
         }
       }),
+
+      // Theme changes
+      atom.config.onDidChange("atomic-terminal.colors", () => {
+        // not debounced to update immediately
+        this.updateTheme()
+      }),
+      atom.themes.onDidChangeActiveThemes(debounceUpdateTheme),
+      atom.styles.onDidUpdateStyleElement(debounceUpdateTheme),
+      atom.styles.onDidAddStyleElement(debounceUpdateTheme),
+      atom.styles.onDidRemoveStyleElement(debounceUpdateTheme),
 
       // Add commands.
       // @ts-ignore
@@ -203,6 +234,12 @@ class Terminal {
   exitAllTerminals() {
     for (const terminal of this.terminalsSet) {
       terminal.exit()
+    }
+  }
+
+  updateTheme() {
+    for (const terminal of this.terminalsSet) {
+      terminal.updateTheme()
     }
   }
 

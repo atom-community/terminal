@@ -148,7 +148,7 @@ export const config = configOrder({
           "Solid Colors",
           "Standard",
         ],
-        default: "Custom",
+        default: "Standard",
       },
       // TODO: add transparency settings?
       foreground: {

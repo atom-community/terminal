@@ -4,6 +4,33 @@
 
 ![Terminal demo](https://cdn.statically.io/gh/bus-stop/x-terminal/master/resources/x-terminal-demo.gif)
 
+## Theme variables
+
+The following theme variables are available to change the colors of the standard theme:
+
+```less
+@app-background-color: #000000;
+@text-color: #ffffff;
+@background-color-selected: #4d4d4d;
+@text-color-highlight: #ffffff;
+@terminal-color-black: #2e3436;
+@terminal-color-red: #cc0000;
+@terminal-color-green: #4e9a06;
+@terminal-color-yellow: #c4a000;
+@terminal-color-blue: #3465a4;
+@terminal-color-magenta: #75507b;
+@terminal-color-cyan: #06989a;
+@terminal-color-white: #d3d7cf;
+@terminal-color-bright-black: #555753;
+@terminal-color-bright-red: #ef2929;
+@terminal-color-bright-green: #8ae234;
+@terminal-color-bright-yellow: #fce94f;
+@terminal-color-bright-blue: #729fcf;
+@terminal-color-bright-magenta: #ad7fa8;
+@terminal-color-bright-cyan: #34e2e2;
+@terminal-color-bright-white: #eeeeec;
+```
+
 ## Active Terminal
 
 The active terminal is the terminal that will be used when sending commands to

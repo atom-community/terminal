@@ -684,12 +684,33 @@ describe("themes", () => {
 
     it("Standard", () => {
       atom.config.set("atomic-terminal.colors.theme", "Standard")
-      const root = getComputedStyle(document.documentElement)
+      const { style } = document.documentElement
+      style.setProperty("--standard-app-background-color", "#000000")
+      style.setProperty("--standard-text-color", "#ffffff")
+      style.setProperty("--standard-background-color-selected", "#4d4d4d")
+      style.setProperty("--standard-text-color-highlight", "#ffffff")
+      style.setProperty("--standard-color-black", "#2e3436")
+      style.setProperty("--standard-color-red", "#cc0000")
+      style.setProperty("--standard-color-green", "#4e9a06")
+      style.setProperty("--standard-color-yellow", "#c4a000")
+      style.setProperty("--standard-color-blue", "#3465a4")
+      style.setProperty("--standard-color-magenta", "#75507b")
+      style.setProperty("--standard-color-cyan", "#06989a")
+      style.setProperty("--standard-color-white", "#d3d7cf")
+      style.setProperty("--standard-color-bright-black", "#555753")
+      style.setProperty("--standard-color-bright-red", "#ef2929")
+      style.setProperty("--standard-color-bright-green", "#8ae234")
+      style.setProperty("--standard-color-bright-yellow", "#fce94f")
+      style.setProperty("--standard-color-bright-blue", "#729fcf")
+      style.setProperty("--standard-color-bright-magenta", "#ad7fa8")
+      style.setProperty("--standard-color-bright-cyan", "#34e2e2")
+      style.setProperty("--standard-color-bright-white", "#eeeeec")
+
       expect(getTheme()).toEqual({
-        background: root.getPropertyValue("--standard-app-background-color"),
-        foreground: root.getPropertyValue("--standard-text-color"),
-        selection: root.getPropertyValue("--standard-background-color-selected"),
-        cursor: root.getPropertyValue("--standard-text-color-highlight"),
+        background: "#000000",
+        foreground: "#ffffff",
+        selection: "#4d4d4d",
+        cursor: "#ffffff",
         cursorAccent: "#000000",
         black: "#2e3436",
         red: "#cc0000",
