@@ -1,3 +1,15 @@
+## [1.1.5](https://github.com/atom-community/terminal/compare/v1.1.4...v1.1.5) (2021-07-12)
+
+
+### Bug Fixes
+
+* add padding to the terminal ([14144a5](https://github.com/atom-community/terminal/commit/14144a53e6055c18b9d0855a3d14b4d20101c4d7))
+* add terminal syntax variables to standard theme ([bb27e56](https://github.com/atom-community/terminal/commit/bb27e56689e271b9216ef0039ab1aeccbcc52eaf))
+* default to Standard theme ([512e285](https://github.com/atom-community/terminal/commit/512e28597aa4bd5d72214604e8b053ace3cb067f))
+* update Dependencies ([a9e6be8](https://github.com/atom-community/terminal/commit/a9e6be82fef424d68686dd56189dbf156996c1f4))
+* update theme without restarting terminal ([b38d4d1](https://github.com/atom-community/terminal/commit/b38d4d18b4ae5ce87598c11eeb51ec31dbcc0cd5))
+* use 1rem of padding ([834a710](https://github.com/atom-community/terminal/commit/834a710537884fb0d92d40d059ef514bbbd1798d))
+
 ## [1.1.4](https://github.com/atom-community/terminal/compare/v1.1.3...v1.1.4) (2021-06-13)
 
 
