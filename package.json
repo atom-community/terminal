@@ -65,11 +65,11 @@
     "xterm-addon-webgl": "0.11.1"
   },
   "devDependencies": {
-    "@types/atom": "1.40.10",
-    "@types/fs-extra": "^9.0.11",
-    "@types/jasmine": "^3.7.7",
-    "@types/node": "^16.0.0",
-    "@types/resize-observer-browser": "^0.1.5",
+    "@types/atom": "1.40.11",
+    "@types/fs-extra": "^9.0.12",
+    "@types/jasmine": "^3.8.1",
+    "@types/node": "^16.3.1",
+    "@types/resize-observer-browser": "^0.1.6",
     "@types/uuid": "^8.3.1",
     "@types/which": "^2.0.1",
     "atom-jasmine3-test-runner": "^5.2.7",
