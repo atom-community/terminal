@@ -23,7 +23,7 @@ specifiers:
   which: ^2.0.2
   xterm: 4.13.0
   xterm-addon-fit: 0.5.0
-  xterm-addon-ligatures: ^0.5.0
+  xterm-addon-ligatures: ^0.5.1
   xterm-addon-web-links: 0.4.0
   xterm-addon-webgl: 0.11.1
 
@@ -34,7 +34,7 @@ dependencies:
   which: 2.0.2
   xterm: 4.13.0
   xterm-addon-fit: 0.5.0_xterm@4.13.0
-  xterm-addon-ligatures: 0.5.0_xterm@4.13.0
+  xterm-addon-ligatures: 0.5.1_xterm@4.13.0
   xterm-addon-web-links: 0.4.0_xterm@4.13.0
   xterm-addon-webgl: 0.11.1_xterm@4.13.0
 
@@ -8065,8 +8065,8 @@ packages:
       xterm: 4.13.0
     dev: false
 
-  /xterm-addon-ligatures/0.5.0_xterm@4.13.0:
-    resolution: {integrity: sha512-1HFeEReL2yfw1oz7iZHE09ipWOA23Pg7yRAgDnuKeWkuItKRZZ9SbKXn8saviAkHYX/s6HgADVwPjRY8m2lyZA==}
+  /xterm-addon-ligatures/0.5.1_xterm@4.13.0:
+    resolution: {integrity: sha512-L70vyVAapDvBBti1bqFTUQOd6R6LH5qKzqZ76sERKkf75+u++sylqflCdwT8zmorK6zxcc3vq4+I4GDYawgYrQ==}
     engines: {node: '>8.0.0'}
     peerDependencies:
       xterm: ^4.0.0
