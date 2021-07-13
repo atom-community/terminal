@@ -80,6 +80,7 @@
     "prettier-config-atomic": "^2.0.5",
     "shx": "0.3.3",
     "temp": "^0.9.4",
+    "terser-config-atomic": "^0.1.1",
     "typescript": "^4.3.5"
   },
   "scripts": {
