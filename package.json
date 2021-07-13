@@ -95,7 +95,7 @@
     "build.tsc": "tsc -p src/tsconfig.json",
     "dev": "tsc --watch -p src/tsconfig.json",
     "build": "cross-env NODE_ENV=production parcel build --target main ./src/terminal.ts",
-    "build-commit": "build-commit -o dist",
+    "build-commit": "npm run clean && build-commit -o dist",
     "prepare": "npm run build"
   },
   "prettier": "prettier-config-atomic",
