@@ -1,3 +1,10 @@
+## [1.1.6](https://github.com/atom-community/terminal/compare/v1.1.5...v1.1.6) (2021-07-13)
+
+
+### Bug Fixes
+
+* use padding variable ([81cf0c9](https://github.com/atom-community/terminal/commit/81cf0c96c54bf8cec4ca58f2e8689d867a04c46c))
+
 ## [1.1.5](https://github.com/atom-community/terminal/compare/v1.1.4...v1.1.5) (2021-07-12)
 
 
