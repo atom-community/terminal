@@ -1,4 +1,5 @@
 import { CompositeDisposable, Workspace, Dock, Pane, WorkspaceOpenOptions } from "atom"
+import { StatusBar, Tile as StatusBarTile } from "atom/status-bar"
 
 import { createTerminalElement } from "./element"
 import { TerminalModel } from "./model"
@@ -28,6 +29,7 @@ class Terminal {
   // TODO: maybe private?
   public disposables: CompositeDisposable
   public terminalsSet: Set<TerminalModel>
+  private statusBarTile: StatusBarTile
 
   constructor() {
     // Disposables for this plugin.
@@ -434,6 +436,10 @@ class Terminal {
         return this.openTerminal()
       },
     }
+  }
+
+  consumeStatusBar(statusBarProvider: StatusBar) {
+    this.statusBarTile = new (require("./status-bar"))(statusBarProvider)
   }
 
   close() {
