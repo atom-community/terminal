@@ -1,5 +1,5 @@
 * text=auto
 
 # don't diff machine generated files
-pnpm-lock.yaml
+pnpm-lock.yaml -diff
 dist/ -diff
