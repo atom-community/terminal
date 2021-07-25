@@ -1,3 +1,12 @@
+## [1.1.7](https://github.com/atom-community/terminal/compare/v1.1.6...v1.1.7) (2021-07-25)
+
+
+### Bug Fixes
+
+* enable scope hoisting of Parcel - reduce the size of app ([00d8d96](https://github.com/atom-community/terminal/commit/00d8d96a7369f783553146b9e4bb092424ba0345))
+* require at least Atom 1.52 - electron 6 ([8fc0612](https://github.com/atom-community/terminal/commit/8fc0612973e2f99e74107988853d9c7f97d5734f))
+* use terser-config-atomic - reduce the size of the app ([c17c299](https://github.com/atom-community/terminal/commit/c17c29934b80670b8f7a091d2be579c4d52ad770))
+
 ## [1.1.6](https://github.com/atom-community/terminal/compare/v1.1.5...v1.1.6) (2021-07-13)
 
 
