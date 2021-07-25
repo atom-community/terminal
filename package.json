@@ -30,7 +30,8 @@
   "atomTestRunner": "./spec/custom-runner",
   "license": "MIT",
   "engines": {
-    "atom": ">=1.50.0 <2.0.0"
+    "atom": ">=1.52 <2.0.0",
+    "electron": ">=6.x"
   },
   "providedServices": {
     "platformioIDETerminal": {
@@ -76,10 +77,11 @@
     "build-commit": "0.1.4",
     "cross-env": "7.0.3",
     "eslint-config-atomic": "^1.16.2",
-    "parcel": "^2.0.0-beta.2",
+    "parcel": "2.0.0-nightly.776",
     "prettier-config-atomic": "^2.0.5",
     "shx": "0.3.3",
     "temp": "^0.9.4",
+    "terser-config-atomic": "^0.1.1",
     "typescript": "^4.3.5"
   },
   "scripts": {
@@ -89,11 +91,11 @@
     "test.lint": "eslint .",
     "test": "atom --test spec",
     "integration.test": "npm run build && atom --test ./spec/terminal-spec.js",
-    "clean": "shx rm -rf dist ~/.parcel-cache",
+    "clean": "shx rm -rf dist ./.parcel-cache",
     "build.tsc": "tsc -p src/tsconfig.json",
     "dev": "tsc --watch -p src/tsconfig.json",
-    "build": "cross-env NODE_ENV=production parcel build --target main ./src/terminal.ts --no-scope-hoist",
-    "build-commit": "build-commit -o dist",
+    "build": "cross-env NODE_ENV=production parcel build --target main ./src/terminal.ts",
+    "build-commit": "npm run clean && build-commit -o dist",
     "prepare": "npm run build"
   },
   "prettier": "prettier-config-atomic",
@@ -103,15 +105,13 @@
   "targets": {
     "main": {
       "context": "electron-renderer",
-      "engines": {
-        "electron": ">=6.x"
-      },
       "includeNodeModules": {
         "atom": false,
         "electron": false,
         "node-pty-prebuilt-multiarch": false
       },
-      "isLibrary": true
+      "isLibrary": true,
+      "optimize": true
     }
   }
 }

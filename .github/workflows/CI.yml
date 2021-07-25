@@ -22,10 +22,16 @@ jobs:
         uses: UziTech/action-setup-atom@v1
         with:
           channel: ${{ matrix.channel }}
-      - name: Atom Version
-        run: atom -v
-      - name: APM Version
-        run: apm -v
+
+      - name: Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./node_modules/
+            ~/.npm
+            ~/AppData/Roaming/npm-cache
+          key: "cache--OS:${{ matrix.os }}-Atom:${{ matrix.channel }}-${{ hashFiles('./package.json') }}"
+
       - name: Install Dependencies
         run: |
           apm install --production
@@ -48,6 +54,15 @@ jobs:
           fetch-depth: 0
       - name: Commit lint ✨
         uses: wagoid/commitlint-github-action@v4
+
+      - name: Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./node_modules/
+            ~/.npm
+            ~/AppData/Roaming/npm-cache
+          key: "cache--OS:${{ matrix.os }}-${{ hashFiles('./package.json') }}"
 
       - name: Install dependencies
         run: npm install
@@ -72,7 +87,7 @@ jobs:
       - name: Install Node
         uses: dcodeIO/setup-node-nvm@master
         with:
-          node-version: 12.4.0 # use the same Node as Atom
+          node-version: 12.14.1
       - name: Install Dependencies
         run: npm install
       - name: Build and Commit
@@ -84,10 +99,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ATOM_ACCESS_TOKEN: ${{ secrets.ATOM_ACCESS_TOKEN  }}
-
-  Skip:
-    if: contains(github.event.head_commit.message, '[skip ci]')
-    runs-on: ubuntu-latest
-    steps:
-      - name: Skip CI 🚫
-        run: echo skip ci
