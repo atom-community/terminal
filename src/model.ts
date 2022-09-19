@@ -61,13 +61,12 @@ export class TerminalModel {
 
   async getInitialCwd(): Promise<string | undefined> {
     let cwd
-
     if (this.cwd) {
       cwd = this.cwd
     } else {
       const previousActiveItem = atom.workspace.getActivePaneItem()
       // @ts-ignore
-      cwd = previousActiveItem?.getPath?.()
+      cwd = previousActiveItem?.getPath?.() ?? previousActiveItem?.selectedPath
       if (cwd) {
         const dir = atom.project.relativizePath(cwd)[0]
         if (dir) {

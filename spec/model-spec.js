@@ -58,11 +58,37 @@ describe("TerminalModel", () => {
     expect(newModel.getPath()).toBe(tmpdir)
   })
 
+  it("constructor with previous active item that has selectedPath property", async () => {
+    const previousActiveItem = jasmine.createSpyObj("somemodel", {}, { ["selectedPath"]: "" })
+    Object.getOwnPropertyDescriptor(previousActiveItem, "selectedPath").get.and.returnValue(tmpdir)
+    spyOn(atom.workspace, "getActivePaneItem").and.returnValue(previousActiveItem)
+    const newModel = new TerminalModel({
+      uri,
+      terminalsSet,
+    })
+    await newModel.initializedPromise
+    expect(newModel.getPath()).toBe(tmpdir)
+  })
+
   it("constructor with previous active item that has getPath() method returns file path", async () => {
     const previousActiveItem = jasmine.createSpyObj("somemodel", ["getPath"])
     const filePath = path.join(tmpdir, "somefile")
     await fs.writeFile(filePath, "")
     previousActiveItem.getPath.and.returnValue(filePath)
+    spyOn(atom.workspace, "getActivePaneItem").and.returnValue(previousActiveItem)
+    const newModel = new TerminalModel({
+      uri,
+      terminalsSet,
+    })
+    await newModel.initializedPromise
+    expect(newModel.getPath()).toBe(tmpdir)
+  })
+
+  it("constructor with previous active item that has selectedPath() property that returns file path", async () => {
+    const previousActiveItem = jasmine.createSpyObj("somemodel", {}, { ["selectedPath"]: "" })
+    const filePath = path.join(tmpdir, "somefile")
+    await fs.writeFile(filePath, "")
+    Object.getOwnPropertyDescriptor(previousActiveItem, "selectedPath").get.and.returnValue(filePath)
     spyOn(atom.workspace, "getActivePaneItem").and.returnValue(previousActiveItem)
     const newModel = new TerminalModel({
       uri,
@@ -87,9 +113,40 @@ describe("TerminalModel", () => {
     expect(newModel.getPath()).toBe(dirPath)
   })
 
-  it("constructor with previous active item which exists in project path", async () => {
+  it("constructor with previous active item that has selectedPath returning invalid path", async () => {
+    const dirPath = path.join(tmpdir, "dir")
+    await fs.mkdir(dirPath)
+    atom.project.setPaths([dirPath])
+    const previousActiveItem = jasmine.createSpyObj("somemodel", {}, { ["selectedPath"]: "" })
+    Object.getOwnPropertyDescriptor(previousActiveItem, "selectedPath").get.and.returnValue(
+      path.join(tmpdir, "non-existent-dir")
+    )
+    spyOn(atom.workspace, "getActivePaneItem").and.returnValue(previousActiveItem)
+    const newModel = new TerminalModel({
+      uri,
+      terminalsSet,
+    })
+    await newModel.initializedPromise
+    expect(newModel.getPath()).toBe(dirPath)
+  })
+
+  it("constructor with previous active item which exists in project path and has getPath", async () => {
     const previousActiveItem = jasmine.createSpyObj("somemodel", ["getPath"])
     previousActiveItem.getPath.and.returnValue("/some/dir/file")
+    spyOn(atom.workspace, "getActivePaneItem").and.returnValue(previousActiveItem)
+    const expected = ["/some/dir", null]
+    spyOn(atom.project, "relativizePath").and.returnValue(expected)
+    const newModel = new TerminalModel({
+      uri,
+      terminalsSet,
+    })
+    await newModel.initializedPromise
+    expect(newModel.getPath()).toBe(expected[0])
+  })
+
+  it("constructor with previous active item which exists in project path and has selectedPath", async () => {
+    const previousActiveItem = jasmine.createSpyObj("somemodel", {}, { ["selectedPath"]: "" })
+    Object.getOwnPropertyDescriptor(previousActiveItem, "selectedPath").get.and.returnValue("/some/dir/file")
     spyOn(atom.workspace, "getActivePaneItem").and.returnValue(previousActiveItem)
     const expected = ["/some/dir", null]
     spyOn(atom.project, "relativizePath").and.returnValue(expected)
