@@ -94,7 +94,7 @@
     "clean": "shx rm -rf dist ./.parcel-cache",
     "build.tsc": "tsc -p src/tsconfig.json",
     "dev": "tsc --watch -p src/tsconfig.json",
-    "build": "cross-env NODE_ENV=production parcel build --target main ./src/terminal.ts",
+    "build": "cross-env NODE_ENV=production parcel build --target main ./src/terminal.ts --no-cache",
     "build-commit": "npm run clean && build-commit -o dist",
     "prepare": "npm run build"
   },
