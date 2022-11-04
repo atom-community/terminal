@@ -1,3 +1,10 @@
+## [1.1.8](https://github.com/atom-community/terminal/compare/v1.1.7...v1.1.8) (2022-11-04)
+
+
+### Bug Fixes
+
+* get correct cwd when treeview is selected ([#102](https://github.com/atom-community/terminal/issues/102)) ([e462b00](https://github.com/atom-community/terminal/commit/e462b00d01cf84060bcb25f976d56ed5d82f1da2))
+
 ## [1.1.7](https://github.com/atom-community/terminal/compare/v1.1.6...v1.1.7) (2021-07-25)
 
 
